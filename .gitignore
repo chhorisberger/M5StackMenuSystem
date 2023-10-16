@@ -8,3 +8,4 @@ Debug
 CppProperties.json
 debug.cfg
 debug_custom.json
+make_link.bat

@@ -1,8 +1,9 @@
 # M5StackMenuSystem
 A quick way to create nice menus for the neat [M5Stack](https://github.com/m5stack/m5stack) devices with just a few lines of code
 
-![Alt text](docs/picture.jpg)
+<img src="https://github.com/chhorisberger/M5StackMenuSystem/blob/main/docs/picture.jpg" width="256">
 
+#### Code Example
 
 ```c++
 #include <M5Stack.h>

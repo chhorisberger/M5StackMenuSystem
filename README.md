@@ -30,7 +30,7 @@ void testOneTimeCallback(CallbackMenuItem& menuItem)
 	M5.Lcd.clear(BLACK);
 	M5.Lcd.setTextColor(WHITE);
 	M5.Lcd.setTextDatum(MC_DATUM);
-	M5.Lcd.drawString(menuItem.getText() + " was choosen", 160, 120);
+	M5.Lcd.drawString(menuItem.getText() + " selected", 160, 120);
 	delay(1000);
 }
 ```

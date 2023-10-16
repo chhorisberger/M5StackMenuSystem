@@ -1,6 +1,5 @@
 #include <M5Stack.h>
-
-#include "M5StackMenuSystem.h"
+#include <M5StackMenuSystem.h>
 
 Menu mainMenu("Main Menu");
 Menu subMenu("Sub Menu");

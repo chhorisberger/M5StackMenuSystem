@@ -1,0 +1,17 @@
+{
+  "name": "M5StackMenuSystem",
+  "description": "A quick way to create menus for M5Stack devices",
+  "keywords": "M5Stack",
+  "authors": {
+    "name": "chhorisberger",
+    "url": "https://github.com/chhorisberger"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chhorisberger/M5StackMenuSystem.git"
+  },
+  "version": "0.0.1",
+  "frameworks": "arduino",
+  "platforms": "espressif32",
+  "headers": "M5StackMenuSystem.h"
+}

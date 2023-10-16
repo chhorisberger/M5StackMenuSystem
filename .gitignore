@@ -1,0 +1,10 @@
+.svd
+.vs
+__vm
+Release
+Debug
+*.vcxproj*
+*.sln
+CppProperties.json
+debug.cfg
+debug_custom.json

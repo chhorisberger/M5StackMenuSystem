@@ -107,18 +107,21 @@ void Menu::checkUpButton()
 	{
 		softKeyUp.setPressed(false);
 
-		MenuItem* previousItem = highlightedItem->getPrevious();
-		if (previousItem != NULL)
+		if (highlightedItem != NULL)
 		{
-			highlightedItem->setDirty();
-			previousItem->setDirty();
-
-			highlightedItem = previousItem;
-
-			if (isAboveViewPort(highlightedItem))
+			MenuItem* previousItem = highlightedItem->getPrevious();
+			if (previousItem != NULL)
 			{
-				firstItemInViewport = firstItemInViewport->getPrevious();
-				setAllMenuItemsDirty();
+				highlightedItem->setDirty();
+				previousItem->setDirty();
+
+				highlightedItem = previousItem;
+
+				if (isAboveViewPort(highlightedItem))
+				{
+					firstItemInViewport = firstItemInViewport->getPrevious();
+					setAllMenuItemsDirty();
+				}
 			}
 		}
 	}
@@ -134,18 +137,21 @@ void Menu::checkDownButton()
 	{
 		softKeyDown.setPressed(false);
 
-		MenuItem* nextItem = highlightedItem->getNext();
-		if (nextItem != NULL)
+		if (highlightedItem != NULL)
 		{
-			highlightedItem->setDirty();
-			nextItem->setDirty();
-
-			highlightedItem = nextItem;
-
-			if (isBelowViewPort(highlightedItem))
+			MenuItem* nextItem = highlightedItem->getNext();
+			if (nextItem != NULL)
 			{
-				firstItemInViewport = firstItemInViewport->getNext();
-				setAllMenuItemsDirty();
+				highlightedItem->setDirty();
+				nextItem->setDirty();
+
+				highlightedItem = nextItem;
+
+				if (isBelowViewPort(highlightedItem))
+				{
+					firstItemInViewport = firstItemInViewport->getNext();
+					setAllMenuItemsDirty();
+				}
 			}
 		}
 	}
@@ -160,7 +166,6 @@ void Menu::checkOkButton()
 	else if (M5.BtnC.wasReleased())
 	{
 		softKeyOk.setPressed(false);
-
 		activeItem = highlightedItem;
 	}
 }

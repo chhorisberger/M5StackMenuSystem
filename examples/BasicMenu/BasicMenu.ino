@@ -17,8 +17,7 @@ void loop() {
   myMenu.loop();
 }
 
-void testOneTimeCallback(CallbackMenuItem& menuItem)
-{
+void testOneTimeCallback(CallbackMenuItem& menuItem) {
   M5.Lcd.clear(BLACK);
   M5.Lcd.setTextColor(WHITE);
   M5.Lcd.setTextDatum(MC_DATUM);

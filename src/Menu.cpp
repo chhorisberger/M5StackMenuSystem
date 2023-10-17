@@ -7,6 +7,7 @@
 
 Menu::Menu(String title_) : menuTopSection(title_), menuBottomSection(this)
 {
+	enabled = true;
 	dirty = true;
 	firstItem = NULL;
 	lastItem = NULL;
@@ -26,16 +27,34 @@ Menu::~Menu()
 	}
 }
 
-void Menu::loop() 
+void Menu::enable()
 {
-	if (activeItem == NULL)
+	enabled = true;
+}
+
+void Menu::disable()
+{
+	enabled = false;
+}
+
+bool Menu::isEnabled()
+{
+	return enabled;
+}
+
+void Menu::loop()
+{
+	if (enabled)
 	{
-		menuBottomSection.checkMenuButtons();
-		render();
-	}
-	else
-	{
-		activeItem->loop();
+		if (activeItem == NULL)
+		{
+			menuBottomSection.checkMenuButtons();
+			render();
+		}
+		else
+		{
+			activeItem->loop();
+		}
 	}
 }
 

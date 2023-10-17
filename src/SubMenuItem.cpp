@@ -11,6 +11,7 @@ SubMenuItem::SubMenuItem(String text_, Menu* subMenu_) : MenuItem(text_)
 
 void SubMenuItem::loop() 
 {
+	subMenu->enable();
 	subMenu->loop();
 }
 

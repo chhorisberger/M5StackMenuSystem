@@ -20,10 +20,13 @@ public:
 	Menu(String title_);
 	~Menu();
 	void loop();
+	void enable();
+	void disable();
+	bool isEnabled();
 
 	void addMenuItem(String text, CallbackFunction callbackOneTimeFunction, CallbackFunction callbackLoopFunction = NULL);
 	void addSubMenu(String text, Menu* subMenu);
-	void addExitItem(Menu* parentMenu);
+	void addExitItem(Menu* parentMenu = NULL);
 
 	void resetActiveMenuItem();
 
@@ -40,6 +43,7 @@ private:
 	bool isAboveViewPort(MenuItem* item);
 	bool isBelowViewPort(MenuItem* item);
 
+	bool enabled;
 	bool dirty;
 	MenuItem* firstItem;
 	MenuItem* lastItem;

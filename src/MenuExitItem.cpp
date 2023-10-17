@@ -12,6 +12,11 @@ MenuExitItem::MenuExitItem(Menu* parentMenu_) : MenuItem("..")
 void MenuExitItem::loop()
 {
 	getMenu()->resetActiveMenuItem();
-	parentMenu->resetActiveMenuItem();
+	getMenu()->disable();
+
+	if (parentMenu != NULL)
+	{
+		parentMenu->resetActiveMenuItem();
+	}
 }
 

@@ -8,6 +8,7 @@ void setup() {
 	M5.begin();
 	M5.Power.begin();
 
+	mainMenu.addExitItem();
 	mainMenu.addMenuItem("One Time Callback", testOneTimeCallback);
 	mainMenu.addMenuItem("Loop Callback", testLoopInitCallback, testLoopCallback);
 	mainMenu.addSubMenu("Submenu", &subMenu);
@@ -22,11 +23,18 @@ void setup() {
 
 void loop() {
 	M5.update();
-	mainMenu.loop();
+
+	if (mainMenu.isEnabled()) {
+		mainMenu.loop();
+	} else {
+		M5.Lcd.clear(BLACK);
+		if (M5.BtnA.wasReleased()) {
+			mainMenu.enable();
+		}
+	}
 }
 
-void testOneTimeCallback(CallbackMenuItem& menuItem)
-{
+void testOneTimeCallback(CallbackMenuItem& menuItem) {
 	M5.Lcd.clear(BLACK);
 	M5.Lcd.setTextColor(WHITE);
 	M5.Lcd.setTextDatum(MC_DATUM);
@@ -35,8 +43,7 @@ void testOneTimeCallback(CallbackMenuItem& menuItem)
 	delay(1500);
 }
 
-void testLoopInitCallback(CallbackMenuItem& menuItem)
-{
+void testLoopInitCallback(CallbackMenuItem& menuItem) {
 	M5.Lcd.clear(BLACK);
 	M5.Lcd.setTextColor(WHITE);
 	M5.Lcd.setTextDatum(MC_DATUM);
@@ -46,16 +53,14 @@ void testLoopInitCallback(CallbackMenuItem& menuItem)
 	escapeSoftKey.render(); 
 }
 
-void testLoopCallback(CallbackMenuItem& menuItem)
-{
+void testLoopCallback(CallbackMenuItem& menuItem) {
 	String time = "sec: " + String(millis() / 1000);
 
 	M5.Lcd.setTextColor(WHITE, BLACK);
 	M5.Lcd.setTextDatum(MC_DATUM);
 	M5.Lcd.drawString(time.c_str(), M5.Lcd.width() / 2, (3 * M5.Lcd.height()) / 6);
 
-	if (M5.BtnA.wasReleased())
-	{
+	if (M5.BtnA.wasReleased()) {
 		menuItem.deactivateCallbacks();
 	}
 }

@@ -15,6 +15,9 @@ void setup() {
 	subMenu.addMenuItem("Sub Menu Item #1", testOneTimeCallback);
 	subMenu.addMenuItem("Sub Menu Item #2", testOneTimeCallback);
 	subMenu.addMenuItem("Sub Menu Item #3", testOneTimeCallback);
+	subMenu.addMenuItem("Sub Menu Item #4", testOneTimeCallback);
+	subMenu.addMenuItem("Sub Menu Item #5", testOneTimeCallback);
+	subMenu.addMenuItem("Sub Menu Item #6", testOneTimeCallback);
 }
 
 void loop() {

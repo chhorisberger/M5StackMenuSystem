@@ -15,7 +15,7 @@ Menu::Menu(String title_) : softKeyUp(BtnASlot), softKeyDown(BtnBSlot), softKeyO
 	lastItem = NULL;
 	highlightedItem = NULL;
 	activeItem = NULL;
-	displayPosition = 0;
+	firstItemInViewport = NULL;
 }
 
 Menu::~Menu()
@@ -76,6 +76,7 @@ void Menu::addItem(MenuItem* item)
 		lastItem = item;
 
 		highlightedItem = item;
+		firstItemInViewport = item;
 	}
 	else
 	{
@@ -114,9 +115,9 @@ void Menu::checkUpButton()
 
 			highlightedItem = previousItem;
 
-			if (highlightedItem->getPosition() < displayPosition)
+			if (isAboveViewPort(highlightedItem))
 			{
-				displayPosition--;
+				firstItemInViewport = firstItemInViewport->getPrevious();
 				setAllMenuItemsDirty();
 			}
 		}
@@ -141,9 +142,9 @@ void Menu::checkDownButton()
 
 			highlightedItem = nextItem;
 
-			if (highlightedItem->getPosition() >= displayPosition + NR_VISIBLE_MENU_ITEMS)
+			if (isBelowViewPort(highlightedItem))
 			{
-				displayPosition++;
+				firstItemInViewport = firstItemInViewport->getNext();
 				setAllMenuItemsDirty();
 			}
 		}
@@ -212,26 +213,30 @@ void Menu::renderTopSection()
 
 void Menu::renderCenterSection(bool force)
 {
-	// TODO: fillrect center section with light grey
-
 	int fontHeight = M5.Lcd.fontHeight(MY_FONT);
 	int titleHeight = fontHeight + (2 * V_PADDING_TOP_SECTION);
 
-	int renderPosition = 0;
-	MenuItem* item = firstItem;
-	while (item != NULL)
+	int pos = 0;
+	MenuItem* item = firstItemInViewport;
+	while (item != NULL && !isBelowViewPort(item))
 	{
-		int position = item->getPosition();
-		if (position >= displayPosition && position < (displayPosition + NR_VISIBLE_MENU_ITEMS))
-		{
-			int x = 0;
-			int y = titleHeight + (renderPosition * fontHeight);
-			item->render(x, y, item == highlightedItem, force);
-			renderPosition++;
-		}
+		int x = 0;
+		int y = titleHeight + (pos * fontHeight);
+		item->render(x, y, item == highlightedItem, force);
+		pos++;
 
 		item = item->getNext();
 	}
+}
+
+bool Menu::isAboveViewPort(MenuItem* item)
+{
+	return item->getPosition() < firstItemInViewport->getPosition();
+}
+
+bool Menu::isBelowViewPort(MenuItem* item)
+{
+	return item->getPosition() >= firstItemInViewport->getPosition() + NR_VISIBLE_MENU_ITEMS;
 }
 
 void Menu::renderBottomSection()

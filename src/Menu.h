@@ -27,7 +27,6 @@ class Menu
 {
 	typedef std::function<void(CallbackMenuItem &menuItem)> CallbackFunction;
 
-
 public:
 	Menu(String title_);
 	~Menu();
@@ -44,7 +43,6 @@ private:
 	void checkUpButton();
 	void checkDownButton();
 	void checkOkButton();
-
 	void render();
 	void clearScreen();
 	void renderTopSection();
@@ -52,6 +50,8 @@ private:
 	void renderBottomSection();
 	void renderSoftKeys(bool force = false);
 	void setAllMenuItemsDirty();
+	bool isAboveViewPort(MenuItem* item);
+	bool isBelowViewPort(MenuItem* item);
 
 	bool dirty;
 	String title;
@@ -59,7 +59,7 @@ private:
 	MenuItem* lastItem;
 	MenuItem* highlightedItem;
 	MenuItem* activeItem;
-	int displayPosition;
+	MenuItem* firstItemInViewport;
 
 	UpSoftKey softKeyUp;
 	DownSoftKey softKeyDown;

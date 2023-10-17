@@ -19,6 +19,7 @@ class Menu
 public:
 	Menu(String title_);
 	~Menu();
+
 	void loop();
 	void enable();
 	void disable();
@@ -28,12 +29,6 @@ public:
 	void addSubMenu(String text, Menu* subMenu);
 	void addExitItem(Menu* parentMenu = NULL);
 
-	void resetActiveMenuItem();
-
-	void upButtonPressed();
-	void downButtonPressed();
-	void okButtonPressed();
-
 private:
 	void addItem(MenuItem* item);
 	void render();
@@ -42,6 +37,10 @@ private:
 	void setAllMenuItemsDirty();
 	bool isAboveViewPort(MenuItem* item);
 	bool isBelowViewPort(MenuItem* item);
+	void upButtonPressed();
+	void downButtonPressed();
+	void okButtonPressed();
+	void resetActiveMenuItem();
 
 	bool enabled;
 	bool dirty;
@@ -52,6 +51,10 @@ private:
 	MenuItem* firstItemInViewport;
 	MenuTopSection menuTopSection;
 	MenuBottomSection menuBottomSection;
+
+	friend class MenuBottomSection;
+	friend class CallbackMenuItem;
+	friend class MenuExitItem;
 };
 
 #endif 

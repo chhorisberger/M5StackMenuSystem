@@ -1,26 +1,15 @@
 #ifndef MENU_H
 #define MENU_H
 
+#include "MenuTopSection.h"
+#include "MenuBottomSection.h"
 #include "MenuItem.h"
 #include "CallbackMenuItem.h"
-#include "TextSoftKey.h"
-#include "UpSoftKey.h"
-#include "DownSoftKey.h"
 
 #include <Arduino.h>
 
-#define TOP_BAR_TITLE_COLOR WHITE
-#define TOP_BAR_BACKGROUND_COLOR RED
-
 #define CENTER_BACKGROUND_COLOR LIGHTGREY
-
-#define BOTTOM_BAR_BACKGROUND_COLOR RED
-
-#define V_PADDING_TOP_SECTION 4
-#define V_PADDING_BOTTOM_SECTION 4
-
 #define NR_VISIBLE_MENU_ITEMS 5
-
 
 
 class Menu
@@ -35,35 +24,28 @@ public:
 	void addExitItem(Menu* parentMenu);
 	void addSubMenu(String text, Menu* subMenu);
 	void resetActiveMenuItem();
-	
+	void upButtonPressed();
+	void downButtonPressed();
+	void okButtonPressed();
 
 private:
 	void addItem(MenuItem* item);
-	void checkMenuButtons();
-	void checkUpButton();
-	void checkDownButton();
-	void checkOkButton();
 	void render();
 	void clearScreen();
-	void renderTopSection();
 	void renderCenterSection(bool force = false);
-	void renderBottomSection();
-	void renderSoftKeys(bool force = false);
 	void setAllMenuItemsDirty();
 	bool isAboveViewPort(MenuItem* item);
 	bool isBelowViewPort(MenuItem* item);
 
 	bool dirty;
-	String title;
 	MenuItem* firstItem;
 	MenuItem* lastItem;
 	MenuItem* highlightedItem;
 	MenuItem* activeItem;
 	MenuItem* firstItemInViewport;
 
-	UpSoftKey softKeyUp;
-	DownSoftKey softKeyDown;
-	TextSoftKey softKeyOk;
+	MenuTopSection menuTopSection;
+	MenuBottomSection menuBottomSection;
 };
 
 #endif 

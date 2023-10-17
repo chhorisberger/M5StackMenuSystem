@@ -10,13 +10,13 @@ class MenuExitItem : virtual public MenuItem
 {
 
 public:
-	MenuExitItem(Menu* subMenu_);
+	MenuExitItem(Menu* parentMenu_);
 	virtual ~MenuExitItem() {}
 
 	virtual void loop();
 
 private:
-	Menu* subMenu;
+	Menu* parentMenu;
 };
 
 #endif 

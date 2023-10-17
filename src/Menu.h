@@ -20,10 +20,13 @@ public:
 	Menu(String title_);
 	~Menu();
 	void loop();
+
 	void addMenuItem(String text, CallbackFunction callbackOneTimeFunction, CallbackFunction callbackLoopFunction = NULL);
-	void addExitItem(Menu* parentMenu);
 	void addSubMenu(String text, Menu* subMenu);
+	void addExitItem(Menu* parentMenu);
+
 	void resetActiveMenuItem();
+
 	void upButtonPressed();
 	void downButtonPressed();
 	void okButtonPressed();
@@ -43,7 +46,6 @@ private:
 	MenuItem* highlightedItem;
 	MenuItem* activeItem;
 	MenuItem* firstItemInViewport;
-
 	MenuTopSection menuTopSection;
 	MenuBottomSection menuBottomSection;
 };

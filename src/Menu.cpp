@@ -10,47 +10,36 @@ Menu::Menu(String title_) : softKeyUp(BtnASlot), softKeyDown(BtnBSlot), softKeyO
 {
 	title = title_;
 
-	enabled = true;
 	dirty = true;
-
 	firstItem = NULL;
 	lastItem = NULL;
 	highlightedItem = NULL;
 	activeItem = NULL;
-
 	displayPosition = 0;
 }
 
 Menu::~Menu()
 {
-	// TODO: call delete on items starting with firstItem
-	// TODO: same for dtor SubMenuItem
+	MenuItem* item = firstItem;
+	while (item != NULL)
+	{
+		MenuItem* next = item->getNext();
+		delete item;
+		item = next;
+	}
 }
 
 void Menu::loop() 
 {
-	if (enabled)
+	if (activeItem == NULL)
 	{
-		if (activeItem == NULL)
-		{
-			checkMenuButtons();
-			render();
-		}
-		else
-		{
-			activeItem->loop();
-		}
+		checkMenuButtons();
+		render();
 	}
-}
-
-void Menu::enable()
-{
-	enabled = true;
-}
-
-void Menu::disable()
-{
-	enabled = false;
+	else
+	{
+		activeItem->loop();
+	}
 }
 
 void Menu::resetActiveMenuItem()

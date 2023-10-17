@@ -32,8 +32,6 @@ public:
 	Menu(String title_);
 	~Menu();
 	void loop();
-	void enable();
-	void disable();
 	void addMenuItem(String text, CallbackFunction callbackOneTimeFunction, CallbackFunction callbackLoopFunction = NULL);
 	void addExitItem(Menu* parentMenu);
 	void addSubMenu(String text, Menu* subMenu);
@@ -55,7 +53,6 @@ private:
 	void renderSoftKeys(bool force = false);
 	void setAllMenuItemsDirty();
 
-	bool enabled;
 	bool dirty;
 	String title;
 	MenuItem* firstItem;

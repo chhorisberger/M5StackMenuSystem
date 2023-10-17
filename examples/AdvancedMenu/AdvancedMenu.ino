@@ -8,13 +8,13 @@ void setup() {
 	M5.begin();
 	M5.Power.begin();
 
-	mainMenu.addItem(new CallbackMenuItem("One Time Callback", testOneTimeCallback));
-	mainMenu.addItem(new CallbackMenuItem("Loop Callback", testLoopInitCallback, testLoopCallback));
-	mainMenu.addItem(new SubMenuItem("Submenu", &subMenu));
+	mainMenu.addMenuItem("One Time Callback", testOneTimeCallback);
+	mainMenu.addMenuItem("Loop Callback", testLoopInitCallback, testLoopCallback);
+	mainMenu.addSubMenu("Submenu", &subMenu);
 
-	subMenu.addItem(new CallbackMenuItem("Sub Menu Item #1", testOneTimeCallback));
-	subMenu.addItem(new CallbackMenuItem("Sub Menu Item #2", testOneTimeCallback));
-	subMenu.addItem(new CallbackMenuItem("Sub Menu Item #3", testOneTimeCallback));
+	subMenu.addMenuItem("Sub Menu Item #1", testOneTimeCallback);
+	subMenu.addMenuItem("Sub Menu Item #2", testOneTimeCallback);
+	subMenu.addMenuItem("Sub Menu Item #3", testOneTimeCallback);
 }
 
 void loop() {

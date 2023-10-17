@@ -1,5 +1,9 @@
 #include "Menu.h"
 
+
+#include "SubMenuItem.h"
+#include "MenuExitItem.h"
+
 #include <M5Stack.h>
 
 Menu::Menu(String title_) : softKeyUp(BtnASlot), softKeyDown(BtnBSlot), softKeyOk(BtnCSlot, "Ok")
@@ -15,6 +19,12 @@ Menu::Menu(String title_) : softKeyUp(BtnASlot), softKeyDown(BtnBSlot), softKeyO
 	activeItem = NULL;
 
 	displayPosition = 0;
+}
+
+Menu::~Menu()
+{
+	// TODO: call delete on items starting with firstItem
+	// TODO: same for dtor SubMenuItem
 }
 
 void Menu::loop() 
@@ -47,6 +57,21 @@ void Menu::resetActiveMenuItem()
 {
 	activeItem = NULL;
 	dirty = true;
+}
+
+void Menu::addMenuItem(String text, CallbackFunction callbackOneTimeFunction, CallbackFunction callbackLoopFunction)
+{
+	addItem(new CallbackMenuItem(text, callbackOneTimeFunction, callbackLoopFunction));
+}
+
+void Menu::addSubMenu(String text, Menu* subMenu)
+{
+	addItem(new SubMenuItem(text, subMenu));
+}
+
+void Menu::addExitItem(Menu* parentMenu)
+{
+	addItem(new MenuExitItem(parentMenu));
 }
 
 void Menu::addItem(MenuItem* item)

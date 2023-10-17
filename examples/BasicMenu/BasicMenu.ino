@@ -7,9 +7,9 @@ void setup() {
   M5.begin();
   M5.Power.begin();
  
-  myMenu.addItem(new CallbackMenuItem("Menu Item #1", testOneTimeCallback));
-  myMenu.addItem(new CallbackMenuItem("Menu Item #2", testOneTimeCallback));
-  myMenu.addItem(new CallbackMenuItem("Menu Item #3", testOneTimeCallback));
+  myMenu.addMenuItem("Menu Item #1", testOneTimeCallback);
+  myMenu.addMenuItem("Menu Item #2", testOneTimeCallback);
+  myMenu.addMenuItem("Menu Item #3", testOneTimeCallback);
 }
 
 void loop() {

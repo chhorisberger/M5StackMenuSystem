@@ -2,6 +2,7 @@
 #define MENU_H
 
 #include "MenuItem.h"
+#include "CallbackMenuItem.h"
 #include "TextSoftKey.h"
 #include "UpSoftKey.h"
 #include "DownSoftKey.h"
@@ -24,16 +25,23 @@
 
 class Menu
 {
+	typedef std::function<void(CallbackMenuItem &menuItem)> CallbackFunction;
+
+
 public:
 	Menu(String title_);
+	~Menu();
 	void loop();
 	void enable();
 	void disable();
-	void addItem(MenuItem* item);
+	void addMenuItem(String text, CallbackFunction callbackOneTimeFunction, CallbackFunction callbackLoopFunction = NULL);
+	void addExitItem(Menu* parentMenu);
+	void addSubMenu(String text, Menu* subMenu);
 	void resetActiveMenuItem();
 	
 
 private:
+	void addItem(MenuItem* item);
 	void checkMenuButtons();
 	void checkUpButton();
 	void checkDownButton();

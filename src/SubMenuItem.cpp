@@ -1,7 +1,6 @@
 #include "SubMenuItem.h"
 
 #include "Menu.h"
-#include "MenuExitItem.h"
 
 #include <M5Stack.h>
 
@@ -17,5 +16,5 @@ void SubMenuItem::loop()
 
 void SubMenuItem::onAdded()
 {
-	subMenu->addItem(new MenuExitItem(getMenu()));
+	subMenu->addExitItem(getMenu());
 }

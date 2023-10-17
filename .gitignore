@@ -1,4 +1,4 @@
-.svd
+*.svd
 .vs
 __vm
 Release
@@ -9,3 +9,5 @@ CppProperties.json
 debug.cfg
 debug_custom.json
 make_link.bat
+examples/BasicMenu/src
+examples/AdvancedMenu/src

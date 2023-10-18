@@ -32,7 +32,7 @@ void SoftKey::render(bool force)
 		int w = getWidth();
 		int h = getHeight();
 		int x = getXPosition();
-		int y = SCREEN_HEIGHT - (h + V_PADDING_BOTTOM_SECTION);
+		int y = SCREEN_HEIGHT - (h + BOTTOM_BAR_V_PADDING);
 
 		renderInternal(x, y, w, h);
 
@@ -44,12 +44,12 @@ void SoftKey::renderRow(int x, int y, int w, int h)
 {
 	if (pressed)
 	{
-		M5.Lcd.fillRoundRect(x, y, w, h, 3, SOFTKEY_COLOR);
+		M5.Lcd.fillRoundRect(x, y, w, h, 3, BOTTOM_BAR_SOFTKEY_COLOR);
 	}
 	else
 	{
-		M5.Lcd.fillRoundRect(x, y, w, h, 3, SOFTKEY_BACKGROUND_COLOR);
-		M5.Lcd.drawRoundRect(x, y, w, h, 3, SOFTKEY_COLOR);
+		M5.Lcd.fillRoundRect(x, y, w, h, 3, BOTTOM_BAR_SOFTKEY_BACKGROUND_COLOR);
+		M5.Lcd.drawRoundRect(x, y, w, h, 3, BOTTOM_BAR_SOFTKEY_COLOR);
 	}
 }
 

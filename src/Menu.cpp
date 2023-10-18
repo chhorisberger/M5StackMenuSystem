@@ -16,6 +16,9 @@ Menu::Menu(String title_) : menuTopSection(title_), menuBottomSection(this)
 	highlightedItem = NULL;
 	activeItem = NULL;
 	firstItemInViewport = NULL;
+
+	M5.Lcd.setTextFont(MENU_FONT);
+	M5.Lcd.setTextSize(MENU_FONT_SIZE);
 }
 
 Menu::~Menu()
@@ -178,15 +181,13 @@ void Menu::render()
 
 void Menu::clearScreen()
 {
-	M5.Lcd.clear(CENTER_BACKGROUND_COLOR);
-	M5.Lcd.setTextSize(MENU_FONT_SIZE);
-	M5.Lcd.setTextFont(MENU_FONT);
+	M5.Lcd.clear(MENU_ITEM_BACKGROUND_COLOR);
 }
 
 void Menu::renderCenterSection(bool force)
 {
 	int fontHeight = MENU_FONT_HEIGHT;
-	int titleHeight = fontHeight + (2 * V_PADDING_TOP_SECTION);
+	int titleHeight = fontHeight + (2 * TOP_BAR_V_PADDING);
 
 	int pos = 0;
 	MenuItem* item = firstItemInViewport;
@@ -218,7 +219,7 @@ bool Menu::isAboveViewPort(MenuItem* item)
 
 bool Menu::isBelowViewPort(MenuItem* item)
 {
-	return item->getPosition() >= firstItemInViewport->getPosition() + NR_VISIBLE_MENU_ITEMS;
+	return item->getPosition() >= firstItemInViewport->getPosition() + MENU_ITEM_MAX_NR;
 }
 
 

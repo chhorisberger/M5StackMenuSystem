@@ -26,5 +26,5 @@ void UpSoftKey::renderIcon(int x, int y, int w, int h)
 	int x2 = iconX + 6;
 	int y2 = iconY + 6;
 
-	M5.Lcd.fillTriangle(x0, y0, x1, y1, x2, y2, pressed ? SOFTKEY_BACKGROUND_COLOR : SOFTKEY_COLOR);
+	M5.Lcd.fillTriangle(x0, y0, x1, y1, x2, y2, pressed ? BOTTOM_BAR_SOFTKEY_BACKGROUND_COLOR : BOTTOM_BAR_SOFTKEY_COLOR);
 }

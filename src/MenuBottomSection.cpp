@@ -70,7 +70,7 @@ void MenuBottomSection::render(bool force)
 void MenuBottomSection::renderBottomBar()
 {
 	int barW = SCREEN_WIDTH / 5;
-	int barH = MENU_FONT_HEIGHT + (2 * V_PADDING_BOTTOM_SECTION);
+	int barH = MENU_FONT_HEIGHT + (2 * BOTTOM_BAR_V_PADDING);
 	int barY = SCREEN_HEIGHT - barH;
 	int paddingSide = barW / 2;
 

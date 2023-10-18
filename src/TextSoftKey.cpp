@@ -19,11 +19,11 @@ void TextSoftKey::renderText(int x, int y, int w, int h)
 {
 	if (pressed)
 	{
-		M5.Lcd.setTextColor(SOFTKEY_BACKGROUND_COLOR);
+		M5.Lcd.setTextColor(BOTTOM_BAR_SOFTKEY_BACKGROUND_COLOR);
 	}
 	else
 	{
-		M5.Lcd.setTextColor(SOFTKEY_COLOR);
+		M5.Lcd.setTextColor(BOTTOM_BAR_SOFTKEY_COLOR);
 	}
 
 	M5.Lcd.setTextDatum(MC_DATUM);

@@ -59,11 +59,11 @@ In this basic example all the menu items point to the same function, but in a re
 
 ## Advanced Usage
 
-Beside the basic functionality shown above, there are additional options that are showcased in the example "AdvancedMenu" that ships with the library
+Beside the basic functionality shown above, there are additional options that are showcased in the example "AdvancedMenu" that ships with the library.
 
 ### Sub Menus
 
-To create a sub menu, just declare a second menu and then add it to the main menu using the "addSubMenu" function
+To create a sub menu, just declare a second menu and then add it to the main menu using the "addSubMenu" function.
 
 ```c++
 Menu subMenu("Sub Menu");
@@ -71,6 +71,11 @@ Menu subMenu("Sub Menu");
 
 ```c++
 mainMenu.addSubMenu("Submenu", &subMenu);
+```
+Adding menu items to the sub menu works the same as adding menu items to the main menu
+
+```c++
+subMenu.addMenuItem("Sub Menu Item #1", testOneTimeCallback);
 ```
 
 ### Exit Items
@@ -80,27 +85,27 @@ When adding a sub menu, a "exit item" will be automatically added in order to be
 It is also possible to add such an "exit item" to the main menu, in order to leave the main menu as completly.
 
 ```c++
-	mainMenu.addExitItem();
+mainMenu.addExitItem();
 ```
 I you want to re-enter the main menu, just run 
 
 ```c++
-	mainMenu.enable();
+mainMenu.enable();
 ```
 
-Be aware this only works if "mainMenu.loop()" is still called in the Arduino "loop()" method
+Be aware this only works if "mainMenu.loop()" is still called in the Arduino "loop()" method.
 
 
 ### Loop Callbacks
 
-When calling "myMenu.addMenuItem" you can pass a "loop callback" function as a third argument 
+When calling "myMenu.addMenuItem" you can pass a "loop callback" function as a third argument.
 
 ```c++
-	mainMenu.addMenuItem("Loop Callback", testLoopInitCallback, testLoopCallback);
+mainMenu.addMenuItem("Loop Callback", testLoopInitCallback, testLoopCallback);
 ```
 This function will be then called automatically on every invocation of "mainMenu.loop()".
 
-Be aware this only works if "mainMenu.loop()" is actually called in the Arduino "loop()" method
+Be aware this only works if "mainMenu.loop()" is actually called in the Arduino "loop()" method.
 
 If you want the invocations of "loop callback" function to stop, just call the following inside the function: 
 
@@ -108,19 +113,19 @@ If you want the invocations of "loop callback" function to stop, just call the f
 menuItem.deactivateCallbacks();
 ```
 
-Check out the example "AdvancedMenu" that ships with the library to see how this all fits together
+Check out the example "AdvancedMenu" that ships with the library to see how this all fits together.
 
 ### Custom Softkeys outside of menu
 
-Inside a "loop callback" function, you can display custom soft keys (the virtual buttons displayed on the screen above the physical buttons of the M5 Stack device) 
+Inside a "loop callback" function, you can display custom soft keys (the virtual buttons displayed on the screen above the physical buttons of the M5 Stack device) .
 
 ```c++
-	TextSoftKey exampleSoftKey(BtnASlot, "Foo");
-	exampleSoftKey.render(); 
+TextSoftKey exampleSoftKey(BtnASlot, "Foo");
+exampleSoftKey.render(); 
 ```
 The first argument "BtnASlot" determines in which of the 3 slots the soft key should be displayed (A, B or C).
 
-The second argument "Foo" determines the text displayed in the soft key. Be aware that only about 3-4 character actually fit in the softkey
+The second argument "Foo" determines the text displayed in the soft key. Be aware that only about 3-4 character actually fit in the softkey.
 
 
 

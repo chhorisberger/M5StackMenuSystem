@@ -3,7 +3,10 @@ A quick way to create nice menus for the neat [M5 Stack](https://github.com/m5st
 
 <img src="https://github.com/chhorisberger/M5StackMenuSystem/blob/main/docs/picture.jpg" width="256">
 
-#### Code Example
+## Getting Started
+Install the library using either the .zip file from the latest release or by searching for "M5StackMenuSystem" in the libraries manager of the Arduino IDE
+
+Here's a simple sketch that shows the basic functionality:
 
 ```c++
 #include <M5Stack.h>
@@ -32,5 +35,27 @@ void testOneTimeCallback(CallbackMenuItem& menuItem) {
   M5.Lcd.drawString(menuItem.getText() + " selected", 160, 120);
   delay(1000);
 }
-
 ```
+## Explenation of above code
+
+Declare a new menu instance, which will have the title "Main Menu".
+```c++
+Menu myMenu("Main Menu");
+```
+
+In the setup() method, add multiple items to that menu.
+```c++
+myMenu.addMenuItem("Menu Item #1", testOneTimeCallback);
+```
+The first argument "Menu Item #1" is the text that will be displayed in the menu for this item.
+The second argument "testOneTimeCallback" is the function further down that will be called once when the user selects this item.
+
+```c++
+void testOneTimeCallback(CallbackMenuItem& menuItem) {
+```
+
+In this basic example all the menu items point to the same function, but in a real application you probably would want each item to point to its own designated funtion.
+
+## Advanced Usage
+
+WIP

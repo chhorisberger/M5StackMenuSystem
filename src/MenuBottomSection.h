@@ -1,15 +1,13 @@
 #ifndef MENU_BOTTOM_SECTION_H
 #define MENU_BOTTOM_SECTION_H
 
-
 #include "TextSoftKey.h"
 #include "UpSoftKey.h"
 #include "DownSoftKey.h"
+#include "Layout.h"
 
 #include <Arduino.h>
 
-#define BOTTOM_BAR_BACKGROUND_COLOR RED
-#define V_PADDING_BOTTOM_SECTION 4
 
 // foward declare class for backwards reference without cyclic dependency
 class Menu;

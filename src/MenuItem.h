@@ -3,19 +3,7 @@
 
 #include <Arduino.h>
 
-#define MY_FONT 2
 
-// high contrast theme
-//#define MENU_ITEM_TEXT_COLOR WHITE
-//#define MENU_ITEM_BACKGROUND_COLOR BLACK
-//#define MENU_ITEM_HIGHLIGHTED_TEXT_COLOR BLACK
-//#define MENU_ITEM_HIGHLIGHTED_BACKGROUND_COLOR WHITE
-
-// grey levels theme
-#define MENU_ITEM_TEXT_COLOR DARKGREY
-#define MENU_ITEM_BACKGROUND_COLOR LIGHTGREY
-#define MENU_ITEM_HIGHLIGHTED_TEXT_COLOR BLACK
-#define MENU_ITEM_HIGHLIGHTED_BACKGROUND_COLOR WHITE
 
 
 // foward declare class for backwards reference without cyclic dependency

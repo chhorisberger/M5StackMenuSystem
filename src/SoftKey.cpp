@@ -2,7 +2,6 @@
 
 #include <M5Stack.h>
 
-
 SoftKey::SoftKey(SoftKeySlot slot_)
 {
 	slot = slot_;

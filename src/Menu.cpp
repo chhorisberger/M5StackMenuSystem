@@ -5,6 +5,8 @@
 
 #include <M5Stack.h>
 
+
+
 Menu::Menu(String title_) : menuTopSection(title_), menuBottomSection(this)
 {
 	enabled = true;

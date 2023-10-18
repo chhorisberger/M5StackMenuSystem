@@ -1,13 +1,10 @@
 #ifndef SOFT_KEY_H
 #define SOFT_KEY_H
 
+#include "Layout.h"
+
 #include <Arduino.h>
 
-#define MY_FONT 2
-#define V_PADDING_BOTTOM_SECTION 4
-
-#define SOFTKEY_COLOR WHITE
-#define SOFTKEY_BACKGROUND_COLOR RED
 
 enum SoftKeySlot { BtnASlot, BtnBSlot, BtnCSlot};
 

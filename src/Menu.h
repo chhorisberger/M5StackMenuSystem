@@ -5,11 +5,11 @@
 #include "MenuBottomSection.h"
 #include "MenuItem.h"
 #include "CallbackMenuItem.h"
+#include "Layout.h"
 
 #include <Arduino.h>
 
-#define CENTER_BACKGROUND_COLOR LIGHTGREY
-#define NR_VISIBLE_MENU_ITEMS 5
+
 
 
 class Menu

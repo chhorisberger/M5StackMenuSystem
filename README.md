@@ -82,7 +82,7 @@ subMenu.addMenuItem("Sub Menu Item #1", testOneTimeCallback);
 
 When adding a sub menu, a "exit item" will be automatically added in order to be able to get back to the main menu.
 
-It is also possible to add such an "exit item" to the main menu, in order to leave the main menu as completly.
+It is also possible to add such an "exit item" to the main menu, in order to leave the main menu completly.
 
 ```c++
 mainMenu.addExitItem();

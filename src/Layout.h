@@ -1,22 +1,26 @@
 #ifndef LAYOUT_DEFINES_H
 #define LAYOUT_DEFINES_H
 
-#define CENTER_BACKGROUND_COLOR LIGHTGREY
-#define NR_VISIBLE_MENU_ITEMS 5
+// GENERAL
+#define SCREEN_WIDTH M5.Lcd.width()
+#define SCREEN_HEIGHT M5.Lcd.height()
+#define MENU_FONT 2
+#define MENU_FONT_SIZE 2
+#define MENU_FONT_HEIGHT M5.Lcd.fontHeight(MENU_FONT)
 
-#define V_PADDING_BOTTOM_SECTION 4
-
-#define SOFTKEY_COLOR WHITE
-#define SOFTKEY_BACKGROUND_COLOR RED
+// --- TOP ---
+// TODO: rename to always start with TOP_
 
 #define TOP_BAR_TITLE_COLOR WHITE
 #define TOP_BAR_BACKGROUND_COLOR RED
 #define V_PADDING_TOP_SECTION 4
-#define MY_FONT 2
 
 
-#define BOTTOM_BAR_BACKGROUND_COLOR RED
-#define V_PADDING_BOTTOM_SECTION 4
+// --- CENTER ---
+// TODO: start to always start with CENTER_
+
+#define CENTER_BACKGROUND_COLOR LIGHTGREY
+#define NR_VISIBLE_MENU_ITEMS 5
 
 // high contrast theme
 //#define MENU_ITEM_TEXT_COLOR WHITE
@@ -30,7 +34,15 @@
 #define MENU_ITEM_HIGHLIGHTED_TEXT_COLOR BLACK
 #define MENU_ITEM_HIGHLIGHTED_BACKGROUND_COLOR WHITE
 
-// TODO: replace LCD.height and font get Width with defines
+// --- BOTTOM ---
+// TODO: rename to always start with BOTTOM_
+
+#define BOTTOM_BAR_BACKGROUND_COLOR RED
+#define SOFTKEY_COLOR WHITE
+#define SOFTKEY_BACKGROUND_COLOR RED
+#define V_PADDING_BOTTOM_SECTION 4
+
+
 
 
 #endif 

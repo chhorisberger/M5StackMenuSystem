@@ -179,13 +179,13 @@ void Menu::render()
 void Menu::clearScreen()
 {
 	M5.Lcd.clear(CENTER_BACKGROUND_COLOR);
-	M5.Lcd.setTextSize(2);
-	M5.Lcd.setTextFont(MY_FONT);
+	M5.Lcd.setTextSize(MENU_FONT_SIZE);
+	M5.Lcd.setTextFont(MENU_FONT);
 }
 
 void Menu::renderCenterSection(bool force)
 {
-	int fontHeight = M5.Lcd.fontHeight(MY_FONT);
+	int fontHeight = MENU_FONT_HEIGHT;
 	int titleHeight = fontHeight + (2 * V_PADDING_TOP_SECTION);
 
 	int pos = 0;

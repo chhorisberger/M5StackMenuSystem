@@ -69,12 +69,12 @@ void MenuBottomSection::render(bool force)
 
 void MenuBottomSection::renderBottomBar()
 {
-	int barW = M5.Lcd.width() / 5;
-	int barH = M5.Lcd.fontHeight(MY_FONT) + (2 * V_PADDING_BOTTOM_SECTION);
-	int barY = M5.Lcd.height() - barH;
+	int barW = SCREEN_WIDTH / 5;
+	int barH = MENU_FONT_HEIGHT + (2 * V_PADDING_BOTTOM_SECTION);
+	int barY = SCREEN_HEIGHT - barH;
 	int paddingSide = barW / 2;
 
-	M5.Lcd.fillRoundRect(0, barY, M5.Lcd.width(), barH, 3, BOTTOM_BAR_BACKGROUND_COLOR);
+	M5.Lcd.fillRoundRect(0, barY, SCREEN_WIDTH, barH, 3, BOTTOM_BAR_BACKGROUND_COLOR);
 }
 
 void MenuBottomSection::renderSoftKeys(bool force)

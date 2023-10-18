@@ -17,12 +17,12 @@ void SoftKey::setPressed(bool pressed_)
 
 int SoftKey::getWidth()
 {
-	return M5.Lcd.width() / 5;
+	return SCREEN_WIDTH / 5;
 }
 
 int SoftKey::getHeight()
 {
-	return M5.Lcd.fontHeight(MY_FONT);
+	return MENU_FONT_HEIGHT;
 }
 
 void SoftKey::render(bool force)
@@ -32,7 +32,7 @@ void SoftKey::render(bool force)
 		int w = getWidth();
 		int h = getHeight();
 		int x = getXPosition();
-		int y = M5.Lcd.height() - (h + V_PADDING_BOTTOM_SECTION);
+		int y = SCREEN_HEIGHT - (h + V_PADDING_BOTTOM_SECTION);
 
 		renderInternal(x, y, w, h);
 
@@ -60,9 +60,9 @@ int SoftKey::getXPosition()
 	case BtnASlot:
 		return getWidth() / 2;
 	case BtnBSlot:
-		return (M5.Lcd.width() / 2) - (getWidth() / 2);
+		return (SCREEN_WIDTH / 2) - (getWidth() / 2);
 	case BtnCSlot:
-		return M5.Lcd.width() - (getWidth() + (getWidth() / 2));
+		return SCREEN_WIDTH - (getWidth() + (getWidth() / 2));
 	}
 
 	return -1;

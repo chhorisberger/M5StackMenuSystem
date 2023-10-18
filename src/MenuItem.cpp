@@ -73,9 +73,9 @@ void MenuItem::render(int x, int y, bool isHighlighted, bool force)
 {
 	if (dirty || force)
 	{
-		int fontHeight = M5.Lcd.fontHeight(MY_FONT);
+		int fontHeight = MENU_FONT_HEIGHT;
 
-		int w = M5.Lcd.width();
+		int w = SCREEN_WIDTH;
 		int h = fontHeight;
 		M5.Lcd.fillRect(x,y,w,h, isHighlighted ? MENU_ITEM_HIGHLIGHTED_BACKGROUND_COLOR : MENU_ITEM_BACKGROUND_COLOR);
 

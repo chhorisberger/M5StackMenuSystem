@@ -29,7 +29,7 @@ void loop() {
 }
 
 void testOneTimeCallback(CallbackMenuItem& menuItem) {
-  Serial.println(menuItem.getTetx() + " menu item was clicked");
+  Serial.println(menuItem.getTetx() + " was clicked");
 }
 ```
 ## Explanation of above code

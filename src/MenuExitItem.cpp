@@ -4,14 +4,14 @@
 
 #include <M5Stack.h>
 
-MenuExitItem::MenuExitItem(Menu* parentMenu_) : MenuItem("..")
+MenuExitItem::MenuExitItem(Menu* parentMenu_) : MenuItem(MENU_EXIT_ITEM_TEXT)
 {
 	parentMenu = parentMenu_;
 }
 
 void MenuExitItem::loop()
 {
-	getMenu()->resetActiveMenuItem();
+	getMenu()->reset();
 	getMenu()->disable();
 
 	if (parentMenu != NULL)

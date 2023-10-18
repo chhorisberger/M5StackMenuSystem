@@ -28,7 +28,8 @@ void loop() {
 		mainMenu.loop();
 	} else {
 		M5.Lcd.clear(BLACK);
-		if (M5.BtnA.wasReleased()) {
+
+		if (M5.BtnA.wasReleased() || M5.BtnB.wasReleased() || M5.BtnC.wasReleased()) {
 			mainMenu.enable();
 		}
 	}

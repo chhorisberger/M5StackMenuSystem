@@ -47,6 +47,15 @@ bool Menu::isEnabled()
 	return enabled;
 }
 
+void Menu::reset()
+{
+	firstItemInViewport = firstItem;
+	highlightedItem = firstItem;
+	activeItem = NULL;
+	dirty = true;
+	setAllMenuItemsDirty();
+}
+
 void Menu::loop()
 {
 	if (enabled)

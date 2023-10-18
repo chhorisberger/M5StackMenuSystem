@@ -24,6 +24,7 @@ public:
 	void enable();
 	void disable();
 	bool isEnabled();
+	void reset();
 
 	void addMenuItem(String text, CallbackFunction callbackOneTimeFunction, CallbackFunction callbackLoopFunction = NULL);
 	void addSubMenu(String text, Menu* subMenu);

@@ -1,16 +1,13 @@
 #ifndef MENU_H
 #define MENU_H
 
+#include "Layout.h"
 #include "MenuTopSection.h"
 #include "MenuBottomSection.h"
 #include "MenuItem.h"
 #include "CallbackMenuItem.h"
-#include "Layout.h"
 
 #include <Arduino.h>
-
-
-
 
 class Menu
 {
@@ -42,6 +39,7 @@ private:
 	void downButtonPressed();
 	void okButtonPressed();
 	void resetActiveMenuItem();
+	void setDefaultLayout();
 
 	bool enabled;
 	bool dirty;
@@ -52,6 +50,7 @@ private:
 	MenuItem* firstItemInViewport;
 	MenuTopSection menuTopSection;
 	MenuBottomSection menuBottomSection;
+	Layout layout;
 
 	friend class MenuBottomSection;
 	friend class CallbackMenuItem;

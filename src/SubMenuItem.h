@@ -10,7 +10,7 @@ class SubMenuItem : virtual public MenuItem
 {
 
 public:
-	SubMenuItem(String text_, Menu* subMenu_);
+	SubMenuItem(Layout& layout_, String text_, Menu* subMenu_);
 	virtual ~SubMenuItem() {}
 	virtual void loop();
 

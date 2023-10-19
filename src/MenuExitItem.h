@@ -2,6 +2,7 @@
 #define MENU_EXIT_ITEM_H
 
 #include "MenuItem.h"
+#include "Layout.h"
 
 // foward declare class for backwards reference without cyclic dependency
 class Menu;
@@ -10,7 +11,7 @@ class MenuExitItem : virtual public MenuItem
 {
 
 public:
-	MenuExitItem(Menu* parentMenu_);
+	MenuExitItem(Layout& layout_, Menu* parentMenu_);
 	virtual ~MenuExitItem() {}
 
 	virtual void loop();

@@ -4,7 +4,7 @@
 
 #include <M5Stack.h>
 
-SubMenuItem::SubMenuItem(String text_, Menu* subMenu_) : MenuItem(text_)
+SubMenuItem::SubMenuItem(Layout& layout_, String text_, Menu* subMenu_) : MenuItem(layout_, text_)
 {
 	subMenu = subMenu_;
 }

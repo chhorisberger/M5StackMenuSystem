@@ -4,7 +4,7 @@
 
 #include <M5Stack.h>
 
-CallbackMenuItem::CallbackMenuItem(String text_, CallbackFunction callbackOneTimeFunction_, CallbackFunction callbackLoopFunction_) : MenuItem(text_)
+CallbackMenuItem::CallbackMenuItem(Layout& layout_, String text_, CallbackFunction callbackOneTimeFunction_, CallbackFunction callbackLoopFunction_) : MenuItem(layout_, text_)
 {
 	text = text_;
 	callbackOneTimeFunction = callbackOneTimeFunction_;

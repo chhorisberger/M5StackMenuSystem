@@ -8,12 +8,10 @@
 
 enum SoftKeySlot { BtnASlot, BtnBSlot, BtnCSlot};
 
-// TODO: make abstract and subclass TextSoftKey, UpSoftKey, DownSoftKey etc.
-
 class SoftKey
 {
 public:
-	SoftKey(SoftKeySlot slot_);
+	SoftKey(SoftKeySlot slot_, Layout& layout_);
 
 	void render(bool force = false);
 	void setPressed(bool pressed_);
@@ -25,6 +23,7 @@ protected:
 	void renderRow(int x, int y, int w, int h);
 
 	SoftKeySlot slot;
+	Layout& layout;
 	bool pressed;
 
 private:

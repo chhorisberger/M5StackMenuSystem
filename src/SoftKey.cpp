@@ -2,7 +2,7 @@
 
 #include <M5Stack.h>
 
-SoftKey::SoftKey(SoftKeySlot slot_)
+SoftKey::SoftKey(SoftKeySlot slot_, Layout& layout_) : layout(layout_)
 {
 	slot = slot_;
 	dirty = true;
@@ -17,12 +17,12 @@ void SoftKey::setPressed(bool pressed_)
 
 int SoftKey::getWidth()
 {
-	return SCREEN_WIDTH / 5;
+	return layout.SCREEN_WIDTH / layout.BOTTOM_BAR_SOFTKEY_WIDTH_AS_FRACTION_OF_SCREEN;
 }
 
 int SoftKey::getHeight()
 {
-	return MENU_FONT_HEIGHT;
+	return  M5.Lcd.fontHeight(layout.MENU_FONT) + (2* layout.BOTTOM_BAR_SOFTKEY_V_PADDING);
 }
 
 void SoftKey::render(bool force)
@@ -32,7 +32,7 @@ void SoftKey::render(bool force)
 		int w = getWidth();
 		int h = getHeight();
 		int x = getXPosition();
-		int y = SCREEN_HEIGHT - (h + BOTTOM_BAR_V_PADDING);
+		int y = layout.SCREEN_HEIGHT - (h + layout.BOTTOM_BAR_SOFTKEY_V_SPACING);
 
 		renderInternal(x, y, w, h);
 
@@ -44,12 +44,12 @@ void SoftKey::renderRow(int x, int y, int w, int h)
 {
 	if (pressed)
 	{
-		M5.Lcd.fillRoundRect(x, y, w, h, 3, BOTTOM_BAR_SOFTKEY_COLOR);
+		M5.Lcd.fillRoundRect(x, y, w, h, 3, layout.BOTTOM_BAR_SOFTKEY_COLOR);
 	}
 	else
 	{
-		M5.Lcd.fillRoundRect(x, y, w, h, 3, BOTTOM_BAR_SOFTKEY_BACKGROUND_COLOR);
-		M5.Lcd.drawRoundRect(x, y, w, h, 3, BOTTOM_BAR_SOFTKEY_COLOR);
+		M5.Lcd.fillRoundRect(x, y, w, h, 3, layout.BOTTOM_BAR_SOFTKEY_BACKGROUND_COLOR);
+		M5.Lcd.drawRoundRect(x, y, w, h, 3, layout.BOTTOM_BAR_SOFTKEY_COLOR);
 	}
 }
 
@@ -60,9 +60,9 @@ int SoftKey::getXPosition()
 	case BtnASlot:
 		return getWidth() / 2;
 	case BtnBSlot:
-		return (SCREEN_WIDTH / 2) - (getWidth() / 2);
+		return (layout.SCREEN_WIDTH / 2) - (getWidth() / 2);
 	case BtnCSlot:
-		return SCREEN_WIDTH - (getWidth() + (getWidth() / 2));
+		return layout.SCREEN_WIDTH - (getWidth() + (getWidth() / 2));
 	}
 
 	return -1;

@@ -4,7 +4,7 @@
 
 #include <M5Stack.h>
 
-MenuBottomSection::MenuBottomSection(Menu* menu_) : softKeyUp(BtnASlot), softKeyDown(BtnBSlot), softKeyOk(BtnCSlot, "Ok")
+MenuBottomSection::MenuBottomSection(Layout& layout_, Menu* menu_) : layout(layout_), softKeyUp(BtnASlot, layout_), softKeyDown(BtnBSlot, layout_), softKeyOk(BtnCSlot, layout_, "Ok")
 {
 	menu = menu_;
 	dirty = true;
@@ -69,12 +69,12 @@ void MenuBottomSection::render(bool force)
 
 void MenuBottomSection::renderBottomBar()
 {
-	int barW = SCREEN_WIDTH / 5;
-	int barH = MENU_FONT_HEIGHT + (2 * BOTTOM_BAR_V_PADDING);
-	int barY = SCREEN_HEIGHT - barH;
+	int barW = layout.SCREEN_WIDTH;
+	int barH = M5.Lcd.fontHeight(layout.MENU_FONT) + (2 * layout.BOTTOM_BAR_SOFTKEY_V_SPACING);
+	int barY = layout.SCREEN_HEIGHT - barH;
 	int paddingSide = barW / 2;
 
-	M5.Lcd.fillRoundRect(0, barY, SCREEN_WIDTH, barH, 3, BOTTOM_BAR_BACKGROUND_COLOR);
+	M5.Lcd.fillRoundRect(0, barY, layout.SCREEN_WIDTH, barH, 3, layout.BOTTOM_BAR_BACKGROUND_COLOR);
 }
 
 void MenuBottomSection::renderSoftKeys(bool force)

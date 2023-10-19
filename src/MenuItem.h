@@ -1,6 +1,8 @@
 #ifndef MENU_ITEM_H
 #define MENU_ITEM_H
 
+#include "Layout.h"
+
 #include <Arduino.h>
 
 
@@ -12,7 +14,7 @@ class Menu;
 class MenuItem
 {
 public:
-	MenuItem(String text_);
+	MenuItem(Layout& layout_, String text_);
 	virtual void loop() = 0;
 	virtual void render(int x, int y, bool isHighlighted, bool force = false);
 	virtual void onAdded();
@@ -31,6 +33,7 @@ public:
 protected:
 	String text;
 	bool dirty;
+	Layout& layout;
 
 private:
 	Menu* menu;

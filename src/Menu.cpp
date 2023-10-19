@@ -5,9 +5,7 @@
 
 #include <M5Stack.h>
 
-
-
-Menu::Menu(String title_) : menuTopSection(title_), menuBottomSection(this)
+Menu::Menu(String title_) : menuTopSection(layout, title_), menuBottomSection(layout, this)
 {
 	enabled = true;
 	dirty = true;
@@ -17,8 +15,7 @@ Menu::Menu(String title_) : menuTopSection(title_), menuBottomSection(this)
 	activeItem = NULL;
 	firstItemInViewport = NULL;
 
-	M5.Lcd.setTextFont(MENU_FONT);
-	M5.Lcd.setTextSize(MENU_FONT_SIZE);
+	setDefaultLayout();
 }
 
 Menu::~Menu()
@@ -30,6 +27,37 @@ Menu::~Menu()
 		delete item;
 		item = next;
 	}
+}
+
+void Menu::setDefaultLayout()
+{
+	// GENERAL
+	layout.SCREEN_WIDTH = M5.Lcd.height();
+	layout.SCREEN_HEIGHT = M5.Lcd.width();
+	layout.MENU_FONT = 2;
+	layout.MENU_FONT_SIZE = 2;
+
+	// --- TOP ---
+	layout.TOP_BAR_TITLE_COLOR = WHITE;
+	layout.TOP_BAR_BACKGROUND_COLOR = RED;
+	layout.TOP_BAR_V_PADDING = 4;
+
+	// --- CENTER ---
+	layout.MENU_ITEM_TEXT_COLOR = DARKGREY;
+	layout.MENU_ITEM_BACKGROUND_COLOR = LIGHTGREY;
+	layout.MENU_ITEM_HIGHLIGHTED_TEXT_COLOR = BLACK;
+	layout.MENU_ITEM_HIGHLIGHTED_BACKGROUND_COLOR = WHITE;
+
+	// --- BOTTOM ---
+	layout.BOTTOM_BAR_BACKGROUND_COLOR = RED;
+	layout.BOTTOM_BAR_SOFTKEY_V_SPACING = 4;
+	layout.BOTTOM_BAR_SOFTKEY_V_PADDING = 0;
+	layout.BOTTOM_BAR_SOFTKEY_WIDTH_AS_FRACTION_OF_SCREEN = 5;
+	layout.BOTTOM_BAR_SOFTKEY_COLOR = WHITE;
+	layout.BOTTOM_BAR_SOFTKEY_BACKGROUND_COLOR = RED;
+
+	M5.Lcd.setTextFont(layout.MENU_FONT);
+	M5.Lcd.setTextSize(layout.MENU_FONT_SIZE);
 }
 
 void Menu::enable()
@@ -80,17 +108,17 @@ void Menu::resetActiveMenuItem()
 
 void Menu::addMenuItem(String text, CallbackFunction callbackOneTimeFunction, CallbackFunction callbackLoopFunction)
 {
-	addItem(new CallbackMenuItem(text, callbackOneTimeFunction, callbackLoopFunction));
+	addItem(new CallbackMenuItem(layout, text, callbackOneTimeFunction, callbackLoopFunction));
 }
 
 void Menu::addSubMenu(String text, Menu* subMenu)
 {
-	addItem(new SubMenuItem(text, subMenu));
+	addItem(new SubMenuItem(layout, text, subMenu));
 }
 
 void Menu::addExitItem(Menu* parentMenu)
 {
-	addItem(new MenuExitItem(parentMenu));
+	addItem(new MenuExitItem(layout, parentMenu));
 }
 
 void Menu::addItem(MenuItem* item)
@@ -190,13 +218,13 @@ void Menu::render()
 
 void Menu::clearScreen()
 {
-	M5.Lcd.clear(MENU_ITEM_BACKGROUND_COLOR);
+	M5.Lcd.clear(layout.MENU_ITEM_BACKGROUND_COLOR);
 }
 
 void Menu::renderCenterSection(bool force)
 {
-	int fontHeight = MENU_FONT_HEIGHT;
-	int titleHeight = fontHeight + (2 * TOP_BAR_V_PADDING);
+	int fontHeight = M5.Lcd.fontHeight(layout.MENU_FONT);
+	int titleHeight = fontHeight + (2 * layout.TOP_BAR_V_PADDING);
 
 	int pos = 0;
 	MenuItem* item = firstItemInViewport;
@@ -228,7 +256,11 @@ bool Menu::isAboveViewPort(MenuItem* item)
 
 bool Menu::isBelowViewPort(MenuItem* item)
 {
-	return item->getPosition() >= firstItemInViewport->getPosition() + MENU_ITEM_MAX_NR;
+	int fontHeight = M5.Lcd.fontHeight(layout.MENU_FONT);
+	int topSectionHeight = (2 * layout.TOP_BAR_V_PADDING) + fontHeight;
+	int bottomSectionHeight = (2 * layout.BOTTOM_BAR_SOFTKEY_V_SPACING) + fontHeight;
+	int maxItemsInViewport = (layout.SCREEN_HEIGHT - (topSectionHeight + topSectionHeight)) / fontHeight;
+	return item->getPosition() >= firstItemInViewport->getPosition() + maxItemsInViewport;
 }
 
 

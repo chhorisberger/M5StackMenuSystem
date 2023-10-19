@@ -16,7 +16,7 @@ class MenuBottomSection
 {
 
 public:
-	MenuBottomSection(Menu* menu_);
+	MenuBottomSection(Layout& layout_, Menu* menu_);
 	void render(bool force = false);
 	void checkMenuButtons();
 
@@ -27,6 +27,7 @@ private:
 	void renderBottomBar();
 	void renderSoftKeys(bool force = false);
 
+	Layout& layout;
 	bool dirty;
 	Menu* menu;
 	UpSoftKey softKeyUp;

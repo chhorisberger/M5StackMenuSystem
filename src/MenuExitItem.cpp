@@ -4,7 +4,7 @@
 
 #include <M5Stack.h>
 
-MenuExitItem::MenuExitItem(Menu* parentMenu_) : MenuItem(MENU_EXIT_ITEM_TEXT)
+MenuExitItem::MenuExitItem(Layout& layout_, Menu* parentMenu_) : MenuItem(layout_, "..")
 {
 	parentMenu = parentMenu_;
 }

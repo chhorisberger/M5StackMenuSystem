@@ -5,7 +5,7 @@
 #include <M5Stack.h>
 
 
-MenuItem::MenuItem(String text_)
+MenuItem::MenuItem(Layout& layout_, String text_) : layout(layout_)
 {
 	text = text_;
 	previousItem = NULL;
@@ -73,11 +73,11 @@ void MenuItem::render(int x, int y, bool isHighlighted, bool force)
 {
 	if (dirty || force)
 	{
-		int fontHeight = MENU_FONT_HEIGHT;
+		int fontHeight = M5.Lcd.fontHeight(layout.MENU_FONT);
 
-		int w = SCREEN_WIDTH;
+		int w = layout.SCREEN_WIDTH;
 		int h = fontHeight;
-		M5.Lcd.fillRect(x,y,w,h, isHighlighted ? MENU_ITEM_HIGHLIGHTED_BACKGROUND_COLOR : MENU_ITEM_BACKGROUND_COLOR);
+		M5.Lcd.fillRect(x,y,w,h, isHighlighted ? layout.MENU_ITEM_HIGHLIGHTED_BACKGROUND_COLOR : layout.MENU_ITEM_BACKGROUND_COLOR);
 
 		if (isHighlighted)
 		{
@@ -89,11 +89,11 @@ void MenuItem::render(int x, int y, bool isHighlighted, bool force)
 			int y1 = iconY + 6; 
 			int x2 = iconX + 6;
 			int y2 = iconY;
-			M5.Lcd.fillTriangle(x0, y0, x1, y1, x2, y2, MENU_ITEM_HIGHLIGHTED_TEXT_COLOR);
+			M5.Lcd.fillTriangle(x0, y0, x1, y1, x2, y2, layout.MENU_ITEM_HIGHLIGHTED_TEXT_COLOR);
 		}
 
 		int textX = 34;	// TODO
-		M5.Lcd.setTextColor(isHighlighted ? MENU_ITEM_HIGHLIGHTED_TEXT_COLOR : MENU_ITEM_TEXT_COLOR);
+		M5.Lcd.setTextColor(isHighlighted ? layout.MENU_ITEM_HIGHLIGHTED_TEXT_COLOR : layout.MENU_ITEM_TEXT_COLOR);
 		M5.Lcd.setTextDatum(TL_DATUM);
 		M5.Lcd.drawString((text).c_str(), textX, y);
 

@@ -9,14 +9,14 @@ class MenuTopSection
 {
 
 public:
-	MenuTopSection(String title_);
+	MenuTopSection(Layout& layout_, String title_);
 	void render(bool force = false);
 	void setTitle(String title_);
 
 private:
-
 	bool dirty;
 	String title;
+	Layout& layout;
 };
 
 #endif 

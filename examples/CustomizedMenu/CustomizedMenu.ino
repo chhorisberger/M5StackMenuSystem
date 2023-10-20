@@ -9,8 +9,6 @@ void setup() {
 	M5.begin();
 	M5.Power.begin();
 
-	customizeLayout();
-
 	myMenu.addMenuItem("Menu Item #1", testOneTimeCallback);
 	myMenu.addMenuItem("Menu Item #2", testOneTimeCallback);
 	myMenu.addMenuItem("Menu Item #3", testOneTimeCallback);
@@ -25,6 +23,8 @@ void setup() {
 	myMenu.addMenuItem("Menu Item #12", testOneTimeCallback);
 	myMenu.addMenuItem("Menu Item #13", testOneTimeCallback);
 	myMenu.addMenuItem("Menu Item #14", testOneTimeCallback);
+
+	customizeLayout();
 }
 
 void loop() {
@@ -48,6 +48,7 @@ void customizeLayout()
 	layout.MENU_ITEM_BACKGROUND_COLOR = BLACK;
 	layout.MENU_ITEM_HIGHLIGHTED_TEXT_COLOR = BLACK;
 	layout.MENU_ITEM_HIGHLIGHTED_BACKGROUND_COLOR = WHITE;
+	layout.MENU_ITEM_HIGHLIGHTED_ICON_SIZE = 3;
 
 	layout.BOTTOM_BAR_BACKGROUND_COLOR = DARKGREY;
 	layout.BOTTOM_BAR_SOFTKEY_COLOR = WHITE;

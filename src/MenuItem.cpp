@@ -83,11 +83,11 @@ void MenuItem::render(int x, int y, bool isHighlighted, bool force)
 		{
 			int iconX = 16;
 			int iconY = y + (fontHeight / 2);
-			int x0 = iconX - 6;
-			int y0 = iconY - 6;
-			int x1 = iconX - 6;
-			int y1 = iconY + 6; 
-			int x2 = iconX + 6;
+			int x0 = iconX - layout.MENU_ITEM_HIGHLIGHTED_ICON_SIZE;
+			int y0 = iconY - layout.MENU_ITEM_HIGHLIGHTED_ICON_SIZE;
+			int x1 = iconX - layout.MENU_ITEM_HIGHLIGHTED_ICON_SIZE;
+			int y1 = iconY + layout.MENU_ITEM_HIGHLIGHTED_ICON_SIZE;
+			int x2 = iconX + layout.MENU_ITEM_HIGHLIGHTED_ICON_SIZE;
 			int y2 = iconY;
 			M5.Lcd.fillTriangle(x0, y0, x1, y1, x2, y2, layout.MENU_ITEM_HIGHLIGHTED_TEXT_COLOR);
 		}

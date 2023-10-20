@@ -1,5 +1,5 @@
 #include <M5Stack.h>
-#include "src/M5StackMenuSystem.h"	// TODO: revert to #include <M5StackMenuSystem.h> 
+#include <M5StackMenuSystem.h> 
 
 
 Menu myMenu("Customized Menu");

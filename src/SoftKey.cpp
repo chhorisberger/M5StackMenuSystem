@@ -22,7 +22,7 @@ int SoftKey::getWidth()
 
 int SoftKey::getHeight()
 {
-	return  M5.Lcd.fontHeight(layout.MENU_FONT) + (2* layout.BOTTOM_BAR_SOFTKEY_V_PADDING);
+	return  M5.Lcd.fontHeight(layout.MENU_FONT) + (2 * layout.BOTTOM_BAR_SOFTKEY_V_PADDING);
 }
 
 void SoftKey::render(bool force)

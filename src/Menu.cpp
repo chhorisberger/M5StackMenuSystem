@@ -14,8 +14,6 @@ Menu::Menu(String title_) : menuTopSection(layout, title_), menuBottomSection(la
 	highlightedItem = NULL;
 	activeItem = NULL;
 	firstItemInViewport = NULL;
-
-	setDefaultLayout();
 }
 
 Menu::~Menu()
@@ -27,37 +25,6 @@ Menu::~Menu()
 		delete item;
 		item = next;
 	}
-}
-
-void Menu::setDefaultLayout()
-{
-	// GENERAL
-	layout.SCREEN_WIDTH = M5.Lcd.height();
-	layout.SCREEN_HEIGHT = M5.Lcd.width();
-	layout.MENU_FONT = 2;
-	layout.MENU_FONT_SIZE = 2;
-
-	// --- TOP ---
-	layout.TOP_BAR_TITLE_COLOR = WHITE;
-	layout.TOP_BAR_BACKGROUND_COLOR = RED;
-	layout.TOP_BAR_V_PADDING = 4;
-
-	// --- CENTER ---
-	layout.MENU_ITEM_TEXT_COLOR = DARKGREY;
-	layout.MENU_ITEM_BACKGROUND_COLOR = LIGHTGREY;
-	layout.MENU_ITEM_HIGHLIGHTED_TEXT_COLOR = BLACK;
-	layout.MENU_ITEM_HIGHLIGHTED_BACKGROUND_COLOR = WHITE;
-
-	// --- BOTTOM ---
-	layout.BOTTOM_BAR_BACKGROUND_COLOR = RED;
-	layout.BOTTOM_BAR_SOFTKEY_V_SPACING = 4;
-	layout.BOTTOM_BAR_SOFTKEY_V_PADDING = 0;
-	layout.BOTTOM_BAR_SOFTKEY_WIDTH_AS_FRACTION_OF_SCREEN = 5;
-	layout.BOTTOM_BAR_SOFTKEY_COLOR = WHITE;
-	layout.BOTTOM_BAR_SOFTKEY_BACKGROUND_COLOR = RED;
-
-	M5.Lcd.setTextFont(layout.MENU_FONT);
-	M5.Lcd.setTextSize(layout.MENU_FONT_SIZE);
 }
 
 void Menu::enable()
@@ -148,6 +115,10 @@ void Menu::addItem(MenuItem* item)
 	item->onAdded();
 }
 
+Layout& Menu::getLayout()
+{
+	return layout;
+}
 
 void Menu::upButtonPressed()
 {
@@ -219,19 +190,21 @@ void Menu::render()
 void Menu::clearScreen()
 {
 	M5.Lcd.clear(layout.MENU_ITEM_BACKGROUND_COLOR);
+	M5.Lcd.setTextFont(layout.MENU_FONT);
+	M5.Lcd.setTextSize(layout.MENU_FONT_SIZE);
 }
 
 void Menu::renderCenterSection(bool force)
 {
-	int fontHeight = M5.Lcd.fontHeight(layout.MENU_FONT);
-	int titleHeight = fontHeight + (2 * layout.TOP_BAR_V_PADDING);
+	int menuItemHeight = M5.Lcd.fontHeight(layout.MENU_FONT);
+	int menuItemsStartY = getMenuItemsStartY();
 
 	int pos = 0;
 	MenuItem* item = firstItemInViewport;
 	while (item != NULL && !isBelowViewPort(item))
 	{
 		int x = 0;
-		int y = titleHeight + (pos * fontHeight);
+		int y = menuItemsStartY + (pos * menuItemHeight);
 		item->render(x, y, item == highlightedItem, force);
 		pos++;
 
@@ -256,11 +229,33 @@ bool Menu::isAboveViewPort(MenuItem* item)
 
 bool Menu::isBelowViewPort(MenuItem* item)
 {
-	int fontHeight = M5.Lcd.fontHeight(layout.MENU_FONT);
-	int topSectionHeight = (2 * layout.TOP_BAR_V_PADDING) + fontHeight;
-	int bottomSectionHeight = (2 * layout.BOTTOM_BAR_SOFTKEY_V_SPACING) + fontHeight;
-	int maxItemsInViewport = (layout.SCREEN_HEIGHT - (topSectionHeight + topSectionHeight)) / fontHeight;
+	int maxItemsInViewport = getMaxMenuItemsInViewport();
 	return item->getPosition() >= firstItemInViewport->getPosition() + maxItemsInViewport;
+}
+
+int Menu::getCenterSectionHeight()
+{
+	int menuItemHeight = M5.Lcd.fontHeight(layout.MENU_FONT);
+	int topSectionHeight = menuTopSection.getHeight();
+	int bottomSectionHeight = menuBottomSection.getHeight();
+	int centerSectionHeight = layout.SCREEN_HEIGHT - (topSectionHeight + bottomSectionHeight);
+	return centerSectionHeight;
+}
+
+int Menu::getMaxMenuItemsInViewport()
+{
+	int menuItemHeight = M5.Lcd.fontHeight(layout.MENU_FONT);
+	int maxItemsInViewport = getCenterSectionHeight() / menuItemHeight;
+	return maxItemsInViewport;
+}
+
+int Menu::getMenuItemsStartY()
+{
+	int centerSectionHeight = getCenterSectionHeight();
+	int maxItemsInViewport = getMaxMenuItemsInViewport();
+	int menuItemHeight = M5.Lcd.fontHeight(layout.MENU_FONT);
+	int remainingPixels = centerSectionHeight - (maxItemsInViewport * menuItemHeight);
+	return menuTopSection.getHeight() + (remainingPixels / 2);
 }
 
 

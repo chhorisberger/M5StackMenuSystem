@@ -12,6 +12,7 @@ public:
 	MenuTopSection(Layout& layout_, String title_);
 	void render(bool force = false);
 	void setTitle(String title_);
+	int getHeight();
 
 private:
 	bool dirty;

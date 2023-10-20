@@ -70,7 +70,7 @@ void MenuBottomSection::render(bool force)
 void MenuBottomSection::renderBottomBar()
 {
 	int barW = layout.SCREEN_WIDTH;
-	int barH = M5.Lcd.fontHeight(layout.MENU_FONT) + (2 * layout.BOTTOM_BAR_SOFTKEY_V_SPACING);
+	int barH = getHeight();
 	int barY = layout.SCREEN_HEIGHT - barH;
 	int paddingSide = barW / 2;
 
@@ -82,4 +82,9 @@ void MenuBottomSection::renderSoftKeys(bool force)
 	softKeyUp.render(force);
 	softKeyDown.render(force);
 	softKeyOk.render(force);
+}
+
+int MenuBottomSection::getHeight()
+{
+	return softKeyOk.getHeight() + (2 * layout.BOTTOM_BAR_SOFTKEY_V_SPACING);
 }

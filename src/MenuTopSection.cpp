@@ -13,7 +13,7 @@ void MenuTopSection::render(bool force)
 	if (dirty || force)
 	{
 		int barW = layout.SCREEN_WIDTH;
-		int barH = M5.Lcd.fontHeight(layout.MENU_FONT) + (2 * layout.TOP_BAR_V_PADDING);
+		int barH = getHeight();
 		M5.Lcd.fillRect(0, 0, barW, barH, layout.TOP_BAR_BACKGROUND_COLOR);
 
 		M5.Lcd.setTextColor(layout.TOP_BAR_TITLE_COLOR);
@@ -28,4 +28,9 @@ void MenuTopSection::setTitle(String title_)
 {
 	title = title_;
 	dirty = true;
+}
+
+int MenuTopSection::getHeight()
+{
+	return M5.Lcd.fontHeight(layout.MENU_FONT) + (2 * layout.TOP_BAR_V_PADDING);
 }

@@ -1,32 +1,37 @@
 #ifndef LAYOUT_H
 #define LAYOUT_H
 
-struct Layout
+class Layout
 {
-		// GENERAL
+	public:
+		Layout();
+
+		// General
 		int SCREEN_WIDTH;
 		int SCREEN_HEIGHT;
 		int MENU_FONT;
-		int MENU_FONT_SIZE;
+		int MENU_FONT_SIZE;	// font size 1 = 16px, font size 2 = 32px
 
-		// --- TOP ---
+		// Top bar
 		int TOP_BAR_TITLE_COLOR;
 		int TOP_BAR_BACKGROUND_COLOR;
 		int TOP_BAR_V_PADDING;
 
-		// --- CENTER ---
+		// Center section
 		int MENU_ITEM_TEXT_COLOR;
 		int MENU_ITEM_BACKGROUND_COLOR;
 		int MENU_ITEM_HIGHLIGHTED_TEXT_COLOR;
 		int MENU_ITEM_HIGHLIGHTED_BACKGROUND_COLOR;
 
-		// --- BOTTOM ---
+		// Bottom bar
 		int BOTTOM_BAR_BACKGROUND_COLOR;
 		int BOTTOM_BAR_SOFTKEY_V_SPACING;
 		int BOTTOM_BAR_SOFTKEY_V_PADDING;
 		int BOTTOM_BAR_SOFTKEY_WIDTH_AS_FRACTION_OF_SCREEN;
 		int BOTTOM_BAR_SOFTKEY_COLOR;
 		int BOTTOM_BAR_SOFTKEY_BACKGROUND_COLOR;
+		int BOTTOM_BAR_SOFTKEY_ICONS_SIZE;
+
 };
 
 #endif 

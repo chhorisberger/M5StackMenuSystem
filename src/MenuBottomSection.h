@@ -19,6 +19,7 @@ public:
 	MenuBottomSection(Layout& layout_, Menu* menu_);
 	void render(bool force = false);
 	void checkMenuButtons();
+	int getHeight();
 
 private:
 	void checkUpButton();

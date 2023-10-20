@@ -17,15 +17,37 @@ public:
 	Menu(String title_);
 	~Menu();
 
+	/* Menu loop function (should be regularly in order to render menu and handle button presses) */
 	void loop();
+
+	/* Enable the menu */
 	void enable();
+	
+	/* Disable the menu*/
 	void disable();
+	
+	/* Check if the menu is currently enabled*/
 	bool isEnabled();
+	
+	/* Reset the highlighted menu item to the first one*/
 	void reset();
 
+	/* Add a new menu item. 
+	   Once the user selected the menu item:
+	    - the function specified in callbackOneTimeFunction will be called only one time.
+	    - if set, the function specified in callbackLoopFunction will be called on every call of menu.loop().
+	   In order to then de-select the menu item and stop the callbacks, call menuItem.deactivateCallbacks() inside the callback function.
+	*/
 	void addMenuItem(String text, CallbackFunction callbackOneTimeFunction, CallbackFunction callbackLoopFunction = NULL);
+
+	/* Add a new sub menu to the menu */
 	void addSubMenu(String text, Menu* subMenu);
+
+	/* Add an exit menu item which allows you to leave the menu or submenu */
 	void addExitItem(Menu* parentMenu = NULL);
+
+	/* Return a reference to the layout object, where you can tweak various display options */
+	Layout& getLayout();
 
 private:
 	void addItem(MenuItem* item);
@@ -35,11 +57,13 @@ private:
 	void setAllMenuItemsDirty();
 	bool isAboveViewPort(MenuItem* item);
 	bool isBelowViewPort(MenuItem* item);
+	int getCenterSectionHeight();
+	int getMaxMenuItemsInViewport();
+	int getMenuItemsStartY();
 	void upButtonPressed();
 	void downButtonPressed();
 	void okButtonPressed();
 	void resetActiveMenuItem();
-	void setDefaultLayout();
 
 	bool enabled;
 	bool dirty;

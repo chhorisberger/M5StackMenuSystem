@@ -5,5 +5,6 @@
 #include "TextSoftKey.h"
 #include "UpSoftKey.h"
 #include "DownSoftKey.h"
+#include "Layout.h"
 
 #endif 

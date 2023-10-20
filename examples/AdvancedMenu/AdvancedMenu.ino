@@ -50,8 +50,7 @@ void testLoopInitCallback(CallbackMenuItem& menuItem) {
 	M5.Lcd.setTextDatum(MC_DATUM);
 	M5.Lcd.drawString("Loop Callback", M5.Lcd.width() / 2, (2 * M5.Lcd.height()) / 6);
 
-	TextSoftKey escapeSoftKey(BtnASlot, "Esc");
-	escapeSoftKey.render(); 
+	menuItem.getMenu()->displaySoftKey(BtnASlot, "Esc");
 }
 
 void testLoopCallback(CallbackMenuItem& menuItem) {

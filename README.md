@@ -129,12 +129,9 @@ Check out the example "AdvancedMenu" that ships with the library to see how this
 Inside a "loop callback" function, you can display custom soft keys by using the following code:
 
 ```c++
-TextSoftKey exampleSoftKey(BtnASlot, "Foo");
-exampleSoftKey.render(); 
+menuItem.getMenu()->displaySoftKey(BtnASlot, "Esc");
 ```
-The first argument "BtnASlot" determines above which of the three buttons the soft key should be displayed (BtnASlot, BtnDSlot or BtnCSlot).
+The first argument "BtnASlot" determines which of the three buttons the soft key should be displayed (BtnASlot, BtnDSlot or BtnCSlot).
 
-The second argument "Foo" determines the text displayed in the soft key. Be aware that currently only about 3-4 character actually fit in the softkey.
-
-Future updates with the possibility to change the font size might enable longer texts.
+The second argument "Foo" determines the text displayed in the soft key. Be aware that currently only about 3-4 character actually fit in the softkey with default font size set.
 

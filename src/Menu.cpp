@@ -120,6 +120,12 @@ Layout& Menu::getLayout()
 	return layout;
 }
 
+void Menu::displaySoftKey(SoftKeySlot slot, String text)
+{
+	TextSoftKey escapeSoftKey(slot, layout, text);
+	escapeSoftKey.render();
+}
+
 void Menu::upButtonPressed()
 {
 	if (highlightedItem != NULL)

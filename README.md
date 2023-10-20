@@ -29,7 +29,7 @@ void loop() {
 }
 
 void testOneTimeCallback(CallbackMenuItem& menuItem) {
-  Serial.println(menuItem.getTetx() + " was clicked");
+  Serial.println(menuItem.getText() + " was clicked");
 }
 ```
 ## Explanation of above code
@@ -49,7 +49,7 @@ The second argument "testOneTimeCallback" is the function that will be called wh
 
 ```c++
 void testOneTimeCallback(CallbackMenuItem& menuItem) {
-  Serial.println(menuItem.getTetx() + " menu item was clicked");
+  Serial.println(menuItem.getText() + " menu item was clicked");
 }
 ```
 In this basic example all the menu items point to the same function, but in a real application you probably would want each item to point to its own designated funtion.
@@ -120,9 +120,19 @@ If you want the invocations of "loop callback" function to stop, just call the f
 menuItem.deactivateCallbacks();
 ```
 
-Check out the example "AdvancedMenu" that ships with the library to see how this all fits together.
+### Alternative Callback Definition
 
-### Custom Softkeys outside of menu
+Instead of creating functions that the callback arguments then point to, you can also use the following syntax, in order to write the code that will be invoked directly in there.
+
+```c++
+myMenu.addMenuItem("Menu Item #1", [this](CallbackMenuItem& menuItem) {
+		Serial.println(menuItem.getText() + " was clicked");
+});
+```
+
+You can also consult the example sketch [AdvancedMenu.ino](https://github.com/chhorisberger/M5StackMenuSystem/blob/main/examples/AdvancedMenu/AdvancedMenu.ino)that ships with the library to see how this all fits together.
+
+### Displaying Custom Softkeys Outside of Menus
 
 "Softkeys" are the virtual buttons displayed on the screen above the physical buttons of the M5 Stack device.
 
@@ -134,4 +144,9 @@ menuItem.getMenu()->displaySoftKey(BtnASlot, "Esc");
 The first argument "BtnASlot" determines which of the three buttons the soft key should be displayed (BtnASlot, BtnDSlot or BtnCSlot).
 
 The second argument "Foo" determines the text displayed in the soft key. Be aware that currently only about 3-4 character actually fit in the softkey with default font size set.
+
+### Customize Menu Appearance
+
+The appearance of the menu can be customized up to some degree (colors, font size, etc.)
+The example sketch [CustomizedMenu.ino](https://github.com/chhorisberger/M5StackMenuSystem/blob/main/examples/CustomizedMenu/CustomizedMenu.ino) will show you the different possiblities to customize the appearance of the menu
 

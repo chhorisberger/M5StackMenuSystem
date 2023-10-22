@@ -95,20 +95,15 @@ void Menu::addItem(MenuItem* item)
 
 	if (firstItem == NULL)
 	{
-		item->setNext(item);
-
 		firstItem = item;
 		lastItem = item;
-
 		highlightedItem = item;
 		firstItemInViewport = item;
 	}
 	else
 	{
 		lastItem->setNext(item);
-
 		item->setPrevious(lastItem);
-
 		lastItem = item;
 	}
 

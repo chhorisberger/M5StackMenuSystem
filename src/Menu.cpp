@@ -30,6 +30,7 @@ Menu::~Menu()
 void Menu::enable()
 {
 	enabled = true;
+	dirty = true;
 }
 
 void Menu::disable()

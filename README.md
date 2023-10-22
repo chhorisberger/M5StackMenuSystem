@@ -126,7 +126,7 @@ Instead of creating functions that the callback arguments then point to, you can
 
 ```c++
 myMenu.addMenuItem("Menu Item #1", [](CallbackMenuItem& menuItem) {
-		Serial.println(menuItem.getText() + " was clicked");
+	Serial.println(menuItem.getText() + " was clicked");
 });
 ```
 

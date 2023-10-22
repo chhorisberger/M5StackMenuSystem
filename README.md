@@ -125,12 +125,12 @@ menuItem.deactivateCallbacks();
 Instead of creating functions that the callback arguments then point to, you can also use the following syntax, in order to write the code that will be invoked directly in there.
 
 ```c++
-myMenu.addMenuItem("Menu Item #1", [this](CallbackMenuItem& menuItem) {
+myMenu.addMenuItem("Menu Item #1", [](CallbackMenuItem& menuItem) {
 		Serial.println(menuItem.getText() + " was clicked");
 });
 ```
 
-You can also consult the example sketch [AdvancedMenu.ino](https://github.com/chhorisberger/M5StackMenuSystem/blob/main/examples/AdvancedMenu/AdvancedMenu.ino)that ships with the library to see how this all fits together.
+You can also consult the example sketch [AdvancedMenu.ino](https://github.com/chhorisberger/M5StackMenuSystem/blob/main/examples/AdvancedMenu/AdvancedMenu.ino) that ships with the library to see how this all fits together.
 
 ### Displaying Custom Softkeys Outside of Menus
 

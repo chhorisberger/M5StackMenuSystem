@@ -1,5 +1,5 @@
 # M5StackMenuSystem
-A quick way to create nice menus for [M5 Stack](https://github.com/m5stack/m5stack) devices with just a few lines of code
+A quick way to create nice menus for [M5 Stack](https://github.com/m5stack/m5stack) devices (v1 only) with just a few lines of code
 
 <img src="https://github.com/chhorisberger/M5StackMenuSystem/blob/main/docs/picture.jpg" width="256">
 

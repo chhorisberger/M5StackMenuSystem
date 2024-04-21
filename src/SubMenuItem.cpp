@@ -2,7 +2,7 @@
 
 #include "Menu.h"
 
-#include <M5Stack.h>
+#include <M5Unified.h>
 
 SubMenuItem::SubMenuItem(Layout& layout_, String text_, Menu* subMenu_) : MenuItem(layout_, text_)
 {

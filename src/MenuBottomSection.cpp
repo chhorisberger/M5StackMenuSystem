@@ -2,7 +2,7 @@
 
 #include "Menu.h"
 
-#include <M5Stack.h>
+#include <M5Unified.h>
 
 MenuBottomSection::MenuBottomSection(Layout& layout_, Menu* menu_) : layout(layout_), softKeyUp(BtnASlot, layout_), softKeyDown(BtnBSlot, layout_), softKeyOk(BtnCSlot, layout_, "Ok")
 {

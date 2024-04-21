@@ -1,6 +1,6 @@
 #include "UpSoftKey.h"
 
-#include <M5Stack.h>
+#include <M5Unified.h>
 
 
 UpSoftKey::UpSoftKey(SoftKeySlot slot_, Layout& layout_) : SoftKey(slot_, layout_)

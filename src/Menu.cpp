@@ -43,6 +43,11 @@ bool Menu::isEnabled()
 	return enabled;
 }
 
+bool Menu::isDirty()
+{
+	return dirty;
+}
+
 void Menu::reset()
 {
 	firstItemInViewport = firstItem;

@@ -1,10 +1,6 @@
 #include "DownSoftKey.h"
 
-#ifdef M5_UNIFIED
 #include <M5Unified.h>
-#else
-#include <M5Stack.h>
-#endif
 
 
 DownSoftKey::DownSoftKey(SoftKeySlot slot_, Layout& layout_) : SoftKey(slot_, layout_)

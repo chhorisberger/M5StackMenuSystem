@@ -1,10 +1,6 @@
 #include "SoftKey.h"
 
-#ifdef M5_UNIFIED
 #include <M5Unified.h>
-#else
-#include <M5Stack.h>
-#endif
 
 SoftKey::SoftKey(SoftKeySlot slot_, Layout& layout_) : layout(layout_)
 {

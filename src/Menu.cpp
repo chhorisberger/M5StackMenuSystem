@@ -3,11 +3,7 @@
 #include "SubMenuItem.h"
 #include "MenuExitItem.h"
 
-#ifdef M5_UNIFIED
 #include <M5Unified.h>
-#else
-#include <M5Stack.h>
-#endif
 
 Menu::Menu(String title_) : menuTopSection(layout, title_), menuBottomSection(layout, this)
 {

@@ -1,6 +1,10 @@
 #include "MenuTopSection.h"
 
+#ifdef M5_UNIFIED
 #include <M5Unified.h>
+#else
+#include <M5Stack.h>
+#endif
 
 MenuTopSection::MenuTopSection(Layout& layout_, String title_) : layout(layout_)
 {

@@ -28,6 +28,8 @@ public:
 	
 	/* Check if the menu is currently enabled*/
 	bool isEnabled();
+
+	/* Check if the menu is currently dirty */
 	bool isDirty();
 	
 	/* Reset the highlighted menu item to the first one*/

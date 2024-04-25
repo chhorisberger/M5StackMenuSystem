@@ -2,7 +2,11 @@
 
 #include "Menu.h"
 
+#ifdef M5_UNIFIED
 #include <M5Unified.h>
+#else
+#include <M5Stack.h>
+#endif
 
 MenuExitItem::MenuExitItem(Layout& layout_, Menu* parentMenu_) : MenuItem(layout_, "..")
 {

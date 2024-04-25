@@ -2,7 +2,11 @@
 
 #include "Menu.h"
 
+#ifdef M5_UNIFIED
 #include <M5Unified.h>
+#else
+#include <M5Stack.h>
+#endif
 
 CallbackMenuItem::CallbackMenuItem(Layout& layout_, String text_, CallbackFunction callbackOneTimeFunction_, CallbackFunction callbackLoopFunction_) : MenuItem(layout_, text_)
 {

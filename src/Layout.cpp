@@ -6,11 +6,8 @@
 Layout::Layout()
 {
 	// General
-	// TODO: Find out why M5 library is not passing the values
-	SCREEN_WIDTH = 320;
-	SCREEN_HEIGHT = 240;
-	//SCREEN_WIDTH = M5.Lcd.width();
-	//SCREEN_HEIGHT = M5.Lcd.height();
+	SCREEN_WIDTH = M5.Lcd.width();
+	SCREEN_HEIGHT = M5.Lcd.height();
 	MENU_FONT = 2;
 	MENU_FONT_SIZE = 2;
 

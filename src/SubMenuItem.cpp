@@ -11,7 +11,8 @@ SubMenuItem::SubMenuItem(Layout& layout_, String text_, Menu* subMenu_) : MenuIt
 
 void SubMenuItem::loop() 
 {
-	if (subMenu->isDirty()) {
+	if (subMenu->isDirty()) 
+	{
 		subMenu->enable();
 	}
 	subMenu->loop();

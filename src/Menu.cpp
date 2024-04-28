@@ -27,6 +27,14 @@ Menu::~Menu()
 	}
 }
 
+void Menu::init()
+{
+	layout.SCREEN_WIDTH = M5.Display.width();
+	layout.SCREEN_HEIGHT = M5.Display.height();
+	initialized = true;
+}
+
+
 void Menu::enable()
 {
 	enabled = true;
@@ -59,6 +67,11 @@ void Menu::reset()
 
 void Menu::loop()
 {
+	if (!initialized)
+	{
+		init();
+	}
+
 	if (enabled)
 	{
 		if (activeItem == NULL)

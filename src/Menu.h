@@ -29,7 +29,7 @@ public:
 	/* Check if the menu is currently enabled*/
 	bool isEnabled();
 
-	/* Check if the menu is current dirty */
+	/* Check if the menu is currently dirty */
 	bool isDirty();
 	
 	/* Reset the highlighted menu item to the first one*/
@@ -56,6 +56,7 @@ public:
 	Layout& getLayout();
 
 private:
+	void init();
 	void addItem(MenuItem* item);
 	void render();
 	void clearScreen();
@@ -71,6 +72,7 @@ private:
 	void okButtonPressed();
 	void resetActiveMenuItem();
 
+	bool initialized;
 	bool enabled;
 	bool dirty;
 	MenuItem* firstItem;

@@ -1,6 +1,6 @@
 #include "SoftKey.h"
 
-#include <M5Stack.h>
+#include <M5Unified.h>
 
 SoftKey::SoftKey(SoftKeySlot slot_, Layout& layout_) : layout(layout_)
 {

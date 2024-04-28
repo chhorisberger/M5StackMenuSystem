@@ -2,7 +2,7 @@
 
 #include "Menu.h"
 
-#include <M5Stack.h>
+#include <M5Unified.h>
 
 SubMenuItem::SubMenuItem(Layout& layout_, String text_, Menu* subMenu_) : MenuItem(layout_, text_)
 {
@@ -11,7 +11,9 @@ SubMenuItem::SubMenuItem(Layout& layout_, String text_, Menu* subMenu_) : MenuIt
 
 void SubMenuItem::loop() 
 {
-	subMenu->enable();
+	if (subMenu->isDirty()) {
+		subMenu->enable();
+	}
 	subMenu->loop();
 }
 

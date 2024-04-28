@@ -3,7 +3,7 @@
 #include "SubMenuItem.h"
 #include "MenuExitItem.h"
 
-#include <M5Stack.h>
+#include <M5Unified.h>
 
 Menu::Menu(String title_) : menuTopSection(layout, title_), menuBottomSection(layout, this)
 {
@@ -41,6 +41,11 @@ void Menu::disable()
 bool Menu::isEnabled()
 {
 	return enabled;
+}
+
+bool Menu::isDirty()
+{
+	return dirty;
 }
 
 void Menu::reset()

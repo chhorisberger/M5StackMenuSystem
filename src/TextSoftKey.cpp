@@ -1,6 +1,6 @@
 #include "TextSoftKey.h"
 
-#include <M5Stack.h>
+#include <M5Unified.h>
 
 
 TextSoftKey::TextSoftKey(SoftKeySlot slot_, Layout& layout_, String text_) : SoftKey(slot_, layout_)

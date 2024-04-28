@@ -1,13 +1,13 @@
 #include "Layout.h"
 
-#include <M5Stack.h>
+#include <M5Unified.h> 
 
 
 Layout::Layout()
 {
 	// General
-	SCREEN_WIDTH = M5.Lcd.height();
-	SCREEN_HEIGHT = M5.Lcd.width();
+	SCREEN_WIDTH = M5.Lcd.width();
+	SCREEN_HEIGHT = M5.Lcd.height();
 	MENU_FONT = 2;
 	MENU_FONT_SIZE = 2;
 

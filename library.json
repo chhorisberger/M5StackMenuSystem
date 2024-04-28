@@ -10,7 +10,7 @@
     "type": "git",
     "url": "https://github.com/chhorisberger/M5StackMenuSystem.git"
   },
-  "version": "1.1.3",
+  "version": "1.2.0",
   "frameworks": "arduino",
   "platforms": "espressif32",
   "headers": "M5StackMenuSystem.h"

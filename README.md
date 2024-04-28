@@ -1,10 +1,6 @@
 # M5StackMenuSystem
 A quick way to create nice menus for [M5 Stack](https://github.com/m5stack/m5stack) devices with just a few lines of code.
 
-> [!NOTE]
-> Currently supports M5Stack v1 devices (Basic Core Kit v2.6). 
-> Adding support for M5Stack Core2 is currently not planned, but if somebody got it working, feel free to create a pull request!
-
 <img src="https://github.com/chhorisberger/M5StackMenuSystem/blob/main/docs/picture.jpg" width="256">
 
 ## Getting Started
@@ -13,7 +9,7 @@ Install the library using either the .zip file from the latest release or by sea
 Here's a simple sketch that shows the basic functionality:
 
 ```c++
-#include <M5Stack.h>
+#include <M5Unified.h>
 #include <M5StackMenuSystem.h> 
 
 Menu myMenu("Main Menu");

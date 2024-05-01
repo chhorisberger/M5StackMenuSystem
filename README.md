@@ -56,12 +56,15 @@ In this basic example all the menu items point to the same function, but in a re
 
 Don't forget to call "myMenu.loop()" in the Arduino "loop()" function, so that the menu is acutally rendered. 
 
-Also make sure to call the "M5.update()" there. This is needed so that the button clicks can be detected.
-
 ```c++
 myMenu.loop();
 ```
 
+Also make sure to call the "M5.update()" there. This is needed so that the button clicks can be detected.
+
+```c++
+M5.update();
+```
 
 
 ## Advanced Usage
@@ -85,9 +88,17 @@ Adding menu items to the sub menu works the same as adding menu items to the mai
 subMenu.addMenuItem("Sub Menu Item #1", testOneTimeCallback);
 ```
 
-### Exit Items
+### Exiting Sub Menus
 
 When adding a sub menu, a "exit item" (shown as "..") will be automatically added, so the user can get back to the main menu.
+
+You can also programatically exit the current menu by calling the "disable" method.
+
+```c++
+subMenu.disable();
+```
+
+### Exiting Main Menu
 
 It is also possible to add such an "exit item" to the main menu, in order to leave the main menu completly.
 
@@ -139,7 +150,7 @@ myMenu.addMenuItem("Menu Item #1", [](CallbackMenuItem& menuItem) {
 Inside a "loop callback" function, you can display custom soft keys by using the following code:
 
 ```c++
-menuItem.getMenu()->displaySoftKey(BtnASlot, "Esc");
+menuItem.getMenu()->displaySoftKey(BtnASlot, "Foo");
 ```
 The first argument "BtnASlot" determines which of the three buttons the soft key should be displayed (BtnASlot, BtnDSlot or BtnCSlot).
 

@@ -14,6 +14,7 @@ Menu::Menu(String title_) : menuTopSection(layout, title_), menuBottomSection(la
 	highlightedItem = NULL;
 	activeItem = NULL;
 	firstItemInViewport = NULL;
+	parentMenu = NULL;
 }
 
 Menu::~Menu()
@@ -44,6 +45,11 @@ void Menu::enable()
 void Menu::disable()
 {
 	enabled = false;
+
+	if (parentMenu != NULL)
+	{
+		parentMenu->reset();
+	}
 }
 
 bool Menu::isEnabled()
@@ -60,8 +66,7 @@ void Menu::reset()
 {
 	firstItemInViewport = firstItem;
 	highlightedItem = firstItem;
-	activeItem = NULL;
-	dirty = true;
+	resetActiveMenuItem();
 	setAllMenuItemsDirty();
 }
 
@@ -83,7 +88,12 @@ void Menu::loop()
 		{
 			activeItem->loop();
 		}
-	}
+	} 
+}
+
+void Menu::setParentMenu(Menu* menu)
+{
+	parentMenu = menu;
 }
 
 void Menu::resetActiveMenuItem()
@@ -99,6 +109,7 @@ void Menu::addMenuItem(String text, CallbackFunction callbackOneTimeFunction, Ca
 
 void Menu::addSubMenu(String text, Menu* subMenu)
 {
+	subMenu->setParentMenu(this);
 	addItem(new SubMenuItem(layout, text, subMenu));
 }
 

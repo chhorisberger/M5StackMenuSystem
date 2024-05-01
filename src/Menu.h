@@ -55,6 +55,10 @@ public:
 	/* Return a reference to the layout object, where you can tweak various display options */
 	Layout& getLayout();
 
+	/* Set parent menu. This is done automatically for you if you add a submenuitem*/
+	void setParentMenu(Menu* menu);
+
+
 private:
 	void init();
 	void addItem(MenuItem* item);
@@ -82,10 +86,12 @@ private:
 	MenuItem* firstItemInViewport;
 	MenuTopSection menuTopSection;
 	MenuBottomSection menuBottomSection;
+	Menu* parentMenu;
 	Layout layout;
 
 	friend class MenuBottomSection;
 	friend class CallbackMenuItem;
+	friend class MenuExitItem;
 	friend class MenuExitItem;
 };
 

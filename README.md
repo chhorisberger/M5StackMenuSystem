@@ -118,7 +118,7 @@ Be aware this only works if "mainMenu.loop()" is still called in the Arduino "lo
 When calling "myMenu.addMenuItem" you can pass a "loop callback" function as a third argument.
 
 ```c++
-mainMenu.addMenuItem("Loop Callback", testLoopInitCallback, testLoopCallback);
+mainMenu.addMenuItem("Loop Callback", testInitCallback, testLoopCallback);
 ```
 
 When a user selects the menu item, this function will be then called automatically on every invocation of "mainMenu.loop()".

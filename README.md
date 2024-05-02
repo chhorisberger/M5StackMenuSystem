@@ -135,7 +135,7 @@ Consult the example sketch [AdvancedMenu.ino](https://github.com/chhorisberger/M
 
 ### Alternative Callback Definition
 
-Instead of creating functions that the callback arguments then point to, you can also use the following syntax, in order to write the code that will be invoked directly in there.
+Instead of creating functions that the callback arguments then point to, you can also pass the code to be invoked as a lambda expression.
 
 ```c++
 myMenu.addMenuItem("Menu Item #1", [](CallbackMenuItem& menuItem) {

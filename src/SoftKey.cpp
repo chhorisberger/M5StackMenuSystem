@@ -15,6 +15,22 @@ void SoftKey::setPressed(bool pressed_)
 	dirty = true;
 }
 
+SoftKeySlot SoftKey::getSlot()
+{
+	return slot;
+}
+
+Rect SoftKey::getRect()
+{
+	Rect rect;
+	rect.x = getXPosition();
+	rect.y = getYPosition();
+	rect.w = getWidth();
+	rect.h = getHeight();
+
+	return rect;
+}
+
 int SoftKey::getWidth()
 {
 	return layout.SCREEN_WIDTH / layout.BOTTOM_BAR_SOFTKEY_WIDTH_AS_FRACTION_OF_SCREEN;
@@ -32,7 +48,7 @@ void SoftKey::render(bool force)
 		int w = getWidth();
 		int h = getHeight();
 		int x = getXPosition();
-		int y = layout.SCREEN_HEIGHT - (h + layout.BOTTOM_BAR_SOFTKEY_V_SPACING);
+		int y = getYPosition();
 
 		renderInternal(x, y, w, h);
 
@@ -66,4 +82,10 @@ int SoftKey::getXPosition()
 	}
 
 	return -1;
+}
+
+int SoftKey::getYPosition()
+{
+	int h = getHeight();
+	return layout.SCREEN_HEIGHT - (h + layout.BOTTOM_BAR_SOFTKEY_V_SPACING);
 }

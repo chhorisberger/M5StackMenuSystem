@@ -2,6 +2,7 @@
 #define SOFT_KEY_H
 
 #include "Layout.h"
+#include "Rect.h"
 
 #include <Arduino.h>
 
@@ -15,8 +16,10 @@ public:
 
 	void render(bool force = false);
 	void setPressed(bool pressed_);
+	Rect getRect();
 	int getWidth();
 	int getHeight();
+	SoftKeySlot getSlot();
 
 protected:
 	virtual void renderInternal(int x, int y, int w, int h) = 0;
@@ -28,6 +31,7 @@ protected:
 
 private:
 	int getXPosition();
+	int getYPosition();
 
 	bool dirty;
 

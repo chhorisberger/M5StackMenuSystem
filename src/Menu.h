@@ -2,6 +2,7 @@
 #define MENU_H
 
 #include "Layout.h"
+#include "Control.h"
 #include "MenuTopSection.h"
 #include "MenuBottomSection.h"
 #include "MenuItem.h"
@@ -86,6 +87,7 @@ private:
 	MenuItem* firstItemInViewport;
 	MenuTopSection menuTopSection;
 	MenuBottomSection menuBottomSection;
+	Control control;
 	Menu* parentMenu;
 	Layout layout;
 

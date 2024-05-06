@@ -4,7 +4,7 @@
 
 #include <M5Unified.h>
 
-MenuBottomSection::MenuBottomSection(Layout& layout_, Menu* menu_) : layout(layout_), softKeyUp(BtnASlot, layout_), softKeyDown(BtnBSlot, layout_), softKeyOk(BtnCSlot, layout_, "Ok")
+MenuBottomSection::MenuBottomSection(Layout& layout_, Control& control_, Menu* menu_) : layout(layout_), control(control_), softKeyUp(BtnASlot, layout_), softKeyDown(BtnBSlot, layout_), softKeyOk(BtnCSlot, layout_, "Ok")
 {
 	menu = menu_;
 	dirty = true;
@@ -19,11 +19,11 @@ void MenuBottomSection::checkMenuButtons()
 
 void MenuBottomSection::checkUpButton()
 {
-	if (M5.BtnA.wasPressed())
+	if (control.buttonAPressed)
 	{
 		softKeyUp.setPressed(true);
 	}
-	else if (M5.BtnA.wasReleased())
+	else if (control.buttonAReleased)
 	{
 		softKeyUp.setPressed(false);
 		menu->upButtonPressed();
@@ -32,11 +32,11 @@ void MenuBottomSection::checkUpButton()
 
 void MenuBottomSection::checkDownButton()
 {
-	if (M5.BtnB.wasPressed())
+	if (control.buttonBPressed)
 	{
 		softKeyDown.setPressed(true);
 	}
-	else if (M5.BtnB.wasReleased())
+	else if (control.buttonBReleased)
 	{
 		softKeyDown.setPressed(false);
 		menu->downButtonPressed();
@@ -45,11 +45,11 @@ void MenuBottomSection::checkDownButton()
 
 void MenuBottomSection::checkOkButton()
 {
-	if (M5.BtnC.wasPressed())
+	if (control.buttonCPressed)
 	{
 		softKeyOk.setPressed(true);
 	}
-	else if (M5.BtnC.wasReleased())
+	else if (control.buttonCReleased)
 	{
 		softKeyOk.setPressed(false);
 		menu->okButtonPressed();

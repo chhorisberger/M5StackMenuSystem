@@ -5,7 +5,7 @@
 
 #include <M5Unified.h>
 
-Menu::Menu(String title_) : menuTopSection(layout, title_), menuBottomSection(layout, this)
+Menu::Menu(String title_) : control(), menuTopSection(layout, title_), menuBottomSection(layout, control, this)
 {
 	enabled = true;
 	dirty = true;
@@ -30,6 +30,7 @@ Menu::~Menu()
 
 void Menu::init()
 {
+	control.init();
 	layout.SCREEN_WIDTH = M5.Display.width();
 	layout.SCREEN_HEIGHT = M5.Display.height();
 	initialized = true;
@@ -79,6 +80,8 @@ void Menu::loop()
 
 	if (enabled)
 	{
+		control.loop();
+
 		if (activeItem == NULL)
 		{
 			menuBottomSection.checkMenuButtons();

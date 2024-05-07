@@ -4,7 +4,7 @@
 
 #include <M5Unified.h>
 
-MenuBottomSection::MenuBottomSection(Layout& layout_, Control& control_, Menu* menu_) : layout(layout_), control(control_), softKeyUp(BtnASlot, layout_), softKeyDown(BtnBSlot, layout_), softKeyOk(BtnCSlot, layout_, "Ok")
+MenuBottomSection::MenuBottomSection(Layout& layout_, Control& control_, Menu* menu_) : layout(layout_), softKeyUp(BtnASlot, layout_, control_), softKeyDown(BtnBSlot, layout_, control_), softKeyOk(BtnCSlot, layout_, control_, "Ok")
 {
 	menu = menu_;
 	dirty = true;
@@ -12,66 +12,19 @@ MenuBottomSection::MenuBottomSection(Layout& layout_, Control& control_, Menu* m
 
 void MenuBottomSection::checkMenuButtons()
 {
-	checkButtonEvent(softKeyUp, control.getAButtonEvent());
-	checkButtonEvent(softKeyDown, control.getBButtonEvent());
-	checkButtonEvent(softKeyOk, control.getCButtonEvent());
-	checkTouchEvents(control.getNrTouchEvents(), control.getTouchEvents());
-}
-
-
-void MenuBottomSection::checkButtonEvent(SoftKey& softKey, ButtonEvent buttonEvent)
-{
-	if (buttonEvent.pressed)
+	if (softKeyUp.wasReleased())
 	{
-		softKey.setPressed(true);
-	}
-	else if (buttonEvent.released)
-	{
-		softKey.setPressed(false);
-		handleButtonPress(softKey);
-	}
-}
-
-void MenuBottomSection::checkTouchEvents(int nrTouchEvents, TouchEvent* touchEvents)
-{
-	for (std::size_t i = 0; i < nrTouchEvents; i++)
-	{
-		TouchEvent touchEvent = touchEvents[i];
-		checkTouchEvent(touchEvent, softKeyUp);
-		checkTouchEvent(touchEvent, softKeyDown);
-		checkTouchEvent(touchEvent, softKeyOk);
-	}
-}
-
-void MenuBottomSection::checkTouchEvent(TouchEvent& touchEvent, SoftKey& softKey)
-{
-	if (softKey.getRect().contains(touchEvent.x, touchEvent.y))
-	{
-		if (touchEvent.pressed)
-		{
-			softKey.setPressed(true);
-		}
-		else if (touchEvent.released)
-		{
-			softKey.setPressed(false);
-			handleButtonPress(softKey);
-		}
-	}
-}
-
-void MenuBottomSection::handleButtonPress(SoftKey& softKey)
-{
-	switch (softKey.getSlot())
-	{
-	case BtnASlot:
 		menu->upButtonPressed();
-		break;
-	case BtnBSlot:
+	}
+	
+	if (softKeyDown.wasReleased())
+	{
 		menu->downButtonPressed();
-		break;
-	case BtnCSlot:
+	}
+	
+	if (softKeyOk.wasReleased())
+	{
 		menu->okButtonPressed();
-		break;
 	}
 }
 

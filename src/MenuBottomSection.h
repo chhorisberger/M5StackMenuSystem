@@ -23,16 +23,10 @@ public:
 	int getHeight();
 
 private:
-	void checkButtonEvent(SoftKey& softKey, ButtonEvent buttonEvent);
-	void checkTouchEvents(int nrTouchEvents, TouchEvent* touchEvents);
-	void checkTouchEvent(TouchEvent& touchEvent, SoftKey& softKey);
-	void handleButtonPress(SoftKey& softKey);
-
 	void renderBottomBar();
 	void renderSoftKeys(bool force = false);
 
 	Layout& layout;
-	Control& control;
 	bool dirty;
 	Menu* menu;
 	UpSoftKey softKeyUp;

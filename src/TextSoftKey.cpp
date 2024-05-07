@@ -3,11 +3,10 @@
 #include <M5Unified.h>
 
 
-TextSoftKey::TextSoftKey(SoftKeySlot slot_, Layout& layout_, String text_) : SoftKey(slot_, layout_)
+TextSoftKey::TextSoftKey(SoftKeySlot slot_, Layout& layout_, Control& control_, String text_) : SoftKey(slot_, layout_, control_)
 {
 	text = text_;
 }
-
 
 void TextSoftKey::renderInternal(int x, int y, int w, int h)
 {

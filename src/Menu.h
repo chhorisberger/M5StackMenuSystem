@@ -52,6 +52,9 @@ public:
 
 	/* Displays a custom soft key. Argument "slot" determines which of the three buttons the soft key should be displayed (BtnASlot, BtnDSlot or BtnCSlot). */
 	void displaySoftKey(SoftKeySlot slot, String text);
+	
+	/* Check if the softkey at this slot was just released. Argument "slot" determines which of the three buttons the soft key should be displayed (BtnASlot, BtnDSlot or BtnCSlot).*/
+	bool wasSoftKeyReleased(SoftKeySlot slot);
 
 	/* Return a reference to the layout object, where you can tweak various display options */
 	Layout& getLayout();

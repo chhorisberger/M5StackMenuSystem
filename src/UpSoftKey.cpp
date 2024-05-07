@@ -3,7 +3,7 @@
 #include <M5Unified.h>
 
 
-UpSoftKey::UpSoftKey(SoftKeySlot slot_, Layout& layout_) : SoftKey(slot_, layout_)
+UpSoftKey::UpSoftKey(SoftKeySlot slot_, Layout& layout_, Control& control_) : SoftKey(slot_, layout_, control_)
 {
 }
 

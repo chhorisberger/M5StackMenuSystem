@@ -2,17 +2,11 @@
 
 #include <M5Unified.h>
 
-SoftKey::SoftKey(SoftKeySlot slot_, Layout& layout_) : layout(layout_)
+SoftKey::SoftKey(SoftKeySlot slot_, Layout& layout_, Control& control_) : layout(layout_), control(control_)
 {
 	slot = slot_;
 	dirty = true;
 	pressed = false;
-}
-
-void SoftKey::setPressed(bool pressed_)
-{
-	pressed = pressed_;
-	dirty = true;
 }
 
 SoftKeySlot SoftKey::getSlot()
@@ -20,25 +14,78 @@ SoftKeySlot SoftKey::getSlot()
 	return slot;
 }
 
-Rect SoftKey::getRect()
+bool SoftKey::wasReleased()
 {
-	Rect rect;
-	rect.x = getXPosition();
-	rect.y = getYPosition();
-	rect.w = getWidth();
-	rect.h = getHeight();
-
-	return rect;
+	return wasButtonReleased() || wasTouchReleased();
 }
 
-int SoftKey::getWidth()
+bool SoftKey::wasButtonReleased()
 {
-	return layout.SCREEN_WIDTH / layout.BOTTOM_BAR_SOFTKEY_WIDTH_AS_FRACTION_OF_SCREEN;
+	ButtonEvent buttonEvent = getButtonEvent();
+	if (buttonEvent.pressed)
+	{
+		setPressed(true);
+	}
+	else if (buttonEvent.released)
+	{
+		setPressed(false);
+		return true;
+	}
+	
+	return false;
 }
 
-int SoftKey::getHeight()
+ButtonEvent SoftKey::getButtonEvent()
 {
-	return  M5.Lcd.fontHeight(layout.MENU_FONT) + (2 * layout.BOTTOM_BAR_SOFTKEY_V_PADDING);
+	switch (getSlot())
+	{
+	case BtnASlot:
+		return control.getAButtonEvent();
+	case BtnBSlot:
+		return control.getBButtonEvent();
+	case BtnCSlot:
+		return control.getCButtonEvent();
+	}
+}
+
+bool SoftKey::wasTouchReleased()
+{	
+	int nrTouchEvents = control.getNrTouchEvents();
+	TouchEvent* touchEvents = control.getTouchEvents();
+	for (std::size_t i = 0; i < nrTouchEvents; i++)
+	{
+		TouchEvent touchEvent = touchEvents[i];
+		if (wasTouchReleased(touchEvent))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool SoftKey::wasTouchReleased(TouchEvent& touchEvent)
+{
+	if (getRect().contains(touchEvent.x, touchEvent.y))
+	{
+		if (touchEvent.pressed)
+		{
+			setPressed(true);
+		}
+		else if (touchEvent.released)
+		{
+			setPressed(false);
+			return true;
+		}
+	}
+	
+	return false;
+}
+
+void SoftKey::setPressed(bool pressed_)
+{
+	pressed = pressed_;
+	dirty = true;
 }
 
 void SoftKey::render(bool force)
@@ -88,4 +135,24 @@ int SoftKey::getYPosition()
 {
 	int h = getHeight();
 	return layout.SCREEN_HEIGHT - (h + layout.BOTTOM_BAR_SOFTKEY_V_SPACING);
+}
+
+int SoftKey::getWidth()
+{
+	return layout.SCREEN_WIDTH / layout.BOTTOM_BAR_SOFTKEY_WIDTH_AS_FRACTION_OF_SCREEN;
+}
+
+int SoftKey::getHeight()
+{
+	return  M5.Lcd.fontHeight(layout.MENU_FONT) + (2 * layout.BOTTOM_BAR_SOFTKEY_V_PADDING);
+}
+
+Rect SoftKey::getRect()
+{
+	Rect rect;
+	rect.x = getXPosition();
+	rect.y = getYPosition();
+	rect.w = getWidth();
+	rect.h = getHeight();
+	return rect;
 }

@@ -150,8 +150,14 @@ Layout& Menu::getLayout()
 
 void Menu::displaySoftKey(SoftKeySlot slot, String text)
 {
-	TextSoftKey escapeSoftKey(slot, layout, text);
-	escapeSoftKey.render();
+	TextSoftKey softKey(slot, layout, control, text);
+	softKey.render();
+}
+
+bool Menu::wasSoftKeyReleased(SoftKeySlot slot)
+{
+	TextSoftKey softKey(slot, layout, control, "");
+	return softKey.wasReleased();
 }
 
 void Menu::upButtonPressed()

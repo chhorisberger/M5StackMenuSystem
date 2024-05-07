@@ -2,6 +2,7 @@
 #define SOFT_KEY_H
 
 #include "Layout.h"
+#include "Control.h"
 #include "Rect.h"
 
 #include <Arduino.h>
@@ -12,10 +13,11 @@ enum SoftKeySlot { BtnASlot, BtnBSlot, BtnCSlot};
 class SoftKey
 {
 public:
-	SoftKey(SoftKeySlot slot_, Layout& layout_);
+	SoftKey(SoftKeySlot slot_, Layout& layout_, Control& control_);
 
 	void render(bool force = false);
-	void setPressed(bool pressed_);
+	bool wasReleased();
+
 	Rect getRect();
 	int getWidth();
 	int getHeight();
@@ -30,9 +32,16 @@ protected:
 	bool pressed;
 
 private:
+	
+	bool wasButtonReleased();
+	ButtonEvent getButtonEvent();
+	bool wasTouchReleased();
+	bool wasTouchReleased(TouchEvent& touchEvent);
 	int getXPosition();
 	int getYPosition();
+	void setPressed(bool pressed_);
 
+	Control& control;
 	bool dirty;
 
 };

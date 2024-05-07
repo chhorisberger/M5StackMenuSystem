@@ -1,5 +1,5 @@
 #include <M5Unified.h>
-#include <M5StackMenuSystem.h> 
+#include "src/M5StackMenuSystem.h" 
 
 Menu mainMenu("Main Menu");
 Menu subMenu("Sub Menu");
@@ -60,7 +60,8 @@ void testLoopCallback(CallbackMenuItem& menuItem) {
 	M5.Lcd.setTextDatum(MC_DATUM);
 	M5.Lcd.drawString(time.c_str(), M5.Lcd.width() / 2, (3 * M5.Lcd.height()) / 6);
 
-	if (M5.BtnA.wasReleased()) {
+	if (menuItem.getMenu()->wasSoftKeyReleased(BtnASlot)) 
+	{
 		menuItem.deactivateCallbacks();
 	}
 }

@@ -4,6 +4,7 @@
 #include "Layout.h"
 #include "Control.h"
 #include "MenuTopSection.h"
+#include "MenuCenterSection.h"
 #include "MenuBottomSection.h"
 #include "MenuItem.h"
 #include "CallbackMenuItem.h"
@@ -16,7 +17,6 @@ class Menu
 
 public:
 	Menu(String title_);
-	~Menu();
 
 	/* Menu loop function (should be regularly in order to render menu and handle button presses) */
 	void loop();
@@ -30,9 +30,6 @@ public:
 	/* Check if the menu is currently enabled*/
 	bool isEnabled();
 
-	/* Check if the menu is currently dirty */
-	bool isDirty();
-	
 	/* Reset the highlighted menu item to the first one*/
 	void reset();
 
@@ -65,39 +62,32 @@ public:
 
 private:
 	void init();
-	void addItem(MenuItem* item);
 	void render();
 	void clearScreen();
-	void renderCenterSection(bool force = false);
-	void setAllMenuItemsDirty();
-	bool isAboveViewPort(MenuItem* item);
-	bool isBelowViewPort(MenuItem* item);
-	int getCenterSectionHeight();
-	int getMaxMenuItemsInViewport();
-	int getMenuItemsStartY();
+
 	void upButtonPressed();
 	void downButtonPressed();
 	void okButtonPressed();
+
 	void resetActiveMenuItem();
+	bool isDirty();
 
 	bool initialized;
 	bool enabled;
 	bool dirty;
-	MenuItem* firstItem;
-	MenuItem* lastItem;
-	MenuItem* highlightedItem;
-	MenuItem* activeItem;
-	MenuItem* firstItemInViewport;
+	
 	MenuTopSection menuTopSection;
+	MenuCenterSection menuCenterSection;
 	MenuBottomSection menuBottomSection;
 	Control control;
 	Menu* parentMenu;
 	Layout layout;
 
 	friend class MenuBottomSection;
+	friend class MenuCenterSection;
 	friend class CallbackMenuItem;
 	friend class MenuExitItem;
-	friend class MenuExitItem;
+	friend class SubMenuItem;
 };
 
 #endif 

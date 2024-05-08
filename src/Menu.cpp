@@ -5,27 +5,11 @@
 
 #include <M5Unified.h>
 
-Menu::Menu(String title_) : control(), menuTopSection(layout, title_), menuBottomSection(layout, control, this)
+Menu::Menu(String title_) : control(), menuTopSection(layout, title_), menuCenterSection(layout, control, this), menuBottomSection(layout, control, this)
 {
 	enabled = true;
 	dirty = true;
-	firstItem = NULL;
-	lastItem = NULL;
-	highlightedItem = NULL;
-	activeItem = NULL;
-	firstItemInViewport = NULL;
 	parentMenu = NULL;
-}
-
-Menu::~Menu()
-{
-	MenuItem* item = firstItem;
-	while (item != NULL)
-	{
-		MenuItem* next = item->getNext();
-		delete item;
-		item = next;
-	}
 }
 
 void Menu::init()
@@ -35,7 +19,6 @@ void Menu::init()
 	layout.SCREEN_HEIGHT = M5.Display.height();
 	initialized = true;
 }
-
 
 void Menu::enable()
 {
@@ -65,10 +48,7 @@ bool Menu::isDirty()
 
 void Menu::reset()
 {
-	firstItemInViewport = firstItem;
-	highlightedItem = firstItem;
-	resetActiveMenuItem();
-	setAllMenuItemsDirty();
+	menuCenterSection.reset();
 }
 
 void Menu::loop()
@@ -81,6 +61,8 @@ void Menu::loop()
 	if (enabled)
 	{
 		control.loop();
+
+		MenuItem* activeItem = menuCenterSection.getActiveMenuItem();
 
 		if (activeItem == NULL)
 		{
@@ -99,48 +81,20 @@ void Menu::setParentMenu(Menu* menu)
 	parentMenu = menu;
 }
 
-void Menu::resetActiveMenuItem()
-{
-	activeItem = NULL;
-	dirty = true;
-}
-
 void Menu::addMenuItem(String text, CallbackFunction callbackOneTimeFunction, CallbackFunction callbackLoopFunction)
 {
-	addItem(new CallbackMenuItem(layout, text, callbackOneTimeFunction, callbackLoopFunction));
+	menuCenterSection.addItem(new CallbackMenuItem(layout, text, callbackOneTimeFunction, callbackLoopFunction));
 }
 
 void Menu::addSubMenu(String text, Menu* subMenu)
 {
 	subMenu->setParentMenu(this);
-	addItem(new SubMenuItem(layout, text, subMenu));
+	menuCenterSection.addItem(new SubMenuItem(layout, text, subMenu));
 }
 
 void Menu::addExitItem(Menu* parentMenu)
 {
-	addItem(new MenuExitItem(layout, parentMenu));
-}
-
-void Menu::addItem(MenuItem* item)
-{
-	item->setMenu(this);
-	item->setPosition((lastItem == NULL) ? 0 : lastItem->getPosition() + 1);
-
-	if (firstItem == NULL)
-	{
-		firstItem = item;
-		lastItem = item;
-		highlightedItem = item;
-		firstItemInViewport = item;
-	}
-	else
-	{
-		lastItem->setNext(item);
-		item->setPrevious(lastItem);
-		lastItem = item;
-	}
-
-	item->onAdded();
+	menuCenterSection.addItem(new MenuExitItem(layout, parentMenu));
 }
 
 Layout& Menu::getLayout()
@@ -160,51 +114,25 @@ bool Menu::wasSoftKeyReleased(SoftKeySlot slot)
 	return softKey.wasReleased();
 }
 
+void Menu::resetActiveMenuItem()
+{
+	menuCenterSection.resetActiveMenuItem();
+	dirty = true;
+}
+
 void Menu::upButtonPressed()
 {
-	if (highlightedItem != NULL)
-	{
-		MenuItem* previousItem = highlightedItem->getPrevious();
-		if (previousItem != NULL)
-		{
-			highlightedItem->setDirty();
-			previousItem->setDirty();
-
-			highlightedItem = previousItem;
-
-			if (isAboveViewPort(highlightedItem))
-			{
-				firstItemInViewport = firstItemInViewport->getPrevious();
-				setAllMenuItemsDirty();
-			}
-		}
-	}
+	menuCenterSection.upButtonPressed();
 }
 
 void Menu::downButtonPressed()
 {
-	if (highlightedItem != NULL)
-	{
-		MenuItem* nextItem = highlightedItem->getNext();
-		if (nextItem != NULL)
-		{
-			highlightedItem->setDirty();
-			nextItem->setDirty();
-
-			highlightedItem = nextItem;
-
-			if (isBelowViewPort(highlightedItem))
-			{
-				firstItemInViewport = firstItemInViewport->getNext();
-				setAllMenuItemsDirty();
-			}
-		}
-	}
+	menuCenterSection.downButtonPressed();
 }
 
 void Menu::okButtonPressed()
 {
-	activeItem = highlightedItem;
+	menuCenterSection.okButtonPressed();
 }
 
 void Menu::render()
@@ -214,7 +142,7 @@ void Menu::render()
 		clearScreen();
 
 		menuTopSection.render(true);
-		renderCenterSection(true);
+		menuCenterSection.render(true);
 		menuBottomSection.render(true);
 
 		dirty = false;
@@ -222,7 +150,7 @@ void Menu::render()
 	else
 	{
 		menuTopSection.render();
-		renderCenterSection();
+		menuCenterSection.render();
 		menuBottomSection.render();
 	}
 }
@@ -233,69 +161,3 @@ void Menu::clearScreen()
 	M5.Lcd.setTextFont(layout.MENU_FONT);
 	M5.Lcd.setTextSize(layout.MENU_FONT_SIZE);
 }
-
-void Menu::renderCenterSection(bool force)
-{
-	int menuItemHeight = M5.Lcd.fontHeight(layout.MENU_FONT);
-	int menuItemsStartY = getMenuItemsStartY();
-
-	int pos = 0;
-	MenuItem* item = firstItemInViewport;
-	while (item != NULL && !isBelowViewPort(item))
-	{
-		int x = 0;
-		int y = menuItemsStartY + (pos * menuItemHeight);
-		item->render(x, y, item == highlightedItem, force);
-		pos++;
-
-		item = item->getNext();
-	}
-}
-
-void Menu::setAllMenuItemsDirty()
-{
-	MenuItem* item = firstItem;
-	while (item != NULL)
-	{
-		item->setDirty();
-		item = item->getNext();
-	}
-}
-
-bool Menu::isAboveViewPort(MenuItem* item)
-{
-	return item->getPosition() < firstItemInViewport->getPosition();
-}
-
-bool Menu::isBelowViewPort(MenuItem* item)
-{
-	int maxItemsInViewport = getMaxMenuItemsInViewport();
-	return item->getPosition() >= firstItemInViewport->getPosition() + maxItemsInViewport;
-}
-
-int Menu::getCenterSectionHeight()
-{
-	int menuItemHeight = M5.Lcd.fontHeight(layout.MENU_FONT);
-	int topSectionHeight = menuTopSection.getHeight();
-	int bottomSectionHeight = menuBottomSection.getHeight();
-	int centerSectionHeight = layout.SCREEN_HEIGHT - (topSectionHeight + bottomSectionHeight);
-	return centerSectionHeight;
-}
-
-int Menu::getMaxMenuItemsInViewport()
-{
-	int menuItemHeight = M5.Lcd.fontHeight(layout.MENU_FONT);
-	int maxItemsInViewport = getCenterSectionHeight() / menuItemHeight;
-	return maxItemsInViewport;
-}
-
-int Menu::getMenuItemsStartY()
-{
-	int centerSectionHeight = getCenterSectionHeight();
-	int maxItemsInViewport = getMaxMenuItemsInViewport();
-	int menuItemHeight = M5.Lcd.fontHeight(layout.MENU_FONT);
-	int remainingPixels = centerSectionHeight - (maxItemsInViewport * menuItemHeight);
-	return menuTopSection.getHeight() + (remainingPixels / 2);
-}
-
-

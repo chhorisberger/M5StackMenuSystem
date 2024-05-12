@@ -107,12 +107,12 @@ void SoftKey::renderRow(int x, int y, int w, int h)
 {
 	if (pressed)
 	{
-		M5.Lcd.fillRoundRect(x, y, w, h, 3, layout.BOTTOM_BAR_SOFTKEY_COLOR);
+		M5.Display.fillRoundRect(x, y, w, h, 3, layout.BOTTOM_BAR_SOFTKEY_COLOR);
 	}
 	else
 	{
-		M5.Lcd.fillRoundRect(x, y, w, h, 3, layout.BOTTOM_BAR_SOFTKEY_BACKGROUND_COLOR);
-		M5.Lcd.drawRoundRect(x, y, w, h, 3, layout.BOTTOM_BAR_SOFTKEY_COLOR);
+		M5.Display.fillRoundRect(x, y, w, h, 3, layout.BOTTOM_BAR_SOFTKEY_BACKGROUND_COLOR);
+		M5.Display.drawRoundRect(x, y, w, h, 3, layout.BOTTOM_BAR_SOFTKEY_COLOR);
 	}
 }
 
@@ -144,7 +144,7 @@ int SoftKey::getWidth()
 
 int SoftKey::getHeight()
 {
-	return  M5.Lcd.fontHeight(layout.MENU_FONT) + (2 * layout.BOTTOM_BAR_SOFTKEY_V_PADDING);
+	return  M5.Display.fontHeight(layout.MENU_FONT) + (2 * layout.BOTTOM_BAR_SOFTKEY_V_PADDING);
 }
 
 Rect SoftKey::getRect()

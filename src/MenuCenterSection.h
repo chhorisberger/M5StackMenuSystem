@@ -29,7 +29,7 @@ public:
 private:
 	void renderMenuItems(bool force);
 	
-
+	void clear();
 	bool isAboveViewPort(MenuItem* item);
 	bool isBelowViewPort(MenuItem* item);
 	int getMaxMenuItemsInViewport();

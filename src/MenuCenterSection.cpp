@@ -7,7 +7,7 @@
 MenuCenterSection::MenuCenterSection(Layout& layout_, Control& control_, Menu* menu_) : layout(layout_), control(control_)
 {
 	menu = menu_;
-	dirty = true;
+	setDirty();
 
 	firstItem = NULL;
 	lastItem = NULL;
@@ -111,6 +111,11 @@ void MenuCenterSection::render(bool force)
 {
 	if (dirty || force)
 	{
+		if(force)
+		{
+			clear();
+		}
+		
 		renderMenuItems(force);
 		dirty = false;
 	}
@@ -118,7 +123,7 @@ void MenuCenterSection::render(bool force)
 
 void MenuCenterSection::renderMenuItems(bool force)
 {
-	int menuItemHeight = M5.Lcd.fontHeight(layout.MENU_FONT);
+	int menuItemHeight = M5.Display.fontHeight(layout.MENU_FONT);
 	int menuItemsStartY = getMenuItemsStartY();
 
 	int pos = 0;		// TODO: cal item->getPos
@@ -152,6 +157,13 @@ void MenuCenterSection::setDirty()
 		item->setDirty();
 		item = item->getNext();
 	}
+}
+
+void MenuCenterSection::clear()
+{
+	int y = getMenuItemsStartY();
+	int h = getCenterSectionHeight();
+	M5.Display.fillRect(0, y, layout.SCREEN_WIDTH, h, layout.MENU_ITEM_BACKGROUND_COLOR);
 }
 
 MenuItem* MenuCenterSection::getActiveMenuItem()
@@ -204,7 +216,7 @@ int MenuCenterSection::getMaxMenuItemsInViewport()
 
 int MenuCenterSection::getMenuItemHeight()
 {
-	return M5.Lcd.fontHeight(layout.MENU_FONT);
+	return M5.Display.fontHeight(layout.MENU_FONT);
 }
 
 int MenuCenterSection::getMenuItemY(MenuItem* item)

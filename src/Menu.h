@@ -63,7 +63,6 @@ public:
 private:
 	void init();
 	void render();
-	void clearScreen();
 
 	void upButtonPressed();
 	void downButtonPressed();

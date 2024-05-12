@@ -14,11 +14,11 @@ void MenuTopSection::render(bool force)
 	{
 		int barW = layout.SCREEN_WIDTH;
 		int barH = getHeight();
-		M5.Lcd.fillRect(0, 0, barW, barH, layout.TOP_BAR_BACKGROUND_COLOR);
+		M5.Display.fillRect(0, 0, barW, barH, layout.TOP_BAR_BACKGROUND_COLOR);
 
-		M5.Lcd.setTextColor(layout.TOP_BAR_TITLE_COLOR);
-		M5.Lcd.setTextDatum(TC_DATUM);
-		M5.Lcd.drawString((title).c_str(), layout.SCREEN_WIDTH / 2, layout.TOP_BAR_V_PADDING);
+		M5.Display.setTextColor(layout.TOP_BAR_TITLE_COLOR);
+		M5.Display.setTextDatum(TC_DATUM);
+		M5.Display.drawString((title).c_str(), layout.SCREEN_WIDTH / 2, layout.TOP_BAR_V_PADDING);
 
 		dirty = false;
 	}
@@ -32,7 +32,7 @@ void MenuTopSection::setTitle(String title_)
 
 int MenuTopSection::getHeight()
 {
-	return M5.Lcd.fontHeight(layout.MENU_FONT) + (2 * layout.TOP_BAR_V_PADDING);
+	return M5.Display.fontHeight(layout.MENU_FONT) + (2 * layout.TOP_BAR_V_PADDING);
 }
 
 void MenuTopSection::setDirty()

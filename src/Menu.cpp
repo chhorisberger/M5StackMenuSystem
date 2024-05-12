@@ -17,6 +17,8 @@ void Menu::init()
 	control.init();
 	layout.SCREEN_WIDTH = M5.Display.width();
 	layout.SCREEN_HEIGHT = M5.Display.height();
+	M5.Display.setTextFont(layout.MENU_FONT);
+	M5.Display.setTextSize(layout.MENU_FONT_SIZE);
 	initialized = true;
 }
 
@@ -150,8 +152,6 @@ void Menu::render()
 	// TODO: clean this up, only delegate to sub components 
 	if (dirty)
 	{
-		clearScreen();
-
 		menuCenterSection.render(true);
 		menuTopSection.render(true);
 		menuBottomSection.render(true);
@@ -168,9 +168,3 @@ void Menu::render()
 	M5.Display.display();
 }
 
-void Menu::clearScreen()
-{
-	M5.Lcd.clear(layout.MENU_ITEM_BACKGROUND_COLOR);
-	M5.Lcd.setTextFont(layout.MENU_FONT);
-	M5.Lcd.setTextSize(layout.MENU_FONT_SIZE);
-}

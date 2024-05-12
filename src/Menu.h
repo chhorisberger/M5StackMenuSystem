@@ -71,6 +71,7 @@ private:
 
 	void resetActiveMenuItem();
 	bool isDirty();
+	void setDirty();
 
 	bool initialized;
 	bool enabled;

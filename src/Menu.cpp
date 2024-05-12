@@ -41,6 +41,14 @@ bool Menu::isEnabled()
 	return enabled;
 }
 
+void Menu::setDirty()
+{
+	dirty = true;
+	menuTopSection.setDirty();
+	menuCenterSection.setDirty();
+	menuBottomSection.setDirty();
+}
+
 bool Menu::isDirty()
 {
 	return dirty;
@@ -137,22 +145,27 @@ void Menu::okButtonPressed()
 
 void Menu::render()
 {
+	M5.Display.waitDisplay();
+
+	// TODO: clean this up, only delegate to sub components 
 	if (dirty)
 	{
 		clearScreen();
 
-		menuTopSection.render(true);
 		menuCenterSection.render(true);
+		menuTopSection.render(true);
 		menuBottomSection.render(true);
 
 		dirty = false;
 	}
 	else
 	{
-		menuTopSection.render();
 		menuCenterSection.render();
+		menuTopSection.render();
 		menuBottomSection.render();
 	}
+
+	M5.Display.display();
 }
 
 void Menu::clearScreen()

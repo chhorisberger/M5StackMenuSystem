@@ -13,7 +13,7 @@ MenuCenterSection::MenuCenterSection(Layout& layout_, Control& control_, Menu* m
 	lastItem = NULL;
 	highlightedItem = NULL;
 	activeItem = NULL;
-	firstItemInViewport = NULL;
+	viewportY = 0;
 }
 
 MenuCenterSection::~MenuCenterSection()
@@ -29,10 +29,10 @@ MenuCenterSection::~MenuCenterSection()
 
 void MenuCenterSection::reset()
 {
-	firstItemInViewport = firstItem;
+	viewportY = 0;
 	highlightedItem = firstItem;
 	resetActiveMenuItem();
-	setAllMenuItemsDirty();
+	setDirty();
 }
 
 void MenuCenterSection::addItem(MenuItem* item)
@@ -45,7 +45,6 @@ void MenuCenterSection::addItem(MenuItem* item)
 		firstItem = item;
 		lastItem = item;
 		highlightedItem = item;
-		firstItemInViewport = item;
 	}
 	else
 	{
@@ -73,8 +72,8 @@ void MenuCenterSection::upButtonPressed()
 
 			if (isAboveViewPort(highlightedItem))
 			{
-				firstItemInViewport = firstItemInViewport->getPrevious();
-				setAllMenuItemsDirty();
+				viewportY -= getMenuItemHeight();
+				menu->setDirty();
 			}
 		}
 	}
@@ -96,8 +95,8 @@ void MenuCenterSection::downButtonPressed()
 
 			if (isBelowViewPort(highlightedItem))
 			{
-				firstItemInViewport = firstItemInViewport->getNext();
-				setAllMenuItemsDirty();
+				viewportY += getMenuItemHeight();
+				menu->setDirty();
 			}
 		}
 	}
@@ -122,21 +121,30 @@ void MenuCenterSection::renderMenuItems(bool force)
 	int menuItemHeight = M5.Lcd.fontHeight(layout.MENU_FONT);
 	int menuItemsStartY = getMenuItemsStartY();
 
-	// TODO: instead use viewportYOffset and compare to 
-	int pos = 0;
-	MenuItem* item = firstItemInViewport;
-	while (item != NULL && !isBelowViewPort(item))
+	int pos = 0;		// TODO: cal item->getPos
+	MenuItem* item = firstItem;
+	while (item != NULL)
 	{
-		int x = 0;
-		int y = menuItemsStartY + (pos * menuItemHeight);
-		item->render(x, y, item == highlightedItem, force);
+		if (isBelowViewPort(item))
+		{
+			break;
+		}
+		
+		if (!isAboveViewPort(item))
+		{
+			int x = 0;
+			int y = getMenuItemY(item);
+			item->render(x, y, item == highlightedItem, force);
+		}
+
 		pos++;
 
 		item = item->getNext();
 	}
+
 }
 
-void MenuCenterSection::setAllMenuItemsDirty()
+void MenuCenterSection::setDirty()
 {
 	MenuItem* item = firstItem;
 	while (item != NULL)
@@ -159,13 +167,12 @@ void MenuCenterSection::resetActiveMenuItem()
 
 bool MenuCenterSection::isAboveViewPort(MenuItem* item)
 {
-	return item->getPosition() < firstItemInViewport->getPosition();
+	return  getMenuItemY(item) < getMenuItemsStartY();
 }
 
 bool MenuCenterSection::isBelowViewPort(MenuItem* item)
 {
-	int maxItemsInViewport = getMaxMenuItemsInViewport();
-	return item->getPosition() >= firstItemInViewport->getPosition() + maxItemsInViewport;
+	return getMenuItemY(item) >= getMenuItemsEndY();
 }
 
 int MenuCenterSection::getCenterSectionHeight()
@@ -180,14 +187,32 @@ int MenuCenterSection::getMenuItemsStartY()
 {
 	int centerSectionHeight = getCenterSectionHeight();
 	int maxItemsInViewport = getMaxMenuItemsInViewport();
-	int menuItemHeight = M5.Lcd.fontHeight(layout.MENU_FONT);
+	int menuItemHeight = getMenuItemHeight();
 	int remainingPixels = centerSectionHeight - (maxItemsInViewport * menuItemHeight);
 	return menu->menuTopSection.getHeight() + (remainingPixels / 2);
 }
 
+int MenuCenterSection::getMenuItemsEndY()
+{
+	return getMenuItemsStartY() + getCenterSectionHeight();
+}
+
 int MenuCenterSection::getMaxMenuItemsInViewport()
 {
-	int menuItemHeight = M5.Lcd.fontHeight(layout.MENU_FONT);
-	int maxItemsInViewport = getCenterSectionHeight() / menuItemHeight;
-	return maxItemsInViewport;
+	return getCenterSectionHeight() / getMenuItemHeight();
+}
+
+int MenuCenterSection::getMenuItemHeight()
+{
+	return M5.Lcd.fontHeight(layout.MENU_FONT);
+}
+
+int MenuCenterSection::getMenuItemY(MenuItem* item)
+{
+	return getMenuItemsStartY() + (item->getPosition() * getMenuItemHeight()) - viewportY;
+}
+
+int MenuCenterSection::getMenuItemPosForY(int y)
+{
+	return (y + viewportY) / getMenuItemHeight();
 }

@@ -21,6 +21,7 @@ public:
 	void render(bool force = false);
 	void checkMenuButtons();
 	int getHeight();
+	void setDirty();
 
 private:
 	void renderBottomBar();

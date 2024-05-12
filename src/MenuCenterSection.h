@@ -18,6 +18,7 @@ public:
 	void render(bool force = false);
 	void addItem(MenuItem* item);
 	void reset();
+	void setDirty();
 
 	void upButtonPressed();
 	void downButtonPressed();
@@ -27,14 +28,18 @@ public:
 
 private:
 	void renderMenuItems(bool force);
-	void setAllMenuItemsDirty();
+	
 
 	bool isAboveViewPort(MenuItem* item);
 	bool isBelowViewPort(MenuItem* item);
-
-	int getMenuItemsStartY();
-	int getCenterSectionHeight();
 	int getMaxMenuItemsInViewport();
+	int getMenuItemsStartY();
+	int getMenuItemsEndY();
+	int getCenterSectionHeight();
+	int getMenuItemHeight();
+	int getMenuItemY(MenuItem* item);
+	int getMenuItemPosForY(int y);
+
 
 	Menu* menu;
 	Layout& layout;
@@ -45,9 +50,8 @@ private:
 	MenuItem* lastItem;
 	MenuItem* highlightedItem;
 	MenuItem* activeItem;
-	MenuItem* firstItemInViewport;
 
-	int height;
+	int viewportY;
 	
 };
 

@@ -60,3 +60,8 @@ int MenuBottomSection::getHeight()
 {
 	return softKeyOk.getHeight() + (2 * layout.BOTTOM_BAR_SOFTKEY_V_SPACING);
 }
+
+void MenuBottomSection::setDirty()
+{
+	dirty = true;
+}

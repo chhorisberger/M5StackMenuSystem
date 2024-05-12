@@ -34,3 +34,8 @@ int MenuTopSection::getHeight()
 {
 	return M5.Lcd.fontHeight(layout.MENU_FONT) + (2 * layout.TOP_BAR_V_PADDING);
 }
+
+void MenuTopSection::setDirty()
+{
+	dirty = true;
+}

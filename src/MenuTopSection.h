@@ -13,6 +13,7 @@ public:
 	void render(bool force = false);
 	void setTitle(String title_);
 	int getHeight();
+	void setDirty();
 
 private:
 	bool dirty;

@@ -19,6 +19,7 @@ public:
 	void addItem(MenuItem* item);
 	void reset();
 	void setDirty();
+	void loop();
 
 	void upButtonPressed();
 	void downButtonPressed();
@@ -30,9 +31,11 @@ private:
 	void renderMenuItems(bool force);
 	
 	void clear();
+	void checkTouch();
 	bool isAboveViewPort(MenuItem* item);
 	bool isBelowViewPort(MenuItem* item);
 	int getMaxMenuItemsInViewport();
+	int getViewportYMax();
 	int getMenuItemsStartY();
 	int getMenuItemsEndY();
 	int getCenterSectionHeight();

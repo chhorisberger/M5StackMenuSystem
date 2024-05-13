@@ -19,7 +19,7 @@ class MenuBottomSection
 public:
 	MenuBottomSection(Layout& layout_, Control& control_, Menu* menu_);
 	void render(bool force = false);
-	void checkMenuButtons();
+	void loop();
 	int getHeight();
 	void setDirty();
 

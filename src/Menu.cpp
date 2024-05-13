@@ -76,7 +76,8 @@ void Menu::loop()
 
 		if (activeItem == NULL)
 		{
-			menuBottomSection.checkMenuButtons();
+			menuCenterSection.loop();
+			menuBottomSection.loop();
 			render();
 		}
 		else

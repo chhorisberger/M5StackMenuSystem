@@ -10,7 +10,7 @@ MenuBottomSection::MenuBottomSection(Layout& layout_, Control& control_, Menu* m
 	dirty = true;
 }
 
-void MenuBottomSection::checkMenuButtons()
+void MenuBottomSection::loop()
 {
 	if (softKeyUp.wasReleased())
 	{

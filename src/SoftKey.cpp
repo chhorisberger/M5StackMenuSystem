@@ -2,7 +2,7 @@
 
 #include <M5Unified.h>
 
-SoftKey::SoftKey(SoftKeySlot slot_, Layout& layout_, Control& control_) : layout(layout_), control(control_)
+SoftKey::SoftKey(SoftKeySlot slot_, Layout& layout_, Control& control_, Display& display_) : layout(layout_), control(control_), display(display_)
 {
 	slot = slot_;
 	dirty = true;
@@ -107,12 +107,12 @@ void SoftKey::renderRow(int x, int y, int w, int h)
 {
 	if (pressed)
 	{
-		M5.Display.fillRoundRect(x, y, w, h, 3, layout.BOTTOM_BAR_SOFTKEY_COLOR);
+		display.fillRoundRect(x, y, w, h, 3, layout.BOTTOM_BAR_SOFTKEY_COLOR);
 	}
 	else
 	{
-		M5.Display.fillRoundRect(x, y, w, h, 3, layout.BOTTOM_BAR_SOFTKEY_BACKGROUND_COLOR);
-		M5.Display.drawRoundRect(x, y, w, h, 3, layout.BOTTOM_BAR_SOFTKEY_COLOR);
+		display.fillRoundRect(x, y, w, h, 3, layout.BOTTOM_BAR_SOFTKEY_BACKGROUND_COLOR);
+		display.drawRoundRect(x, y, w, h, 3, layout.BOTTOM_BAR_SOFTKEY_COLOR);
 	}
 }
 
@@ -144,7 +144,7 @@ int SoftKey::getWidth()
 
 int SoftKey::getHeight()
 {
-	return  M5.Display.fontHeight(layout.MENU_FONT) + (2 * layout.BOTTOM_BAR_SOFTKEY_V_PADDING);
+	return  display.fontHeight(layout.MENU_FONT) + (2 * layout.BOTTOM_BAR_SOFTKEY_V_PADDING);
 }
 
 Rect SoftKey::getRect()

@@ -45,6 +45,7 @@ void Control::checkTouch()
 		touchEvents[i].released = touch.wasReleased();
 		touchEvents[i].dragStart = touch.wasDragStart();
 		touchEvents[i].drag = touch.wasDragged();
+		touchEvents[i].dragging = touch.isDragging();
 		touchEvents[i].flickStart = touch.wasFlickStart();
 		touchEvents[i].flick = touch.wasFlicked();
 		touchEvents[i].hold = touch.wasHold();

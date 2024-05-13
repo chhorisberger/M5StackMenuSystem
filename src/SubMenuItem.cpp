@@ -2,7 +2,7 @@
 
 #include "Menu.h"
 
-SubMenuItem::SubMenuItem(Layout& layout_, String text_, Menu* subMenu_) : MenuItem(layout_, text_)
+SubMenuItem::SubMenuItem(Layout& layout_, Display& display_, String text_, Menu* subMenu_) : MenuItem(layout_, display_, text_)
 {
 	subMenu = subMenu_;
 }

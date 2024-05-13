@@ -2,6 +2,7 @@
 #define MENU_H
 
 #include "Layout.h"
+#include "Display.h"
 #include "Control.h"
 #include "MenuTopSection.h"
 #include "MenuCenterSection.h"
@@ -79,6 +80,8 @@ private:
 	MenuTopSection menuTopSection;
 	MenuCenterSection menuCenterSection;
 	MenuBottomSection menuBottomSection;
+
+	Display display;
 	Control control;
 	Menu* parentMenu;
 	Layout layout;

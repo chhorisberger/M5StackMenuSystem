@@ -3,7 +3,7 @@
 #include <M5Unified.h>
 
 
-UpSoftKey::UpSoftKey(SoftKeySlot slot_, Layout& layout_, Control& control_) : SoftKey(slot_, layout_, control_)
+UpSoftKey::UpSoftKey(SoftKeySlot slot_, Layout& layout_, Control& control_, Display& display_) : SoftKey(slot_, layout_, control_, display_)
 {
 }
 
@@ -26,5 +26,5 @@ void UpSoftKey::renderIcon(int x, int y, int w, int h)
 	int x2 = iconX + layout.BOTTOM_BAR_SOFTKEY_ICONS_SIZE;
 	int y2 = iconY + layout.BOTTOM_BAR_SOFTKEY_ICONS_SIZE;
 
-	M5.Display.fillTriangle(x0, y0, x1, y1, x2, y2, pressed ? layout.BOTTOM_BAR_SOFTKEY_BACKGROUND_COLOR : layout.BOTTOM_BAR_SOFTKEY_COLOR);
+	display.fillTriangle(x0, y0, x1, y1, x2, y2, pressed ? layout.BOTTOM_BAR_SOFTKEY_BACKGROUND_COLOR : layout.BOTTOM_BAR_SOFTKEY_COLOR);
 }

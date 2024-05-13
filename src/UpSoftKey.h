@@ -7,7 +7,7 @@
 class UpSoftKey : virtual public SoftKey
 {
 public:
-	UpSoftKey(SoftKeySlot slot_, Layout& layout_, Control& control_);
+	UpSoftKey(SoftKeySlot slot_, Layout& layout_, Control& control_, Display& display_);
 	virtual ~UpSoftKey() {}
 
 protected:

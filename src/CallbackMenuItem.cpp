@@ -1,7 +1,7 @@
 #include "CallbackMenuItem.h"
 #include "Menu.h"
 
-CallbackMenuItem::CallbackMenuItem(Layout& layout_, String text_, CallbackFunction callbackOneTimeFunction_, CallbackFunction callbackLoopFunction_) : MenuItem(layout_, text_)
+CallbackMenuItem::CallbackMenuItem(Layout& layout_, Display& display_, String text_, CallbackFunction callbackOneTimeFunction_, CallbackFunction callbackLoopFunction_) : MenuItem(layout_, display_, text_)
 {
 	text = text_;
 	callbackOneTimeFunction = callbackOneTimeFunction_;

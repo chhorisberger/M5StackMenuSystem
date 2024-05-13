@@ -1,6 +1,7 @@
 #ifndef SOFT_KEY_H
 #define SOFT_KEY_H
 
+#include "Display.h"
 #include "Layout.h"
 #include "Control.h"
 #include "Rect.h"
@@ -13,7 +14,7 @@ enum SoftKeySlot { BtnASlot, BtnBSlot, BtnCSlot};
 class SoftKey
 {
 public:
-	SoftKey(SoftKeySlot slot_, Layout& layout_, Control& control_);
+	SoftKey(SoftKeySlot slot_, Layout& layout_, Control& control_, Display& display_);
 
 	void render(bool force = false);
 	bool wasReleased();
@@ -29,6 +30,7 @@ protected:
 
 	SoftKeySlot slot;
 	Layout& layout;
+	Display& display;
 	bool pressed;
 
 private:

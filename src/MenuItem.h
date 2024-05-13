@@ -2,10 +2,9 @@
 #define MENU_ITEM_H
 
 #include "Layout.h"
+#include "Display.h"
 
 #include <Arduino.h>
-
-
 
 
 // foward declare class for backwards reference without cyclic dependency
@@ -14,7 +13,7 @@ class Menu;
 class MenuItem
 {
 public:
-	MenuItem(Layout& layout_, String text_);
+	MenuItem(Layout& layout_, Display& display_, String text_);
 	virtual void loop() = 0;
 	virtual void render(int x, int y, bool isHighlighted, bool force = false);
 	virtual void onAdded();
@@ -34,6 +33,7 @@ protected:
 	String text;
 	bool dirty;
 	Layout& layout;
+	Display& display;
 
 private:
 	Menu* menu;

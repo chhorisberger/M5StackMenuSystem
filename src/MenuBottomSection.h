@@ -4,6 +4,7 @@
 #include "TextSoftKey.h"
 #include "UpSoftKey.h"
 #include "DownSoftKey.h"
+#include "Display.h"
 #include "Layout.h"
 #include "Control.h"
 
@@ -17,7 +18,7 @@ class MenuBottomSection
 {
 
 public:
-	MenuBottomSection(Layout& layout_, Control& control_, Menu* menu_);
+	MenuBottomSection(Layout& layout_, Control& control_, Display& display_, Menu* menu_);
 	void render(bool force = false);
 	void loop();
 	int getHeight();
@@ -28,6 +29,8 @@ private:
 	void renderSoftKeys(bool force = false);
 
 	Layout& layout;
+	Display& display;
+
 	bool dirty;
 	Menu* menu;
 	UpSoftKey softKeyUp;

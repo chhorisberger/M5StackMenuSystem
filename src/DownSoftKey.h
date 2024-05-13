@@ -7,7 +7,7 @@
 class DownSoftKey : virtual public SoftKey
 {
 public:
-	DownSoftKey(SoftKeySlot slot_, Layout& layout_, Control& control_);
+	DownSoftKey(SoftKeySlot slot_, Layout& layout_, Control& control_, Display& display_);
 	virtual ~DownSoftKey() {}
 
 protected:

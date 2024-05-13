@@ -16,6 +16,7 @@ struct TouchEvent
 	bool hold;
 	bool dragStart;
 	bool drag;
+	bool dragging;
 	bool flickStart;
 	bool flick;
 };

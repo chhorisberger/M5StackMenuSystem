@@ -5,7 +5,7 @@
 
 #include <M5Unified.h>
 
-Menu::Menu(String title_) : control(), menuTopSection(layout, title_), menuCenterSection(layout, control, this), menuBottomSection(layout, control, this)
+Menu::Menu(String title_) : display(), control(), menuTopSection(layout, display, title_), menuCenterSection(layout, control, display, this), menuBottomSection(layout, control, display, this)
 {
 	enabled = true;
 	dirty = true;
@@ -14,11 +14,12 @@ Menu::Menu(String title_) : control(), menuTopSection(layout, title_), menuCente
 
 void Menu::init()
 {
+	display.init();
 	control.init();
-	layout.SCREEN_WIDTH = M5.Display.width();
-	layout.SCREEN_HEIGHT = M5.Display.height();
-	M5.Display.setTextFont(layout.MENU_FONT);
-	M5.Display.setTextSize(layout.MENU_FONT_SIZE);
+	layout.SCREEN_WIDTH = display.width();
+	layout.SCREEN_HEIGHT = display.height();
+	display.setTextFont(layout.MENU_FONT);
+	display.setTextSize(layout.MENU_FONT_SIZE);
 	initialized = true;
 }
 
@@ -94,18 +95,18 @@ void Menu::setParentMenu(Menu* menu)
 
 void Menu::addMenuItem(String text, CallbackFunction callbackOneTimeFunction, CallbackFunction callbackLoopFunction)
 {
-	menuCenterSection.addItem(new CallbackMenuItem(layout, text, callbackOneTimeFunction, callbackLoopFunction));
+	menuCenterSection.addItem(new CallbackMenuItem(layout, display, text, callbackOneTimeFunction, callbackLoopFunction));
 }
 
 void Menu::addSubMenu(String text, Menu* subMenu)
 {
 	subMenu->setParentMenu(this);
-	menuCenterSection.addItem(new SubMenuItem(layout, text, subMenu));
+	menuCenterSection.addItem(new SubMenuItem(layout, display, text, subMenu));
 }
 
 void Menu::addExitItem(Menu* parentMenu)
 {
-	menuCenterSection.addItem(new MenuExitItem(layout, parentMenu));
+	menuCenterSection.addItem(new MenuExitItem(layout, display, parentMenu));
 }
 
 Layout& Menu::getLayout()
@@ -115,13 +116,13 @@ Layout& Menu::getLayout()
 
 void Menu::displaySoftKey(SoftKeySlot slot, String text)
 {
-	TextSoftKey softKey(slot, layout, control, text);
+	TextSoftKey softKey(slot, layout, control, display, text);
 	softKey.render();
 }
 
 bool Menu::wasSoftKeyReleased(SoftKeySlot slot)
 {
-	TextSoftKey softKey(slot, layout, control, "");
+	TextSoftKey softKey(slot, layout, control, display, "");
 	return softKey.wasReleased();
 }
 
@@ -148,8 +149,6 @@ void Menu::okButtonPressed()
 
 void Menu::render()
 {
-	M5.Display.waitDisplay();
-
 	// TODO: clean this up, only delegate to sub components 
 	if (dirty)
 	{
@@ -166,6 +165,6 @@ void Menu::render()
 		menuBottomSection.render();
 	}
 
-	M5.Display.display();
+	display.draw();
 }
 

@@ -3,7 +3,7 @@
 #include <M5Unified.h>
 
 
-TextSoftKey::TextSoftKey(SoftKeySlot slot_, Layout& layout_, Control& control_, String text_) : SoftKey(slot_, layout_, control_)
+TextSoftKey::TextSoftKey(SoftKeySlot slot_, Layout& layout_, Control& control_, Display& display_, String text_) : SoftKey(slot_, layout_, control_, display_)
 {
 	text = text_;
 }
@@ -18,14 +18,14 @@ void TextSoftKey::renderText(int x, int y, int w, int h)
 {
 	if (pressed)
 	{
-		M5.Display.setTextColor(layout.BOTTOM_BAR_SOFTKEY_BACKGROUND_COLOR);
+		display.setTextColor(layout.BOTTOM_BAR_SOFTKEY_BACKGROUND_COLOR);
 	}
 	else
 	{
-		M5.Display.setTextColor(layout.BOTTOM_BAR_SOFTKEY_COLOR);
+		display.setTextColor(layout.BOTTOM_BAR_SOFTKEY_COLOR);
 	}
 
-	M5.Display.setTextDatum(MC_DATUM);
-	M5.Display.drawString((text).c_str(), x + (w / 2), y + (h / 2));
+	display.setTextDatum(MC_DATUM);
+	display.drawString((text).c_str(), x + (w / 2), y + (h / 2));
 
 }

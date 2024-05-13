@@ -1,6 +1,7 @@
 #ifndef MENU_CENTER_SECTION_H
 #define MENU_CENTER_SECTION_H
 
+#include "Display.h"
 #include "Layout.h"
 #include "Control.h"
 #include "MenuItem.h"
@@ -12,7 +13,7 @@ class MenuCenterSection
 {
 
 public:
-	MenuCenterSection(Layout& layout_, Control& control_, Menu* menu_);
+	MenuCenterSection(Layout& layout_, Control& control_, Display& display_, Menu* menu_);
 	~MenuCenterSection();
 
 	void render(bool force = false);
@@ -41,12 +42,15 @@ private:
 	int getCenterSectionHeight();
 	int getMenuItemHeight();
 	int getMenuItemY(MenuItem* item);
+	MenuItem* getMenuItemForY(int y);
+	MenuItem* getMenuItemByPos(int pos);
 	int getMenuItemPosForY(int y);
-
 
 	Menu* menu;
 	Layout& layout;
+	Display& display;
 	Control& control;
+
 	bool dirty;
 
 	MenuItem* firstItem;

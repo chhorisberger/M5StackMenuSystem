@@ -4,7 +4,7 @@
 
 #include <M5Unified.h>
 
-MenuCenterSection::MenuCenterSection(Layout& layout_, Control& control_, Menu* menu_) : layout(layout_), control(control_)
+MenuCenterSection::MenuCenterSection(Layout& layout_, Control& control_, Display& display_, Menu* menu_) : layout(layout_), control(control_), display(display_)
 {
 	menu = menu_;
 	setDirty();
@@ -123,8 +123,11 @@ void MenuCenterSection::render(bool force)
 
 void MenuCenterSection::renderMenuItems(bool force)
 {
-	int menuItemHeight = M5.Display.fontHeight(layout.MENU_FONT);
+	int menuItemHeight = display.fontHeight(layout.MENU_FONT);
 	int menuItemsStartY = getMenuItemsStartY();
+
+	// TODO. calculate first item instead by calucating pos from y!
+	//Serial.println("rendering menu with viewportY: " + String(viewportY));
 
 	MenuItem* item = firstItem;
 	while (item != NULL)
@@ -140,10 +143,14 @@ void MenuCenterSection::renderMenuItems(bool force)
 			int y = getMenuItemY(item);
 			item->render(x, y, item == highlightedItem, force);
 
+			bool highlighted = (item == highlightedItem);
+			//Serial.println("item #" + String(item->getPosition()) + " at y: " + String(y) + (highlighted ? "<" : "") +" : " + item->getText());
+		}
 
 		item = item->getNext();
 	}
 
+	//Serial.println("-----------------");
 }
 
 void MenuCenterSection::setDirty()
@@ -168,18 +175,24 @@ void MenuCenterSection::checkTouch()
 	for (std::size_t i = 0; i < nrTouchEvents; i++)
 	{
 		TouchEvent touchEvent = touchEvents[i];
-		if (touchEvent.released) // is this was released?
+		int y = touchEvent.y;
+
+		if (y > getMenuItemsStartY() && y < getMenuItemsEndY())
 		{
-			// TODO click menu?
-		}
-		else
-		{
-			int y = touchEvent.y;
-			if (y > getMenuItemsStartY() && y < getMenuItemsEndY())
+			if (touchEvent.clicked)
+			{
+				MenuItem* item = getMenuItemForY(y);
+				if (item != NULL)
+				{
+					highlightedItem = item;
+					activeItem = highlightedItem;
+					item->setDirty();
+				}
+			}
+			else
 			{
 				int viewportYNew = viewportY - touchEvent.dy;
-				int viewportYMax = getViewportYMax();
-				viewportYNew = constrain(viewportYNew, 0, viewportYMax);
+				viewportYNew = constrain(viewportYNew, 0, getViewportYMax());
 				if (viewportYNew != viewportY)
 				{
 					viewportY = viewportYNew;
@@ -194,7 +207,7 @@ void MenuCenterSection::clear()
 {
 	int y = getMenuItemsStartY();
 	int h = getCenterSectionHeight();
-	M5.Display.fillRect(0, y, layout.SCREEN_WIDTH, h, layout.MENU_ITEM_BACKGROUND_COLOR);
+	display.fillRect(0, y, layout.SCREEN_WIDTH, h, layout.MENU_ITEM_BACKGROUND_COLOR);
 }
 
 MenuItem* MenuCenterSection::getActiveMenuItem()
@@ -247,7 +260,7 @@ int MenuCenterSection::getMaxMenuItemsInViewport()
 
 int MenuCenterSection::getMenuItemHeight()
 {
-	return M5.Display.fontHeight(layout.MENU_FONT);
+	return display.fontHeight(layout.MENU_FONT);
 }
 
 int MenuCenterSection::getMenuItemY(MenuItem* item)
@@ -257,7 +270,29 @@ int MenuCenterSection::getMenuItemY(MenuItem* item)
 
 int MenuCenterSection::getMenuItemPosForY(int y)
 {
-	return (y + viewportY) / getMenuItemHeight();
+	return ((y - getMenuItemsStartY()) + viewportY) / getMenuItemHeight();
+}
+
+MenuItem* MenuCenterSection::getMenuItemForY(int y)
+{
+	int pos = getMenuItemPosForY(y);
+	return getMenuItemByPos(pos);
+}
+
+MenuItem* MenuCenterSection::getMenuItemByPos(int pos)
+{
+	MenuItem* item = firstItem;
+	while (item != NULL)
+	{
+		if (item->getPosition() == pos)
+		{
+			return item;
+		}
+
+		item = item->getNext();
+	}
+
+	return NULL;
 }
 
 int MenuCenterSection::getViewportYMax()

@@ -15,14 +15,13 @@ class MenuItem
 public:
 	MenuItem(Layout& layout_, Display& display_, String text_);
 	virtual void loop() = 0;
-	virtual void render(int x, int y, bool isHighlighted, bool force = false);
+	virtual void render(int x, int y, bool isHighlighted);
 	virtual void onAdded();
 
 	MenuItem* getPrevious();
 	void setPrevious(MenuItem* item);
 	MenuItem* getNext();
 	void setNext(MenuItem* item);
-	void setDirty();
 	String getText();
 	void setMenu(Menu* menu_);
 	Menu* getMenu();
@@ -31,7 +30,6 @@ public:
 
 protected:
 	String text;
-	bool dirty;
 	Layout& layout;
 	Display& display;
 

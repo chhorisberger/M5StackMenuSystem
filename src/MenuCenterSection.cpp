@@ -7,7 +7,6 @@
 MenuCenterSection::MenuCenterSection(Layout& layout_, Control& control_, Display& display_, Menu* menu_) : layout(layout_), control(control_), display(display_)
 {
 	menu = menu_;
-	setDirty();
 
 	firstItem = NULL;
 	lastItem = NULL;
@@ -32,7 +31,6 @@ void MenuCenterSection::reset()
 	viewportY = 0;
 	highlightedItem = firstItem;
 	resetActiveMenuItem();
-	setDirty();
 }
 
 void MenuCenterSection::addItem(MenuItem* item)
@@ -58,15 +56,11 @@ void MenuCenterSection::addItem(MenuItem* item)
 
 void MenuCenterSection::upButtonPressed()
 {
-	dirty = true;
-
 	if (highlightedItem != NULL)
 	{
 		MenuItem* previousItem = highlightedItem->getPrevious();
 		if (previousItem != NULL)
 		{
-			highlightedItem->setDirty();
-			previousItem->setDirty();
 
 			highlightedItem = previousItem;
 
@@ -81,16 +75,11 @@ void MenuCenterSection::upButtonPressed()
 
 void MenuCenterSection::downButtonPressed()
 {
-	dirty = true;
-
 	if (highlightedItem != NULL)
 	{
 		MenuItem* nextItem = highlightedItem->getNext();
 		if (nextItem != NULL)
 		{
-			highlightedItem->setDirty();
-			nextItem->setDirty();
-
 			highlightedItem = nextItem;
 
 			if (isBelowViewPort(highlightedItem))
@@ -107,27 +96,16 @@ void MenuCenterSection::okButtonPressed()
 	activeItem = highlightedItem;
 }
 
-void MenuCenterSection::render(bool force)
+void MenuCenterSection::render()
 {
-	if (dirty || force)
-	{
-		if(force)
-		{
-			clear();
-		}
-		
-		renderMenuItems(force);
-		dirty = false;
-	}
+	clear();
+	renderMenuItems();
 }
 
-void MenuCenterSection::renderMenuItems(bool force)
+void MenuCenterSection::renderMenuItems()
 {
 	int menuItemHeight = display.fontHeight(layout.MENU_FONT);
 	int menuItemsStartY = getMenuItemsStartY();
-
-	// TODO. calculate first item instead by calucating pos from y!
-	//Serial.println("rendering menu with viewportY: " + String(viewportY));
 
 	MenuItem* item = firstItem;
 	while (item != NULL)
@@ -141,26 +119,12 @@ void MenuCenterSection::renderMenuItems(bool force)
 		{
 			int x = 0;
 			int y = getMenuItemY(item);
-			item->render(x, y, item == highlightedItem, force);
-
-			bool highlighted = (item == highlightedItem);
-			//Serial.println("item #" + String(item->getPosition()) + " at y: " + String(y) + (highlighted ? "<" : "") +" : " + item->getText());
+			item->render(x, y, item == highlightedItem);
 		}
 
 		item = item->getNext();
 	}
 
-	//Serial.println("-----------------");
-}
-
-void MenuCenterSection::setDirty()
-{
-	MenuItem* item = firstItem;
-	while (item != NULL)
-	{
-		item->setDirty();
-		item = item->getNext();
-	}
 }
 
 void MenuCenterSection::loop()
@@ -186,7 +150,6 @@ void MenuCenterSection::checkTouch()
 				{
 					highlightedItem = item;
 					activeItem = highlightedItem;
-					item->setDirty();
 				}
 			}
 			else
@@ -218,7 +181,6 @@ MenuItem* MenuCenterSection::getActiveMenuItem()
 void MenuCenterSection::resetActiveMenuItem()
 {
 	activeItem = NULL;
-	dirty = true;
 }
 
 bool MenuCenterSection::isAboveViewPort(MenuItem* item)

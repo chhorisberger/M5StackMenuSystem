@@ -19,19 +19,17 @@ class MenuBottomSection
 
 public:
 	MenuBottomSection(Layout& layout_, Control& control_, Display& display_, Menu* menu_);
-	void render(bool force = false);
+	void render();
 	void loop();
 	int getHeight();
-	void setDirty();
 
 private:
 	void renderBottomBar();
-	void renderSoftKeys(bool force = false);
+	void renderSoftKeys();
 
 	Layout& layout;
 	Display& display;
 
-	bool dirty;
 	Menu* menu;
 	UpSoftKey softKeyUp;
 	DownSoftKey softKeyDown;

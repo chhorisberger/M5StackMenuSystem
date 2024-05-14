@@ -26,7 +26,7 @@ void Menu::init()
 void Menu::enable()
 {
 	enabled = true;
-	dirty = true;
+	setDirty();
 }
 
 void Menu::disable()
@@ -47,9 +47,6 @@ bool Menu::isEnabled()
 void Menu::setDirty()
 {
 	dirty = true;
-	menuTopSection.setDirty();
-	menuCenterSection.setDirty();
-	menuBottomSection.setDirty();
 }
 
 bool Menu::isDirty()
@@ -129,7 +126,7 @@ bool Menu::wasSoftKeyReleased(SoftKeySlot slot)
 void Menu::resetActiveMenuItem()
 {
 	menuCenterSection.resetActiveMenuItem();
-	dirty = true;
+	setDirty();
 }
 
 void Menu::upButtonPressed()
@@ -149,22 +146,12 @@ void Menu::okButtonPressed()
 
 void Menu::render()
 {
-	// TODO: clean this up, only delegate to sub components 
-	if (dirty)
-	{
-		menuCenterSection.render(true);
-		menuTopSection.render(true);
-		menuBottomSection.render(true);
-
-		dirty = false;
-	}
-	else
+	if (isDirty())
 	{
 		menuCenterSection.render();
 		menuTopSection.render();
 		menuBottomSection.render();
+		display.draw();
 	}
-
-	display.draw();
 }
 

@@ -16,10 +16,9 @@ public:
 	MenuCenterSection(Layout& layout_, Control& control_, Display& display_, Menu* menu_);
 	~MenuCenterSection();
 
-	void render(bool force = false);
+	void render();
 	void addItem(MenuItem* item);
 	void reset();
-	void setDirty();
 	void loop();
 
 	void upButtonPressed();
@@ -29,7 +28,7 @@ public:
 	MenuItem* getActiveMenuItem();
 
 private:
-	void renderMenuItems(bool force);
+	void renderMenuItems();
 	
 	void clear();
 	void checkTouch();
@@ -50,8 +49,6 @@ private:
 	Layout& layout;
 	Display& display;
 	Control& control;
-
-	bool dirty;
 
 	MenuItem* firstItem;
 	MenuItem* lastItem;

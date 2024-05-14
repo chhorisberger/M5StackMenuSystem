@@ -16,7 +16,7 @@ class SoftKey
 public:
 	SoftKey(SoftKeySlot slot_, Layout& layout_, Control& control_, Display& display_);
 
-	void render(bool force = false);
+	void render();
 	bool wasReleased();
 
 	Rect getRect();
@@ -44,7 +44,6 @@ private:
 	void setPressed(bool pressed_);
 
 	Control& control;
-	bool dirty;
 
 };
 

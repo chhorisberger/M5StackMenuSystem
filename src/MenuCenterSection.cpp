@@ -150,6 +150,7 @@ void MenuCenterSection::checkTouch()
 				{
 					highlightedItem = item;
 					activeItem = highlightedItem;
+					menu->setDirty();
 				}
 			}
 			else

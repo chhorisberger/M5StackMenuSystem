@@ -132,16 +132,19 @@ void Menu::resetActiveMenuItem()
 void Menu::upButtonPressed()
 {
 	menuCenterSection.upButtonPressed();
+	setDirty();
 }
 
 void Menu::downButtonPressed()
 {
 	menuCenterSection.downButtonPressed();
+	setDirty();
 }
 
 void Menu::okButtonPressed()
 {
 	menuCenterSection.okButtonPressed();
+	setDirty();
 }
 
 void Menu::render()
@@ -152,6 +155,7 @@ void Menu::render()
 		menuTopSection.render();
 		menuBottomSection.render();
 		display.draw();
+		dirty = false;
 	}
 }
 

@@ -5,7 +5,6 @@
 SoftKey::SoftKey(SoftKeySlot slot_, Layout& layout_, Control& control_, Display& display_) : layout(layout_), control(control_), display(display_)
 {
 	slot = slot_;
-	dirty = true;
 	pressed = false;
 }
 
@@ -85,22 +84,16 @@ bool SoftKey::wasTouchReleased(TouchEvent& touchEvent)
 void SoftKey::setPressed(bool pressed_)
 {
 	pressed = pressed_;
-	dirty = true;
 }
 
-void SoftKey::render(bool force)
+void SoftKey::render()
 {
-	if (dirty || force)
-	{
-		int w = getWidth();
-		int h = getHeight();
-		int x = getXPosition();
-		int y = getYPosition();
+	int w = getWidth();
+	int h = getHeight();
+	int x = getXPosition();
+	int y = getYPosition();
 
-		renderInternal(x, y, w, h);
-
-		dirty = false;
-	}
+	renderInternal(x, y, w, h);
 }
 
 void SoftKey::renderRow(int x, int y, int w, int h)

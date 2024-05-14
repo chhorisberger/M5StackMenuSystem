@@ -40,7 +40,7 @@ void MenuBottomSection::renderBottomBar()
 	int barY = layout.SCREEN_HEIGHT - barH;
 	int paddingSide = barW / 2;
 
-	display.fillRoundRect(0, barY, layout.SCREEN_WIDTH, barH, 3, layout.BOTTOM_BAR_BACKGROUND_COLOR);
+	display.fillRect(0, barY, layout.SCREEN_WIDTH, barH, layout.BOTTOM_BAR_BACKGROUND_COLOR);
 }
 
 void MenuBottomSection::renderSoftKeys()

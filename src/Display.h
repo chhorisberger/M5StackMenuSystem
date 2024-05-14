@@ -2,6 +2,7 @@
 #define DISPLAY_H
 
 #include <stdint.h>
+#include <M5Unified.h> 
 
 class Display
 {
@@ -32,7 +33,8 @@ class Display
 		void drawTriangle(int32_t x0, int32_t y0, int32_t x1, int32_t y1, int32_t x2, int32_t y2, int color);
 
 	private:
-		
+		M5GFX display;
+		M5Canvas canvas;
 
 };
 

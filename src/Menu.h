@@ -1,7 +1,6 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include "DirectDisplay.h"
 #include "BufferedDisplay.h"
 #include "Layout.h"
 #include "Control.h"
@@ -82,12 +81,7 @@ private:
 	MenuCenterSection menuCenterSection;
 	MenuBottomSection menuBottomSection;
 
-#ifdef FORCE_DIRECT_DRAW
-	DirectDisplay display;
-#else
 	BufferedDisplay display;
-#endif 
-
 	Control control;
 	Menu* parentMenu;
 	Layout layout;

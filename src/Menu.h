@@ -82,7 +82,7 @@ private:
 	MenuCenterSection menuCenterSection;
 	MenuBottomSection menuBottomSection;
 
-#ifdef DIRECT
+#ifdef FORCE_DIRECT_DRAW
 	DirectDisplay display;
 #else
 	BufferedDisplay display;

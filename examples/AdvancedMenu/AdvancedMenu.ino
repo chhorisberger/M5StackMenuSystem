@@ -38,6 +38,8 @@ void loop() {
 void testOneTimeCallback(CallbackMenuItem& menuItem) {
 	M5.Display.clear(BLACK);
 	M5.Display.setTextColor(WHITE);
+	M5.Display.setTextFont(2);
+	M5.Display.setTextSize(2);
 	M5.Display.setTextDatum(MC_DATUM);
 	M5.Display.drawString("One Time Callback", M5.Display.width() / 2, (2 * M5.Display.height()) / 6);
 
@@ -47,6 +49,8 @@ void testOneTimeCallback(CallbackMenuItem& menuItem) {
 void testLoopInitCallback(CallbackMenuItem& menuItem) {
 	M5.Display.clear(BLACK);
 	M5.Display.setTextColor(WHITE);
+	M5.Display.setTextFont(2);
+	M5.Display.setTextSize(2);
 	M5.Display.setTextDatum(MC_DATUM);
 	M5.Display.drawString("Loop Callback", M5.Display.width() / 2, (2 * M5.Display.height()) / 6);
 
@@ -57,6 +61,8 @@ void testLoopCallback(CallbackMenuItem& menuItem) {
 	String time = "sec: " + String(millis() / 1000);
 
 	M5.Display.setTextColor(WHITE, BLACK);
+	M5.Display.setTextFont(2);
+	M5.Display.setTextSize(2);
 	M5.Display.setTextDatum(MC_DATUM);
 	M5.Display.drawString(time.c_str(), M5.Display.width() / 2, (3 * M5.Display.height()) / 6);
 

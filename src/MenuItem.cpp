@@ -18,6 +18,10 @@ void MenuItem::onAdded()
 {
 }
 
+void MenuItem::reset()
+{
+}
+
 MenuItem* MenuItem::getPrevious()
 {
 	return previousItem;

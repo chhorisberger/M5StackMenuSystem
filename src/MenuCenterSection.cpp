@@ -181,6 +181,11 @@ MenuItem* MenuCenterSection::getActiveMenuItem()
 
 void MenuCenterSection::resetActiveMenuItem()
 {
+	if (activeItem != NULL)
+	{
+		activeItem->reset();
+	}
+	
 	activeItem = NULL;
 }
 

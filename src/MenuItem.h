@@ -17,6 +17,7 @@ public:
 	virtual void loop() = 0;
 	virtual void render(int x, int y, bool isHighlighted);
 	virtual void onAdded();
+	virtual void reset();
 
 	MenuItem* getPrevious();
 	void setPrevious(MenuItem* item);

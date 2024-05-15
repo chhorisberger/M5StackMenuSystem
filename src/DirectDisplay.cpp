@@ -13,6 +13,7 @@ void DirectDisplay::init()
 void DirectDisplay::drawStart()
 {
 	M5.Display.startWrite();
+	M5.Display.clear();
 }
 
 void DirectDisplay::drawEnd()

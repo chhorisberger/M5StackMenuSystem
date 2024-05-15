@@ -7,7 +7,7 @@ BufferedDisplay::BufferedDisplay() : canvas()
 
 void BufferedDisplay::init()
 {
-	canvas.setColorDepth(8); // without this, creating full screen canvas fails
+	canvas.setColorDepth(8); // without this, full screen canvas fails to draw... maybe related to chosen board in arduino ide?
 	canvas.createSprite(width(), height());
 }
 

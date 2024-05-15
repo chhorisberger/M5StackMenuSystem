@@ -113,7 +113,9 @@ Layout& Menu::getLayout()
 void Menu::displaySoftKey(SoftKeySlot slot, String text)
 {
 	TextSoftKey softKey(slot, layout, control, display, text);
+	display.drawStart();
 	softKey.render();
+	display.drawEnd();
 }
 
 bool Menu::wasSoftKeyReleased(SoftKeySlot slot)

@@ -1,5 +1,4 @@
 #include "Menu.h"
-
 #include "SubMenuItem.h"
 #include "MenuExitItem.h"
 
@@ -151,10 +150,11 @@ void Menu::render()
 {
 	if (isDirty())
 	{
+		display.drawStart();
 		menuCenterSection.render();
 		menuTopSection.render();
 		menuBottomSection.render();
-		display.draw();
+		display.drawEnd();
 		dirty = false;
 	}
 }

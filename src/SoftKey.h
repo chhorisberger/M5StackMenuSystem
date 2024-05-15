@@ -17,6 +17,7 @@ public:
 	SoftKey(SoftKeySlot slot_, Layout& layout_, Control& control_, Display& display_);
 
 	void render();
+	bool wasPressed();
 	bool wasReleased();
 
 	Rect getRect();
@@ -35,6 +36,7 @@ protected:
 
 private:
 	
+	bool wasButtonPressed();
 	bool wasButtonReleased();
 	ButtonEvent getButtonEvent();
 	bool wasTouchReleased();

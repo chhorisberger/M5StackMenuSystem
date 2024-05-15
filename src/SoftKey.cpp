@@ -13,6 +13,22 @@ SoftKeySlot SoftKey::getSlot()
 	return slot;
 }
 
+bool SoftKey::wasPressed()
+{
+	return wasButtonPressed();
+}
+
+bool SoftKey::wasButtonPressed()
+{
+	ButtonEvent buttonEvent = getButtonEvent();
+	if (buttonEvent.pressed)
+	{
+		setPressed(true);
+		return true;
+	}
+	return false;
+}
+
 bool SoftKey::wasReleased()
 {
 	return wasButtonReleased() || wasTouchReleased();
@@ -21,11 +37,7 @@ bool SoftKey::wasReleased()
 bool SoftKey::wasButtonReleased()
 {
 	ButtonEvent buttonEvent = getButtonEvent();
-	if (buttonEvent.pressed)
-	{
-		setPressed(true);
-	}
-	else if (buttonEvent.released)
+	if (buttonEvent.released)
 	{
 		setPressed(false);
 		return true;

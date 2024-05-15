@@ -11,17 +11,29 @@ MenuBottomSection::MenuBottomSection(Layout& layout_, Control& control_, Display
 
 void MenuBottomSection::loop()
 {
-	if (softKeyUp.wasReleased())
+	if (softKeyUp.wasPressed())
+	{
+		menu->setDirty();
+	}
+	else if (softKeyUp.wasReleased())
 	{
 		menu->upButtonPressed();
 	}
 	
-	if (softKeyDown.wasReleased())
+	if (softKeyDown.wasPressed())
+	{
+		menu->setDirty();
+	}
+	else if (softKeyDown.wasReleased())
 	{
 		menu->downButtonPressed();
 	}
 	
-	if (softKeyOk.wasReleased())
+	if (softKeyOk.wasPressed())
+	{
+		menu->setDirty();
+	}
+	else if (softKeyOk.wasReleased())
 	{
 		menu->okButtonPressed();
 	}

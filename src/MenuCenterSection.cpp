@@ -191,7 +191,7 @@ void MenuCenterSection::resetActiveMenuItem()
 
 bool MenuCenterSection::isAboveViewPort(MenuItem* item)
 {
-	return  getMenuItemY(item) < getMenuItemsStartY();
+	return (getMenuItemY(item) + getMenuItemHeight()) < getMenuItemsStartY();
 }
 
 bool MenuCenterSection::isBelowViewPort(MenuItem* item)

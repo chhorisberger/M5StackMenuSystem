@@ -60,8 +60,6 @@ void customizeLayout()
 void testOneTimeCallback(CallbackMenuItem& menuItem) {
 	M5.Display.clear(BLACK);
 	M5.Display.setTextColor(WHITE);
-	M5.Display.setTextFont(2);
-	M5.Display.setTextSize(2);
 	M5.Display.setTextDatum(MC_DATUM);
 	M5.Display.drawString(menuItem.getText() + " selected", 160, 120);
 	delay(1000);

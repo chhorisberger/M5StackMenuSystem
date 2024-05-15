@@ -15,7 +15,7 @@ void MenuBottomSection::loop()
 	{
 		menu->setDirty();
 	}
-	else if (softKeyUp.wasReleased())
+	if (softKeyUp.wasReleased())
 	{
 		menu->upButtonPressed();
 	}
@@ -24,7 +24,7 @@ void MenuBottomSection::loop()
 	{
 		menu->setDirty();
 	}
-	else if (softKeyDown.wasReleased())
+	if (softKeyDown.wasReleased())
 	{
 		menu->downButtonPressed();
 	}
@@ -33,7 +33,7 @@ void MenuBottomSection::loop()
 	{
 		menu->setDirty();
 	}
-	else if (softKeyOk.wasReleased())
+	if (softKeyOk.wasReleased())
 	{
 		menu->okButtonPressed();
 	}

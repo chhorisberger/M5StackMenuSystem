@@ -3,6 +3,11 @@ A quick way to create nice menus for [M5 Stack](https://github.com/m5stack/m5sta
 
 <img src="https://github.com/chhorisberger/M5StackMenuSystem/blob/main/docs/picture.jpg" width="256">
 
+### Compatibility
+
+While this library was initally created for M5Stack Core and Core2 devices, other M5 devices that are supported by the [M5Unified library](https://github.com/m5stack/M5Unified) (e.g. CoreS3) might work as well.
+Feel free to share your experiences in the [Forum](https://github.com/chhorisberger/M5StackMenuSystem/discussions)!
+
 ## Getting Started
 Install the library using either the .zip file from the latest release or by searching for "M5StackMenuSystem" in the libraries manager of the Arduino IDE
 
@@ -160,8 +165,3 @@ The second argument "Foo" determines the text displayed in the soft key. Be awar
 
 The appearance of the menu can be customized up to some degree (colors, font size, etc.)
 The example sketch [CustomizedMenu.ino](https://github.com/chhorisberger/M5StackMenuSystem/blob/main/examples/CustomizedMenu/CustomizedMenu.ino) will show you the different possiblities to customize the appearance of the menu
-
-### Compatibility
-
-While this library was primary created for M5Stack Core and Core2 devices, other M5 devices that are supported by the [M5Unified library](https://github.com/m5stack/M5Unified) might work as well.
-Feel free to share you experiences in the [Forum](https://github.com/chhorisberger/M5StackMenuSystem/discussions)!

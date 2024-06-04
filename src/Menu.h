@@ -55,19 +55,22 @@ public:
 
 	/* Return a reference to the layout object, where you can tweak various display options */
 	Layout& getLayout();
+	
+	/* Move the current menu selection up */
+	void moveUpSelection();
 
-	/* Set parent menu. This is done automatically for you if you add a submenuitem*/
-	void setParentMenu(Menu* menu);
+	/* Move the current menu selection down */
+	void moveDownSelection();
+
+	/* Confirm the current menu selection */
+	void confirmSelection();
 
 
 private:
 	void init();
 	void render();
 
-	void upButtonPressed();
-	void downButtonPressed();
-	void okButtonPressed();
-
+	void setParentMenu(Menu* menu);
 	void resetActiveMenuItem();
 	bool isDirty();
 	void setDirty();

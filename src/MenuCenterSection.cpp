@@ -55,7 +55,7 @@ void MenuCenterSection::addItem(MenuItem* item)
 	item->onAdded();
 }
 
-void MenuCenterSection::upButtonPressed()
+void MenuCenterSection::moveUpSelection()
 {
 	if (highlightedItem != NULL)
 	{
@@ -74,7 +74,7 @@ void MenuCenterSection::upButtonPressed()
 	}
 }
 
-void MenuCenterSection::downButtonPressed()
+void MenuCenterSection::moveDownSelection()
 {
 	if (highlightedItem != NULL)
 	{
@@ -92,7 +92,7 @@ void MenuCenterSection::downButtonPressed()
 	}
 }
 
-void MenuCenterSection::okButtonPressed()
+void MenuCenterSection::confirmSelection()
 {
 	activeItem = highlightedItem;
 }

@@ -20,9 +20,9 @@ public:
 	void reset();
 	void loop();
 
-	void upButtonPressed();
-	void downButtonPressed();
-	void okButtonPressed();
+	void moveUpSelection();
+	void moveDownSelection();
+	void confirmSelection();
 	void resetActiveMenuItem();
 	MenuItem* getActiveMenuItem();
 

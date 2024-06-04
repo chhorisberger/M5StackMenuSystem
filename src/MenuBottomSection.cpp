@@ -18,7 +18,7 @@ void MenuBottomSection::loop()
 	}
 	if (softKeyUp.wasReleased())
 	{
-		menu->upButtonPressed();
+		menu->moveUpSelection();
 	}
 	
 	if (softKeyDown.wasPressed())
@@ -27,7 +27,7 @@ void MenuBottomSection::loop()
 	}
 	if (softKeyDown.wasReleased())
 	{
-		menu->downButtonPressed();
+		menu->moveDownSelection();
 	}
 	
 	if (softKeyOk.wasPressed())
@@ -36,7 +36,7 @@ void MenuBottomSection::loop()
 	}
 	if (softKeyOk.wasReleased())
 	{
-		menu->okButtonPressed();
+		menu->confirmSelection();
 	}
 }
 

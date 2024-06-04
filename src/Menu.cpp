@@ -133,21 +133,21 @@ void Menu::resetActiveMenuItem()
 	setDirty();
 }
 
-void Menu::upButtonPressed()
+void Menu::moveUpSelection()
 {
-	menuCenterSection.upButtonPressed();
+	menuCenterSection.moveUpSelection();
 	setDirty();
 }
 
-void Menu::downButtonPressed()
+void Menu::moveDownSelection()
 {
-	menuCenterSection.downButtonPressed();
+	menuCenterSection.moveDownSelection();
 	setDirty();
 }
 
-void Menu::okButtonPressed()
+void Menu::confirmSelection()
 {
-	menuCenterSection.okButtonPressed();
+	menuCenterSection.confirmSelection();
 	setDirty();
 }
 

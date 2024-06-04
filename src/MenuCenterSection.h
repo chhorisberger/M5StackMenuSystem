@@ -1,7 +1,6 @@
 #ifndef MENU_CENTER_SECTION_H
 #define MENU_CENTER_SECTION_H
 
-#include "Display.h"
 #include "Layout.h"
 #include "Control.h"
 #include "MenuItem.h"
@@ -13,7 +12,7 @@ class MenuCenterSection
 {
 
 public:
-	MenuCenterSection(Layout& layout_, Control& control_, Display& display_, Menu* menu_);
+	MenuCenterSection(Layout& layout_, Control& control_, Menu* menu_);
 	~MenuCenterSection();
 
 	void render();
@@ -47,7 +46,6 @@ private:
 
 	Menu* menu;
 	Layout& layout;
-	Display& display;
 	Control& control;
 
 	MenuItem* firstItem;

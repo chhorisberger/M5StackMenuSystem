@@ -1,7 +1,7 @@
 #include "BufferedDisplay.h"
 
 
-BufferedDisplay::BufferedDisplay() : Display(), canvas()
+BufferedDisplay::BufferedDisplay() : canvas()
 {	
 }
 

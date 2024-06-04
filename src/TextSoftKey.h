@@ -7,7 +7,7 @@
 class TextSoftKey : virtual public SoftKey
 {
 public:
-	TextSoftKey(SoftKeySlot slot_, Layout& layout_, Control& control_, Display& display_, String text_);
+	TextSoftKey(SoftKeySlot slot_, Layout& layout_, Control& control_, String text_);
 	virtual ~TextSoftKey() {}
 
 protected:

@@ -1,24 +1,27 @@
 #include "Menu.h"
 #include "SubMenuItem.h"
 #include "MenuExitItem.h"
+#include "BufferedDisplay.h"
 
 #include <M5Unified.h>
 
-Menu::Menu(String title_) : display(), control(), menuTopSection(layout, display, title_), menuCenterSection(layout, control, display, this), menuBottomSection(layout, control, display, this)
+Menu::Menu(String title_) : control(), menuTopSection(layout, title_), menuCenterSection(layout, control, this), menuBottomSection(layout, control, this)
 {
 	enabled = true;
 	dirty = true;
+	initialized = false;
 	parentMenu = NULL;
 }
 
 void Menu::init()
 {
-	display.init();
 	control.init();
-	layout.SCREEN_WIDTH = display.width();
-	layout.SCREEN_HEIGHT = display.height();
-	display.setTextFont(layout.MENU_FONT);
-	display.setTextSize(layout.MENU_FONT_SIZE);
+
+	layout.SCREEN_WIDTH = Display::getInstance()->width();
+	layout.SCREEN_HEIGHT = Display::getInstance()->height();
+
+	Display::getInstance()->setTextFont(layout.MENU_FONT);
+	Display::getInstance()->setTextSize(layout.MENU_FONT_SIZE);
 	initialized = true;
 }
 
@@ -91,18 +94,18 @@ void Menu::setParentMenu(Menu* menu)
 
 void Menu::addMenuItem(String text, CallbackFunction callbackOneTimeFunction, CallbackFunction callbackLoopFunction)
 {
-	menuCenterSection.addItem(new CallbackMenuItem(layout, display, text, callbackOneTimeFunction, callbackLoopFunction));
+	menuCenterSection.addItem(new CallbackMenuItem(layout, text, callbackOneTimeFunction, callbackLoopFunction));
 }
 
 void Menu::addSubMenu(String text, Menu* subMenu)
 {
 	subMenu->setParentMenu(this);
-	menuCenterSection.addItem(new SubMenuItem(layout, display, text, subMenu));
+	menuCenterSection.addItem(new SubMenuItem(layout, text, subMenu));
 }
 
 void Menu::addExitItem(Menu* parentMenu)
 {
-	menuCenterSection.addItem(new MenuExitItem(layout, display, parentMenu));
+	menuCenterSection.addItem(new MenuExitItem(layout, parentMenu));
 }
 
 Layout& Menu::getLayout()
@@ -112,15 +115,15 @@ Layout& Menu::getLayout()
 
 void Menu::displaySoftKey(SoftKeySlot slot, String text)
 {
-	TextSoftKey softKey(slot, layout, control, display, text);
-	display.drawStart();
+	TextSoftKey softKey(slot, layout, control, text);
+	Display::getInstance()->drawStart();
 	softKey.render();
-	display.drawEnd();
+	Display::getInstance()->drawEnd();
 }
 
 bool Menu::wasSoftKeyReleased(SoftKeySlot slot)
 {
-	TextSoftKey softKey(slot, layout, control, display, "");
+	TextSoftKey softKey(slot, layout, control, "");
 	return softKey.wasReleased();
 }
 
@@ -152,11 +155,11 @@ void Menu::render()
 {
 	if (isDirty())
 	{
-		display.drawStart();
+		Display::getInstance()->drawStart();
 		menuCenterSection.render();
 		menuTopSection.render();
 		menuBottomSection.render();
-		display.drawEnd();
+		Display::getInstance()->drawEnd();
 		dirty = false;
 	}
 }

@@ -3,10 +3,14 @@
 
 #include <stdint.h>
 
+
 class Display
 {
 	public:
-		Display();
+		static Display* getInstance();
+
+		Display(Display &other) = delete;
+		void operator=(const Display &) = delete;
 
 		virtual void init();
 		virtual void drawStart();
@@ -32,7 +36,11 @@ class Display
 		virtual void fillTriangle(int32_t x0, int32_t y0, int32_t x1, int32_t y1, int32_t x2, int32_t y2, int color) = 0;
 		virtual void drawTriangle(int32_t x0, int32_t y0, int32_t x1, int32_t y1, int32_t x2, int32_t y2, int color) = 0;
 
+	protected:
+		Display();
 
+	private:
+		static Display* singleton;
 };
 
 #endif 

@@ -13,7 +13,7 @@ class Menu;
 class MenuItem
 {
 public:
-	MenuItem(Layout& layout_, Display& display_, String text_);
+	MenuItem(Layout& layout_, String text_);
 	virtual void loop() = 0;
 	virtual void render(int x, int y, bool isHighlighted);
 	virtual void onAdded();
@@ -32,7 +32,6 @@ public:
 protected:
 	String text;
 	Layout& layout;
-	Display& display;
 
 private:
 	Menu* menu;

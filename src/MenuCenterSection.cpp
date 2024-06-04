@@ -1,10 +1,11 @@
 #include "MenuCenterSection.h"
 
+#include "Display.h"
 #include "Menu.h"
 
 #include <M5Unified.h>
 
-MenuCenterSection::MenuCenterSection(Layout& layout_, Control& control_, Display& display_, Menu* menu_) : layout(layout_), control(control_), display(display_)
+MenuCenterSection::MenuCenterSection(Layout& layout_, Control& control_, Menu* menu_) : layout(layout_), control(control_)
 {
 	menu = menu_;
 
@@ -104,7 +105,7 @@ void MenuCenterSection::render()
 
 void MenuCenterSection::renderMenuItems()
 {
-	int menuItemHeight = display.fontHeight(layout.MENU_FONT);
+	int menuItemHeight = Display::getInstance()->fontHeight(layout.MENU_FONT);
 	int menuItemsStartY = getMenuItemsStartY();
 
 	MenuItem* item = firstItem;
@@ -171,7 +172,7 @@ void MenuCenterSection::clear()
 {
 	int y = getMenuItemsStartY();
 	int h = getCenterSectionHeight();
-	display.fillRect(0, y, layout.SCREEN_WIDTH, h, layout.MENU_ITEM_BACKGROUND_COLOR);
+	Display::getInstance()->fillRect(0, y, layout.SCREEN_WIDTH, h, layout.MENU_ITEM_BACKGROUND_COLOR);
 }
 
 MenuItem* MenuCenterSection::getActiveMenuItem()
@@ -228,7 +229,7 @@ int MenuCenterSection::getMaxMenuItemsInViewport()
 
 int MenuCenterSection::getMenuItemHeight()
 {
-	return display.fontHeight(layout.MENU_FONT);
+	return Display::getInstance()->fontHeight(layout.MENU_FONT);
 }
 
 int MenuCenterSection::getMenuItemY(MenuItem* item)

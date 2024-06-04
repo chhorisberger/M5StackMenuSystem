@@ -5,7 +5,7 @@
 #include <M5Unified.h>
 
 
-MenuItem::MenuItem(Layout& layout_, Display& display_, String text_) : layout(layout_), display(display_)
+MenuItem::MenuItem(Layout& layout_, String text_) : layout(layout_)
 {
 	text = text_;
 	previousItem = NULL;
@@ -69,11 +69,11 @@ int MenuItem::getPosition()
 
 void MenuItem::render(int x, int y, bool isHighlighted)
 {
-	int fontHeight = display.fontHeight(layout.MENU_FONT);
+	int fontHeight = Display::getInstance()->fontHeight(layout.MENU_FONT);
 
 	int w = layout.SCREEN_WIDTH;
 	int h = fontHeight;
-	display.fillRect(x,y,w,h, isHighlighted ? layout.MENU_ITEM_HIGHLIGHTED_BACKGROUND_COLOR : layout.MENU_ITEM_BACKGROUND_COLOR);
+	Display::getInstance()->fillRect(x,y,w,h, isHighlighted ? layout.MENU_ITEM_HIGHLIGHTED_BACKGROUND_COLOR : layout.MENU_ITEM_BACKGROUND_COLOR);
 
 	if (isHighlighted)
 	{
@@ -85,12 +85,12 @@ void MenuItem::render(int x, int y, bool isHighlighted)
 		int y1 = iconY + layout.MENU_ITEM_HIGHLIGHTED_ICON_SIZE;
 		int x2 = iconX + layout.MENU_ITEM_HIGHLIGHTED_ICON_SIZE;
 		int y2 = iconY;
-		display.fillTriangle(x0, y0, x1, y1, x2, y2, layout.MENU_ITEM_HIGHLIGHTED_TEXT_COLOR);
+		Display::getInstance()->fillTriangle(x0, y0, x1, y1, x2, y2, layout.MENU_ITEM_HIGHLIGHTED_TEXT_COLOR);
 	}
 
 	int textX = 34;	// TODO
-	display.setTextColor(isHighlighted ? layout.MENU_ITEM_HIGHLIGHTED_TEXT_COLOR : layout.MENU_ITEM_TEXT_COLOR);
-	display.setTextDatum(TL_DATUM);
-	display.drawString((text).c_str(), textX, y);
+	Display::getInstance()->setTextColor(isHighlighted ? layout.MENU_ITEM_HIGHLIGHTED_TEXT_COLOR : layout.MENU_ITEM_TEXT_COLOR);
+	Display::getInstance()->setTextDatum(TL_DATUM);
+	Display::getInstance()->drawString((text).c_str(), textX, y);
 }
 

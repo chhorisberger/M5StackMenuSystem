@@ -3,13 +3,12 @@
 
 #include "Layout.h"
 #include <Arduino.h>
-#include "Display.h"
 
 class MenuTopSection
 {
 
 public:
-	MenuTopSection(Layout& layout_, Display& display_, String title_);
+	MenuTopSection(Layout& layout_, String title_);
 	void render();
 	void setTitle(String title_);
 	int getHeight();
@@ -17,7 +16,6 @@ public:
 private:
 	String title;
 	Layout& layout;
-	Display& display;
 };
 
 #endif 

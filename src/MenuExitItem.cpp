@@ -3,7 +3,7 @@
 #include "Menu.h"
 
 
-MenuExitItem::MenuExitItem(Layout& layout_, Display& display_, Menu* parentMenu_) : MenuItem(layout_, display_, "..")
+MenuExitItem::MenuExitItem(Layout& layout_, Menu* parentMenu_) : MenuItem(layout_, "..")
 {
 	parentMenu = parentMenu_;
 }

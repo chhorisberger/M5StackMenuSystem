@@ -14,7 +14,7 @@ enum SoftKeySlot { BtnASlot, BtnBSlot, BtnCSlot};
 class SoftKey
 {
 public:
-	SoftKey(SoftKeySlot slot_, Layout& layout_, Control& control_, Display& display_);
+	SoftKey(SoftKeySlot slot_, Layout& layout_, Control& control_);
 
 	void render();
 	bool wasPressed();
@@ -31,7 +31,6 @@ protected:
 
 	SoftKeySlot slot;
 	Layout& layout;
-	Display& display;
 	bool pressed;
 
 private:

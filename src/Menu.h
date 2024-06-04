@@ -1,7 +1,6 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include "BufferedDisplay.h"
 #include "Layout.h"
 #include "Control.h"
 #include "MenuTopSection.h"
@@ -81,7 +80,6 @@ private:
 	MenuCenterSection menuCenterSection;
 	MenuBottomSection menuBottomSection;
 
-	BufferedDisplay display;
 	Control control;
 	Menu* parentMenu;
 	Layout layout;

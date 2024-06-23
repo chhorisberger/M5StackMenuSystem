@@ -11,7 +11,7 @@ void setup() {
 	mainMenu.addMenuItem("One Time Callback", testOneTimeCallback);
 	mainMenu.addMenuItem("Loop Callback", testLoopInitCallback, testLoopCallback);
 	mainMenu.addSubMenu("Submenu", &subMenu);
-	mainMenu.addExitItem();
+	mainMenu.addExitItem("Exit");
 
 	subMenu.addMenuItem("Sub Menu Item #1", testOneTimeCallback);
 	subMenu.addMenuItem("Sub Menu Item #2", testOneTimeCallback);

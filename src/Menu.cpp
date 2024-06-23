@@ -103,9 +103,9 @@ void Menu::addSubMenu(String text, Menu* subMenu)
 	menuCenterSection.addItem(new SubMenuItem(layout, text, subMenu));
 }
 
-void Menu::addExitItem(Menu* parentMenu)
+void Menu::addExitItem(String text)
 {
-	menuCenterSection.addItem(new MenuExitItem(layout, parentMenu));
+	menuCenterSection.addItem(new MenuExitItem(layout, parentMenu, text));
 }
 
 Layout& Menu::getLayout()

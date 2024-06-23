@@ -45,7 +45,7 @@ public:
 	void addSubMenu(String text, Menu* subMenu);
 
 	/* Add an exit menu item which allows you to leave the menu or submenu */
-	void addExitItem(Menu* parentMenu = NULL);
+	void addExitItem(String text = "..");
 
 	/* Displays a custom soft key. Argument "slot" determines which of the three buttons the soft key should be displayed (BtnASlot, BtnDSlot or BtnCSlot). */
 	void displaySoftKey(SoftKeySlot slot, String text);

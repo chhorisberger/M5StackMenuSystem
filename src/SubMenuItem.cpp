@@ -21,7 +21,7 @@ void SubMenuItem::loop()
 
 void SubMenuItem::onAdded()
 {
-	subMenu->addExitItem(getMenu());
+	subMenu->addExitItem();
 }
 
 void SubMenuItem::reset()

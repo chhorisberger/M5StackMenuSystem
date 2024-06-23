@@ -11,7 +11,7 @@ class MenuExitItem : virtual public MenuItem
 {
 
 public:
-	MenuExitItem(Layout& layout_, Menu* parentMenu_);
+	MenuExitItem(Layout& layout_, Menu* parentMenu_, String text);
 	virtual ~MenuExitItem() {}
 
 	virtual void loop();

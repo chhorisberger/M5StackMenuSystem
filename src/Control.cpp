@@ -8,6 +8,16 @@ Control::Control()
 
 void Control::init()
 {
+	nrTouchEvents = 0;
+
+	aButtonEvent.pressed = false;
+	aButtonEvent.released = false;
+
+	bButtonEvent.pressed = false;
+	bButtonEvent.released = false;
+
+	cButtonEvent.pressed = false;
+	cButtonEvent.released = false;
 }
 
 void Control::loop()

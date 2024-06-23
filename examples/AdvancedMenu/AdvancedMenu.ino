@@ -28,8 +28,8 @@ void loop() {
 		mainMenu.loop(); 
 	} else {
 		M5.Display.clear(BLACK);
-
-		if (M5.BtnA.wasReleased() || M5.BtnB.wasReleased() || M5.BtnC.wasReleased()) {
+		if (M5.BtnA.wasReleased() || M5.BtnB.wasReleased() || M5.BtnC.wasReleased() || M5.Touch.getCount() > 0) {
+			M5.update();
 			mainMenu.enable();
 		}
 	}
@@ -37,37 +37,31 @@ void loop() {
 
 void testOneTimeCallback(CallbackMenuItem& menuItem) {
 	M5.Display.clear(BLACK);
-	M5.Display.setTextColor(WHITE);
-	M5.Display.setTextFont(2);
-	M5.Display.setTextSize(2);
-	M5.Display.setTextDatum(MC_DATUM);
-	M5.Display.drawString("One Time Callback", M5.Display.width() / 2, (2 * M5.Display.height()) / 6);
-
+	drawText("One Time Callback");
 	delay(1500);
 }
 
 void testLoopInitCallback(CallbackMenuItem& menuItem) {
 	M5.Display.clear(BLACK);
-	M5.Display.setTextColor(WHITE);
-	M5.Display.setTextFont(2);
-	M5.Display.setTextSize(2);
-	M5.Display.setTextDatum(MC_DATUM);
-	M5.Display.drawString("Loop Callback", M5.Display.width() / 2, (2 * M5.Display.height()) / 6);
-
+	drawText("Loop Callback");
 	menuItem.getMenu()->displaySoftKey(BtnASlot, "Esc");
 }
 
 void testLoopCallback(CallbackMenuItem& menuItem) {
 	String time = "sec: " + String(millis() / 1000);
-
-	M5.Display.setTextColor(WHITE, BLACK);
-	M5.Display.setTextFont(2);
-	M5.Display.setTextSize(2);
-	M5.Display.setTextDatum(MC_DATUM);
-	M5.Display.drawString(time.c_str(), M5.Display.width() / 2, (3 * M5.Display.height()) / 6);
+	drawText(time);
 
 	if (menuItem.getMenu()->wasSoftKeyReleased(BtnASlot)) 
 	{
 		menuItem.deactivateCallbacks();
 	}
+}
+
+void drawText(String text)
+{
+	M5.Display.setTextColor(WHITE, BLACK);
+	M5.Display.setTextFont(2);
+	M5.Display.setTextSize(2);
+	M5.Display.setTextDatum(MC_DATUM);
+	M5.Display.drawString(text, M5.Display.width() / 2, (3 * M5.Display.height()) / 6);
 }
